@@ -31,7 +31,7 @@ Dans cette partie nous allons décrire la méthode de travail que nous avons ado
 
 
 
-#Auteur
+# Auteur
 * Bouyiatiotis Stéphane
 * Danai Moïn
 * Gomes Da Costa Joshua
