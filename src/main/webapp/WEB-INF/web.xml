@@ -5,6 +5,7 @@
            http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
            version="3.1">
   <display-name>Archetype Created Web Application</display-name>
+
   <servlet>
     <servlet-name>HomePageServlet</servlet-name>
     <servlet-class>presentation.HomePageServlet</servlet-class>
@@ -13,4 +14,14 @@
     <servlet-name>HomePageServlet</servlet-name>
     <url-pattern>/home</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LoginPageServlet</servlet-name>
+    <servlet-class>presentation.LoginPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginPageServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
 </web-app>
