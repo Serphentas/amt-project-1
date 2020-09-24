@@ -11,34 +11,54 @@
 <html>
 
 <body>
-<nav class="navbar fixed-top navbar-expand-lg bg-white" >
+<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="javascript:;">Our StackOverflow</a>
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="javascript:;">Menu <span class="sr-only">(current)</span></a>
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit/index.html">
+                Material Kit </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="material-icons">apps</i> Components
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="../index.html" class="dropdown-item">
+                            <i class="material-icons">layers</i> All Components
+                        </a>
+                        <a href="https://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">
+                            <i class="material-icons">content_paste</i> Documentation
+                        </a>
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:;">Sign up</a>
+                    <a class="nav-link" href="https://www.creative-tim.com/product/material-kit-pro" target="_blank">
+                        <i class="material-icons">unarchive</i> Upgrade to PRO
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="javascript:;">Sign in</a>
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on Twitter" rel="nofollow">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on Facebook" rel="nofollow">
+                        <i class="fa fa-facebook-square"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Follow us on Instagram" rel="nofollow">
+                        <i class="fa fa-instagram"></i>
+                    </a>
                 </li>
             </ul>
-            <form class="form-inline ml-auto">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-white btn-just-icon btn-round">
-                    <i class="material-icons">search</i>
-                </button>
-            </form>
         </div>
     </div>
 </nav>
