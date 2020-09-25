@@ -30,8 +30,8 @@ jobs:
       - name: Build Docker image
         run: |
           echo ${{ secrets.SECRET_KEY }}
-          echo ${{ secrets.SECRET_KEY }} | docker login ghcr.io -u dev-openaffect --password-stdin
-          docker build -t openaffect/flow .
+          echo ${{ secrets.SECRET_KEY }} | docker login ghcr.io -u Serphentas --password-stdin
+          docker build -t Serphentas/amt-project-1 .
           ./build-image.sh
-          docker tag openaffect/flow ghcr.io/openaffect/flow
-          docker push ghcr.io/openaffect/flow
+          docker tag Serphentas/amt-project-1 ghcr.io/Serphentas/amt-project-1
+          docker push ghcr.io/Serphentas/amt-project-1
