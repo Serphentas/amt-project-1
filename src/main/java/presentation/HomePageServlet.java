@@ -14,6 +14,6 @@ public class HomePageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Initially, you simply forward the request to the correspond JSP.
-        request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

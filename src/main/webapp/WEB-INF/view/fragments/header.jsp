@@ -39,7 +39,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="../login.jsp"/>" target="_blank">
+                    <a class="nav-link" href="<c:url value="http://localhost:8080/amt-project-1/login"/>" target="_blank">
                         <i class="material-icons">login</i> Sign in
                     </a>
                 </li>
