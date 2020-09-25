@@ -30,21 +30,21 @@
                         <i class="material-icons">apps</i> Menu
                     </a>
                     <div class="dropdown-menu dropdown-with-icons">
-                        <a href="../index.html" class="dropdown-item">
+                        <a href="<c:url value="../questions.jsp"/>" class="dropdown-item">
                             <i class="material-icons">layers</i> Ask your questions
                         </a>
-                        <a href="https://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">
+                        <a href="<c:url value="../questions_list.jsp"/>" class="dropdown-item">
                             <i class="material-icons">content_paste</i> View questions list
                         </a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://www.creative-tim.com/product/material-kit-pro" target="_blank">
+                    <a class="nav-link" href="<c:url value="../login.jsp"/>" target="_blank">
                         <i class="material-icons">login</i> Sign in
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://www.creative-tim.com/product/material-kit-pro" target="_blank">
+                    <a class="nav-link" href="<c:url value="../signup.jsp"/>" target="_blank">
                          Sign up
                     </a>
                 </li>

@@ -43,7 +43,7 @@
                             <h4 class="card-title">Login</h4>
 
                         </div>
-                        <p class="description text-center">Or Be Classical</p>
+                        <p class="description text-center">Sign in :D </p>
                         <div class="card-body">
                             <div class="input-group">
                                 <div class="input-group-prepend">

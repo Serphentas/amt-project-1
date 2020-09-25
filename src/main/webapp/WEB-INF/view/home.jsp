@@ -63,7 +63,7 @@
 <!--  Google Maps Plugin    -->
 <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
 <script src="<c:url value="/assets/js/material-kit.js?v=2.0.7" />" type="text/javascript"></script>
->>>>>>> devs
+
 </body>
 
 </html>
