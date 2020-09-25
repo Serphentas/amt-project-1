@@ -1,0 +1,9 @@
+<server description="Testing Liberty server">
+    <featureManager>
+        <feature>webProfile-8.0</feature>
+    </featureManager>
+    <variable name="default.http.port" defaultValue="9080"/>
+    <variable name="default.https.port" defaultValue="9443"/>
+    <webApplication location="amt-project-1.war" contextRoot="/"/>
+    <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
+</server>
