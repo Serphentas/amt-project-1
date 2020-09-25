@@ -48,7 +48,7 @@
 <!-- Inclusion du home content dans la page -->
 <jsp:include page="fragments/home_content.jsp" flush="true"/>
 
-<!-- Inclusion du header sur le pied de page -->
+<!-- Inclusion du footer sur le pied de page -->
 <jsp:include page="fragments/footer.jsp" flush="true"/>
 
 <!--   Core JS Files   -->
