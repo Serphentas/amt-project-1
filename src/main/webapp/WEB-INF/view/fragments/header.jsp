@@ -39,13 +39,8 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="http://localhost:8080/amt-project-1/login"/>" target="_blank">
-                        <i class="material-icons">login</i> Sign in
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="../signup.jsp"/>" target="_blank">
-                         Sign up
+                    <a class="nav-link" href="<c:url value="http://localhost:9080/amt-project-1/login"/>">
+                        <i class="material-icons">login</i> Sign in/up
                     </a>
                 </li>
               </ul>

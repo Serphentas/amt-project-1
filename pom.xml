@@ -45,15 +45,6 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-  <!--
-    <distributionManagement>
-      <repository>
-        <id>internal.repo</id>
-        <name>MyCo Internal Repository</name>
-        <url>http://localhost:8080/amt-project-1/</url>
-      </repository>
-    </distributionManagement>
--->
     <build>
       <finalName>amt-project-1</finalName>
       <pluginManagement>
@@ -94,6 +85,16 @@
         </plugin>
       </plugins>
     </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
 
-  </build>
+    </build>
 </project>

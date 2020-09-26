@@ -1,10 +1,8 @@
-package presentation;
+package stackoverflow.ui.web;
 import model.Account;
 import model.Generator;
 
 import javax.servlet.ServletException;
-
-import javax.servlet.annotation.WebServlet;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

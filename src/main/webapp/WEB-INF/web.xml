@@ -8,7 +8,7 @@
 
   <servlet>
     <servlet-name>HomePageServlet</servlet-name>
-    <servlet-class>presentation.HomePageServlet</servlet-class>
+    <servlet-class>stackoverflow.ui.web.HomePageServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>HomePageServlet</servlet-name>
@@ -17,7 +17,7 @@
 
   <servlet>
     <servlet-name>LoginPageServlet</servlet-name>
-    <servlet-class>presentation.LoginPageServlet</servlet-class>
+    <servlet-class>stackoverflow.ui.web.login.LoginPageServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginPageServlet</servlet-name>
@@ -26,7 +26,7 @@
 
   <servlet>
     <servlet-name>ProfilPageServlet</servlet-name>
-    <servlet-class>presentation.ProfilPageServlet</servlet-class>
+    <servlet-class>stackoverflow.ui.web.ProfilPageServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ProfilPageServlet</servlet-name>
