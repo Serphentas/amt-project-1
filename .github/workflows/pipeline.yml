@@ -31,6 +31,6 @@ jobs:
         run: |
           echo ${{ secrets.SECRET_KEY }}
           echo ${{ secrets.SECRET_KEY }} | docker login ghcr.io -u Serphentas --password-stdin
-          docker build -t serphentas/amt-project-1 .
-          docker tag serphentas/amt-project-1 ghcr.io/serphentas/amt-project-1
-          docker push ghcr.io/serphentas/amt-project-1
+          docker build -t amt-long-du-zboub/amt-project-1 .
+          docker tag amt-long-du-zboub/amt-project-1 ghcr.io/amt-long-du-zboub/amt-project-1
+          docker push ghcr.io/amt-long-du-zboub/amt-project-1
