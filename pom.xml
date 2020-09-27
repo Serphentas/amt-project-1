@@ -11,7 +11,7 @@
 
   <name>amt-project-1 Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>http://localhost:8080/amt-project-1/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,11 +39,25 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.12</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
-
-  <build>
-    <finalName>amt-project-1</finalName>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+  <!--
+    <distributionManagement>
+      <repository>
+        <id>internal.repo</id>
+        <name>MyCo Internal Repository</name>
+        <url>http://localhost:8080/amt-project-1/</url>
+      </repository>
+    </distributionManagement>
+-->
+    <build>
+      <finalName>amt-project-1</finalName>
+      <pluginManagement>
       <plugins>
         <plugin>
           <groupId>io.openliberty.tools</groupId>
@@ -81,5 +95,6 @@
         </plugin>
       </plugins>
     </pluginManagement>
+
   </build>
 </project>
