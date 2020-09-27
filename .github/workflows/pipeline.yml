@@ -29,9 +29,10 @@ jobs:
 
       - name: Build Docker image
         run: |
+          ls -lash
+          tree .
           echo ${{ secrets.SECRET_KEY }}
           echo ${{ secrets.SECRET_KEY }} | docker login ghcr.io -u Serphentas --password-stdin
           docker build -t serphentas/amt-project-1 .
-          ./build-image.sh
           docker tag serphentas/amt-project-1 ghcr.io/serphentas/amt-project-1
           docker push ghcr.io/serphentas/amt-project-1
