@@ -34,7 +34,7 @@ The easiest way to run our app is with the bundled scripts:
 ./run-image.sh
 ```
 
-Should you wish to pull our [online image](https://github.com/orgs/AMT-Long-Du-Zboub/packages/container/amt-project-1/84294), then do:
+Should you wish to pull our [online image](https://github.com/orgs/AMT-Long-Du-Zboub/packages/container/package/amt-project-1), then do:
 
 ```
 docker pull ghcr.io/amt-long-du-zboub/amt-project-1
