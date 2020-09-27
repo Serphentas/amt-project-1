@@ -1,6 +1,6 @@
-# Projet 1 : Stack overflow like (à décider)
+# Codemad
 
-## Table des matières
+## Table of contents
 
 - [Introduction](#introduction)
 - [Usage](#usage)
@@ -10,7 +10,7 @@
 
 ## Introduction
 
-The purpose of this app is to provide a simplified version of StackOverflow, with the following features:
+The purpose of Codemad is to provide a simplified version of StackOverflow, with the following features:
 
 - Anonymous users can:
   - Browse questions and their answers & comments
