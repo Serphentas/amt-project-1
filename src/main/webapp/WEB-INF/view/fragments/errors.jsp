@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
-    <c:forEach var="error" items"${errors}">
+    <c:forEach var="error" items="${errors}">
         <div>${error}</div>
     </c:forEach>
 </div>

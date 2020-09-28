@@ -16,7 +16,7 @@ public class MemoryPersonRepo extends MemoryRepo<Person, PersonId> implements IP
     public void save(Person entity) {
         synchronized (entity.getUsername()){
             if(!findByUsername(entity.getUsername()).isEmpty()){
-                throw new IntegrityConstraintViolationException("Cannot save/update Person. Integrity constraint vilation: username");
+                //throw new IntegrityConstraintViolationException("Cannot save/update Person. Integrity constraint vilation: username");
             }
             super.save(entity);
         }
@@ -33,7 +33,7 @@ public class MemoryPersonRepo extends MemoryRepo<Person, PersonId> implements IP
         }
 
         if(matchingEntities.size() > 1) {
-            throw new DataCorruptionException("Your data store is corrupted");
+            //throw new DataCorruptionException("Your data store is corrupted");
         }
 
         return Optional.of(matchingEntities.get(0).deepClone());

@@ -123,8 +123,11 @@
     </div>
 </div>
 
-<!-- Inclusion du home content dans la page -->
-<jsp:include page="fragments/home_content.jsp" flush="true"/>
+<div>
+    <c:forEach items="${currentUser}" var="var">
+        <li>${var}"</li>
+    </c:forEach>
+</div>
 
 <!-- Inclusion du footer sur le pied de page -->
 <jsp:include page="fragments/footer.jsp" flush="true"/>

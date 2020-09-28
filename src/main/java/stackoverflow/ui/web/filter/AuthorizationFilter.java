@@ -11,6 +11,11 @@ import java.io.IOException;
 @WebFilter(filterName="AuthorizationFilter", urlPatterns = "/*")
 public class AuthorizationFilter implements Filter {
 
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
     public void doFilter(ServletRequest servletReq, ServletResponse servletResp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletReq;
         HttpServletResponse resp = (HttpServletResponse) servletResp;
@@ -35,6 +40,11 @@ public class AuthorizationFilter implements Filter {
         }
 
         chain.doFilter(req, resp);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 
     boolean isPublicResource(String URI){
