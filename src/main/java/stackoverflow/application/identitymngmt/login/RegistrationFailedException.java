@@ -3,7 +3,7 @@ package stackoverflow.application.identitymngmt.login;
 import lombok.Value;
 
 @Value
-public class RegistrationFailedException extends Exception {
+public class RegistrationFailedException extends RuntimeException {
 
-    public RegistrationFailedException(String msg) { super(msg); }
+    private String msg;
 }
