@@ -3,7 +3,7 @@ package stackoverflow.infrastructure.persistence.exception;
 import lombok.Value;
 
 @Value
-public class DataCorruptionException extends Exception {
+public class DataCorruptionException extends RuntimeException {
 
-    public DataCorruptionException(String msg) { super(msg); }
+    private String msg;
 }

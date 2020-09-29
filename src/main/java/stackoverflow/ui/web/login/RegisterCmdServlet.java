@@ -24,12 +24,12 @@ public class RegisterCmdServlet extends HttpServlet {
         req.getSession().getAttribute("errors");
 
         RegisterCmd registerCmd = RegisterCmd.builder()
-            .username(req.getParameter("username"))
-            .email(req.getParameter("email"))
-            .firstName(req.getParameter("firstName"))
-            .lastName(req.getParameter("lastName"))
-            .clearTextPassword(req.getParameter("password"))
-            .build();
+                .username(req.getParameter("username"))
+                .email(req.getParameter("email"))
+                .firstName(req.getParameter("firstName"))
+                .lastName(req.getParameter("lastName"))
+                .clearTextPassword(req.getParameter("password"))
+                .build();
 
         try {
             identityMngmtFacade.register(registerCmd);
