@@ -123,12 +123,6 @@
     </div>
 </div>
 
-<div>
-    <c:forEach items="${currentUser}" var="var">
-        <li>${var}"</li>
-    </c:forEach>
-</div>
-
 <!-- Inclusion du footer sur le pied de page -->
 <jsp:include page="fragments/footer.jsp" flush="true"/>
 

@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-6 ml-auto mr-auto">
                 <div class="card card-login">
-                    <form class="form" method="post" action="/login.do">
+                    <form class="form" method="post" action="login.do">
                         <div class="card-header card-header-primary text-center">
                             <h4 class="card-title">Login</h4>
                         </div>
@@ -66,12 +66,12 @@
                                 <input type="checkbox" checked="checked" name="remember"> Remember me
                             </label>
                             <br/>
-                            <input id="fSubmit" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Get Started"></input>
+                            <input id="fLogin" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Get Started">
                         </div>
                     </form>
                 </div>
                 <div class="card card-login">
-                    <form class="form" method="post" action="/register.do">
+                    <form class="form" method="post" action="register.do">
                         <div class="card-header card-header-primary text-center">
                             <h4 class="card-title">Register</h4>
                         </div>
@@ -123,7 +123,7 @@
                                 <input type="checkbox" checked="checked" name="remember"> Remember me
                             </label>
                             <br/>
-                            <input id="fSubmit" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Get Started"></input>
+                            <input id="fRegister" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Get Started">
                         </div>
                     </form>
                 </div>
@@ -136,17 +136,17 @@
     <jsp:include page="fragments/footer.jsp" flush="true"/>
 </div>
 <!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-<script src="../assets/js/plugins/moment.min.js"></script>
+<script src="<c:url value="/assets/js/core/jquery.min.js" />" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/core/popper.min.js"  />" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/core/bootstrap-material-design.min.js"  />" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/plugins/moment.min.js"/>"></script>
 <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-<script src="../assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/plugins/bootstrap-datetimepicker.js" />" type="text/javascript"></script>
 <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/plugins/nouislider.min.js" />" type="text/javascript"></script>
 <!--  Google Maps Plugin    -->
 <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
-<script src="../assets/js/material-kit.js?v=2.0.7" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/material-kit.js?v=2.0.7" />" type="text/javascript"></script>
 </body>
 
 </html>

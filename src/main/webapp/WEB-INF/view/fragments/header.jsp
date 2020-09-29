@@ -38,8 +38,8 @@
                             <div>
                                     ${currentUser.firstName} ${currentUser.lastName}
                             </div>
-                            <form method="post" action="/logout.do">
-                                <input type="submit" value="Logout"></input>
+                            <form method="post" action="logout.do">
+                                <input type="submit" value="Logout">
                             </form>
                         </c:when>
                         <c:otherwise>
