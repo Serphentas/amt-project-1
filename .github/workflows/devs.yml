@@ -1,0 +1,33 @@
+name: Build & publish nightly Docker image
+
+on:
+  push:
+    branches: [ devs ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-mvn-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-mvn-
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Build Docker image
+        run: |
+          echo ${{ secrets.SECRET_KEY }}
+          echo ${{ secrets.SECRET_KEY }} | docker login ghcr.io -u Serphentas --password-stdin
+          docker build -t amt-long-du-zboub/amt-project-1:nightly .
+          docker tag amt-long-du-zboub/amt-project-1:nightly ghcr.io/amt-long-du-zboub/amt-project-1:nightly
+          docker push ghcr.io/amt-long-du-zboub/amt-project-1:nightly
