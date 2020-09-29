@@ -33,34 +33,32 @@
 <!-- Inclusion du header sur le haut de page -->
 <jsp:include page="fragments/header.jsp" flush="true"/>
 
-<div class="page-header header-filter" style="background-image: url('../assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+<div class="page-header header-filter" style="background-image: url(<c:url value="/assets/img/bg7.jpg"/>); background-size: cover; background-position: top center;">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 ml-auto mr-auto">
                 <div class="card card-login">
-                    <form class="form" method="" action="">
+                    <form class="form" method="post" action="login.do">
                         <div class="card-header card-header-primary text-center">
                             <h4 class="card-title">Login</h4>
-
                         </div>
                         <p class="description text-center">Sign in :D </p>
                         <div class="card-body">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">face</i>
-                    </span>
+                                    <span class="input-group-text">
+                                      <i class="material-icons">face</i>
+                                    </span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Username...">
+                                <input id="fLoginUsername" name="username" type="text" class="form-control" placeholder="Username...">
                             </div>
-
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">lock_outline</i>
-                    </span>
+                                    <span class="input-group-text">
+                                      <i class="material-icons">lock_outline</i>
+                                    </span>
                                 </div>
-                                <input type="password" class="form-control" placeholder="Password...">
+                                <input id="fLoginPassword" name="password" type="password" class="form-control" placeholder="Password...">
                             </div>
                         </div>
                         <div class="footer text-center">
@@ -68,10 +66,65 @@
                                 <input type="checkbox" checked="checked" name="remember"> Remember me
                             </label>
                             <br/>
-                            <a href="#pablo" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</a>
+                            <input id="fLogin" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Get Started">
                         </div>
-
-
+                    </form>
+                </div>
+                <div class="card card-login">
+                    <form class="form" method="post" action="register.do">
+                        <div class="card-header card-header-primary text-center">
+                            <h4 class="card-title">Register</h4>
+                        </div>
+                        <p class="description text-center">Nice to meet you :D </p>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="material-icons">face</i>
+                                    </span>
+                                </div>
+                                <input id="fUsername" name="username" type="text" class="form-control" placeholder="Username...">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="material-icons">face</i>
+                                    </span>
+                                </div>
+                                <input id="fEmail" name="email" type="text" class="form-control" placeholder="Email...">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="material-icons">face</i>
+                                    </span>
+                                </div>
+                                <input id="fFirstName" name="firstName" type="text" class="form-control" placeholder="FirstName...">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="material-icons">face</i>
+                                    </span>
+                                </div>
+                                <input id="fLastName" name="lastName" type="text" class="form-control" placeholder="LastName...">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="material-icons">lock_outline</i>
+                                    </span>
+                                </div>
+                                <input id="fPassword" name="password" type="password" class="form-control" placeholder="Password...">
+                            </div>
+                        </div><!--end of card body-->
+                        <div class="footer text-center">
+                            <label>
+                                <input type="checkbox" checked="checked" name="remember"> Remember me
+                            </label>
+                            <br/>
+                            <input id="fRegister" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Get Started">
+                        </div>
                     </form>
                 </div>
             </div>
@@ -83,17 +136,17 @@
     <jsp:include page="fragments/footer.jsp" flush="true"/>
 </div>
 <!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-<script src="../assets/js/plugins/moment.min.js"></script>
+<script src="<c:url value="/assets/js/core/jquery.min.js" />" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/core/popper.min.js"  />" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/core/bootstrap-material-design.min.js"  />" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/plugins/moment.min.js"/>"></script>
 <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-<script src="../assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/plugins/bootstrap-datetimepicker.js" />" type="text/javascript"></script>
 <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/plugins/nouislider.min.js" />" type="text/javascript"></script>
 <!--  Google Maps Plugin    -->
 <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
-<script src="../assets/js/material-kit.js?v=2.0.7" type="text/javascript"></script>
+<script src="<c:url value="/assets/js/material-kit.js?v=2.0.7" />" type="text/javascript"></script>
 </body>
 
 </html>

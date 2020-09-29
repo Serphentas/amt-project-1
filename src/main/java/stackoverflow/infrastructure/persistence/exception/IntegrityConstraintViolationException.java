@@ -3,7 +3,7 @@ package stackoverflow.infrastructure.persistence.exception;
 import lombok.Value;
 
 @Value
-public class IntegrityConstraintViolationException extends Exception {
+public class IntegrityConstraintViolationException extends RuntimeException {
 
-    public IntegrityConstraintViolationException(String msg) { super(msg); }
+    private String msg;
 }

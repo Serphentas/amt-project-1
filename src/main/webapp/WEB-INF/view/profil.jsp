@@ -123,9 +123,6 @@
     </div>
 </div>
 
-<!-- Inclusion du home content dans la page -->
-<jsp:include page="fragments/home_content.jsp" flush="true"/>
-
 <!-- Inclusion du footer sur le pied de page -->
 <jsp:include page="fragments/footer.jsp" flush="true"/>
 
