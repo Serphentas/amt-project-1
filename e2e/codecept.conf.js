@@ -5,13 +5,13 @@ const { setHeadlessWhen } = require('@codeceptjs/configure');
 setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
-  tests: './tests/*_test.js',
+  tests: 'tests/*_test.js',
   output: './output',
   helpers: {
     Puppeteer: {
-      url: 'http://localhost:8080/amt-project-1/',
+      url: 'httpd://localhost:9080/',
       show: true,
-      windowSize: '1920x1080'
+      windowSize: '1200x900'
     }
   },
   include: {

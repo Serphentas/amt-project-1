@@ -40,7 +40,7 @@
                 <div class="card card-login">
                     <form class="form" method="post" action="login.do">
                         <div class="card-header card-header-primary text-center">
-                            <h4 class="card-title">Login</h4>
+                            <h4 class="card-title">Sign up</h4>
                         </div>
                         <p class="description text-center">Sign in :D </p>
                         <div class="card-body">
@@ -66,14 +66,14 @@
                                 <input type="checkbox" checked="checked" name="remember"> Remember me
                             </label>
                             <br/>
-                            <input id="fLogin" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Get Started">
+                            <input id="fLogin" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Login">
                         </div>
                     </form>
                 </div>
                 <div class="card card-login">
                     <form class="form" method="post" action="register.do">
                         <div class="card-header card-header-primary text-center">
-                            <h4 class="card-title">Register</h4>
+                            <h4 class="card-title">Sign in</h4>
                         </div>
                         <p class="description text-center">Nice to meet you :D </p>
                         <div class="card-body">
@@ -123,7 +123,7 @@
                                 <input type="checkbox" checked="checked" name="remember"> Remember me
                             </label>
                             <br/>
-                            <input id="fRegister" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Get Started">
+                            <input id="fRegister" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Register">
                         </div>
                     </form>
                 </div>
