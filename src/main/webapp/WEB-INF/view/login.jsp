@@ -107,8 +107,5 @@
         </div>
     </div>
     <jsp:include page="fragments/errors.jsp" flush="true"/>
-
-    <!-- Inclusion du footer sur le pied de page -->
-    <jsp:include page="fragments/footer.jsp" flush="true"/>
 </div>
 </t:base>
