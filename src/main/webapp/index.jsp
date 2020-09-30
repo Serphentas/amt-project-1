@@ -66,5 +66,4 @@
 <script src="<c:url value="/assets/js/material-kit.js?v=2.0.7" />" type="text/javascript"></script>
 
 </body>
-
 </html>
