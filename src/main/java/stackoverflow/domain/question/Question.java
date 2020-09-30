@@ -22,6 +22,11 @@ public class Question implements IEntity {
 
     public void categorizeAs(QuestionType questionType){this.questionType = questionType;}
 
+    @Override
+    public IEntity deepClone() {
+        return null;
+    }
+
     public static class QuestionBuilder {
 
         public Question build(){
