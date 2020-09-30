@@ -48,7 +48,7 @@ public class AuthorizationFilter implements Filter {
     }
 
     boolean isPublicResource(String URI){
-        if(URI.startsWith("/assets")){
+        if(URI.startsWith("/")){
             return true;
         }
 
