@@ -43,7 +43,11 @@
                             </form>
                         </c:when>
                         <c:otherwise>
-                            <div></div>
+                            <div>
+                                <a class="nav-link" href="<c:url value="/login"/>">
+                                    Sign up/in
+                                </a>
+                            </div>
                         </c:otherwise>
                     </c:choose>
                 </li>
