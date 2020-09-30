@@ -22,21 +22,52 @@
 
 <br>
 
-<div class="columns">
-    <div class = "authoring">
-        <div class="title">Submit your questions</div>
-        <form id="newQuestion" method="POST" action="submitQuestion.do">
-            <textarea id ="tfText" name="text" form="newQuestion" rows="4"></textarea>
-            <button id="bSubmitQuestion" type="submit">Submit Question</button>
-        </form>
+<div class="page-header header-filter" style="background-image: url('../assets/img/bg.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+    <div class="row">
+        <div class="col">
+                <div class="card card-login">
+                    <form id="newQuestion" method="POST" action="submitQuestion.do" class="form">
+                        <div class="card-header card-header-primary text-center">
+                            <h4 class="card-title">Question</h4>
+                        </div>
+                        <p class="description text-center">Ask any question you want below</p>
+                        <div class="card-body text-center">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="material-icons">face</i>
+                                    </span>
+                                </div>
+                                <textarea class="form-control" id ="tfText" name="text" form="newQuestion" rows="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="footer text-center">
+                            <button id="bSubmitQuestion" type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Submit Question</button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+        <div class="col">
+                <div class="card card-login">
+                    <div class="card-header card-header-primary text-center">
+                        <h4 class="card-title">Questions List</h4>
+                    </div>
+                    <p class="description text-center">View the questions list below</p>
+                    <div class="card-body text-center">
+                        <div class="title">Questions</div>
+                        <c:forEach var="question" items="${questions.questions}">
+                            <button  class="btn btn-primary btn-sm">${question.text}</button><br>
+                        </c:forEach>
+                    </div>
+                    <div>
+                        <br>
+                    </div>
+                </div>
+        </div>
     </div>
-    <div class="questions">
-        <div class=title">Questions</div>
-        <c:forEach var="question" items="${questions.questions}">
-            <div class = "question">${question.text}</div>
-        </c:forEach>
     </div>
-</div>
+
 
 <br>
 <!-- Inclusion du footer sur le pied de page -->
