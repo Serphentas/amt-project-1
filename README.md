@@ -1,37 +1,62 @@
-# Projet 1 : Stack overflow like (à décider)
+# Codemad
 
-Le but de ce projet est de réaliser une version plus simple de stack overflow qui permet à une communauté d'utilisateurs de poser des questions et d'y répondre.
-Comme ce site sra plus simple il aura comme fonctionnalité : 
-* Un utilisateur anonyme pourra parcourir la liste des questions et des réponses.
-* Un utilisateur anonyme pourra s'incrire sur le site et se loguer
-* Un utilisateur connecté pourra poser des questions
-* un utilisateur connecté pourra proposer des réponses
-* un utilisateur connecté pourra commenter des réponses et/ou des questions
-* un utilisateur connecté pourra voter pour des questions/réponses ainsi que pour des commentaires
-* un utilisateur connecté pourra metre à jour ses informations personnelles
-* un utilisateur anonyme pourra réaliser une recherche
+## Table of contents
 
-Pour réaliser ceci nous allons utiliser un modèle MVC en utilisant Java EE APIs ainsi que CodeceptJS pour tester le site.
+- [Introduction](#introduction)
+- [Usage](#usage)
+- [Repository structure](#repository-structure)
+- [Workflow](#workflow)
+- [Authors](#authors)
 
-# Structure du git
-## Dossier :
-````Docker```` : Contient le nécéssaire pour réaliser un déployement docker
+## Introduction
 
-````e2e```` : Contient les test fonctionnelles du site
+The purpose of Codemad is to provide a simplified version of StackOverflow, with the following features:
 
-`````src````` : Contient les fichiers sources du site
+- Anonymous users can:
+  - Browse questions and their answers & comments
+  - Sign up on the website
+  - Search for questions
+- Authenticated users can:
+  - Ask questions
+  - Answer to questions
+  - Comment on answer & questions
+  - Vote on questions, answers, and comments
+  - Update its account information
 
-## Organisation
-Dans cette partie nous allons décrire la méthode de travail que nous avons adopté.
+This is provided with the use of Java EE APIs according to an MVC pattern, along with CodeceptJS to test the UI.
 
-"En attente de discussion pour l'instant créer une issue, depuis la branche devs, et une merge request par page de mockup"
+## Usage
 
+The easiest way to run our app is with the bundled scripts:
 
+```
+./build-image.sh
+./run-image.sh
+```
 
+Should you wish to pull our [online image](https://github.com/orgs/AMT-Long-Du-Zboub/packages/container/package/amt-project-1), then do:
 
+```
+docker pull ghcr.io/amt-long-du-zboub/amt-project-1
+docker run -p 9080:9080 ghcr.io/amt-long-du-zboub/amt-project-1
+```
 
+Nightly builds can be use in a similar fashion using the `nightly` tag on Docker commands.
 
-# Auteur
+## Repository structure
+
+- `Docker` - files required for Docker deployments
+- `e2e` - UI tests (CodeceptJS)
+- `src` - app sources
+
+## Workflow
+
+Unstable/nightly code belongs in [devs](https://github.com/AMT-Long-Du-Zboub/amt-project-1/tree/devs) while stable code is in [master](https://github.com/AMT-Long-Du-Zboub/amt-project-1/tree/master).
+
+Code is merged into `master` using PRs following associated issues, and a similar procedure is used for `devs` when dealing with feature branches.
+
+## Authors
+
 * Bouyiatiotis Stéphane
 * Danai Moïn
 * Gomes Da Costa Joshua
