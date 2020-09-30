@@ -66,7 +66,7 @@
                                 <input type="checkbox" checked="checked" name="remember"> Remember me
                             </label>
                             <br/>
-                            <input id="fLogin" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Login">
+                            <button id="fLogin" role="submit" class="btn btn-primary btn-link btn-wd btn-lg" >Login</button>
                         </div>
                     </form>
                 </div>
@@ -123,7 +123,7 @@
                                 <input type="checkbox" checked="checked" name="remember"> Remember me
                             </label>
                             <br/>
-                            <input id="fRegister" type="submit" class="btn btn-primary btn-link btn-wd btn-lg" value="Register">
+                            <button id="fRegister" role="submit" class="btn btn-primary btn-link btn-wd btn-lg">Register</button>
                         </div>
                     </form>
                 </div>

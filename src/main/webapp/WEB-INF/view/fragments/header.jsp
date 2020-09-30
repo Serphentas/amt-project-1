@@ -39,7 +39,7 @@
                                     ${currentUser.firstName} ${currentUser.lastName}
                             </div>
                             <form method="post" action="logout.do">
-                                <input type="submit" value="Logout">
+                                <button role="submit" >Logout</button>
                             </form>
                         </c:when>
                         <c:otherwise>
