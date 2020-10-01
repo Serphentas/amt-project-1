@@ -5,12 +5,12 @@ const { setHeadlessWhen } = require('@codeceptjs/configure');
 setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
-  tests: 'tests/*_test.js',
+  tests: './tests/*_test.js',
   output: './output',
   helpers: {
     Puppeteer: {
-      url: 'httpd://localhost:9080/',
-      show: true,
+      url: 'http://localhost:9080/',
+      show: false,
       windowSize: '1200x900'
     }
   },
@@ -21,7 +21,11 @@ exports.config = {
   mocha: {},
   name: 'e2e',
   plugins: {
+    pauseOnFail: {},
     retryFailedStep: {
+      enabled: true
+    },
+    tryTo: {
       enabled: true
     },
     screenshotOnFail: {
