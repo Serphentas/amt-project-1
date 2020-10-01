@@ -117,13 +117,18 @@
                                 </div>
                                 <input id="fPassword" name="password" type="password" class="form-control" placeholder="Password...">
                             </div>
-                        </div><!--end of card body-->
-                        <div class="footer text-center">
-                            <label>
-                                <input type="checkbox" checked="checked" name="remember"> Remember me
-                            </label>
-                            <br/>
-                            <button id="fRegister" role="submit" class="btn btn-primary btn-link btn-wd btn-lg">Register</button>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <label>
+                                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend text-center">
+                                    <button id="fRegister" role="submit" class="btn btn-primary btn-lg">Register</button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>

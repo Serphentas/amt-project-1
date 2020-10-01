@@ -1,6 +1,6 @@
 Feature('home page test');
 
-Scenario('test home page', (I) => {
+Scenario('test home page', ({I}) => {
 	I.amOnPage('http://localhost:9080/');
 	I.see('Our StackOverflow');
 	I.click('Menu');
