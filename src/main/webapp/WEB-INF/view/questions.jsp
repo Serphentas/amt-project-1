@@ -18,7 +18,7 @@
 <body class="login-page sidebar-collapse">
 
 <!-- Inclusion du header sur le haut de page -->
-<jsp:include page="fragments/header.jsp" flush="true"/>
+<jsp:include page="fragments/nav.jsp" flush="true"/>
 
 <br>
 
