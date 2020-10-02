@@ -8,7 +8,7 @@ import lombok.Getter;
 @Builder
 @Getter
 @EqualsAndHashCode
-public class ProposeQuestionCommand {
+public class ProposeQuestionCmd {
 
     @Builder.Default
     private String author = "Anonymous";

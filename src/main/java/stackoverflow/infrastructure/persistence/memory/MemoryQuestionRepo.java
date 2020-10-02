@@ -1,7 +1,7 @@
 package stackoverflow.infrastructure.persistence.memory;
 
 import stackoverflow.application.question.QuestionsQuery;
-import stackoverflow.domain.question.IQuestionRepository;
+import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
 import stackoverflow.domain.question.QuestionType;
@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-public class InMemoryQuestionRepo implements IQuestionRepository {
+public class MemoryQuestionRepo implements IQuestionRepo {
 
     private Map<QuestionId, Question> store = new ConcurrentHashMap<>();
 

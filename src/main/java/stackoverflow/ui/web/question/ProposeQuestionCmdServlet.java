@@ -1,7 +1,7 @@
 package stackoverflow.ui.web.question;
 
 import stackoverflow.application.ServiceReg;
-import stackoverflow.application.question.ProposeQuestionCommand;
+import stackoverflow.application.question.ProposeQuestionCmd;
 import stackoverflow.application.question.QuestionFacade;
 
 import javax.servlet.ServletException;
@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name="SubmitQuestionCommandHandler", urlPatterns = "/submitQuestion.do")
-public class ProposeQuestionCommandServlet extends HttpServlet {
+public class ProposeQuestionCmdServlet extends HttpServlet {
 
     private ServiceReg serviceRegistry = ServiceReg.getInstance();
     private QuestionFacade questionFacade = serviceRegistry.getQuestionFacade();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProposeQuestionCommand command = ProposeQuestionCommand.builder()
+        ProposeQuestionCmd command = ProposeQuestionCmd.builder()
                 .author("anonymous")
                 .text(req.getParameter("text"))
                 .build();

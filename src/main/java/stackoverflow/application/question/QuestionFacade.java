@@ -1,6 +1,6 @@
 package stackoverflow.application.question;
 
-import stackoverflow.domain.question.IQuestionRepository;
+import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.domain.question.Question;
 
 import java.util.Collection;
@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 
 public class QuestionFacade {
 
-    private IQuestionRepository questionRepository;
-    public QuestionFacade(IQuestionRepository questionRepository){this.questionRepository = questionRepository;}
+    private IQuestionRepo questionRepository;
+    public QuestionFacade(IQuestionRepo questionRepository){this.questionRepository = questionRepository;}
 
-    public void proposeQuestion(ProposeQuestionCommand command){
+    public void proposeQuestion(ProposeQuestionCmd command){
         Question submittedQuestion = Question.builder()
                 .author(command.getAuthor())
                 .text(command.getText())
