@@ -12,7 +12,7 @@
     <div class="page-header header-filter" style="background-image: url('/assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                <div class="col">
                     <div class="card card-login">
                         <form class="form" method="post" action="login.do">
                             <div class="card-header card-header-primary text-center">
@@ -38,6 +38,7 @@
                                 </div>
                             </div>
                             <div class="footer text-center">
+                                <br>
                                 <label>
                                     <input type="checkbox" checked="checked" name="remember"> Remember me
                                 </label>
@@ -46,6 +47,8 @@
                             </div>
                         </form>
                     </div>
+                </div>
+                <div class="col">
                     <div class="card card-login">
                         <form class="form" method="post" action="register.do">
                             <div class="card-header card-header-primary text-center">
@@ -93,17 +96,13 @@
                                     </div>
                                     <input id="fPassword" name="password" type="password" class="form-control" placeholder="Password...">
                                 </div>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <label>
-                                            <input type="checkbox" checked="checked" name="remember"> Remember me
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="input-group">
-                                    <div class="input-group-prepend text-center">
-                                        <button id="fRegister" role="submit" class="btn btn-primary btn-lg">Register</button>
-                                    </div>
+                                <div class="footer text-center">
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                                    </label>
+                                    <br>
+                                    <button id="fRegister" role="submit"  class="btn btn-primary btn-link btn-wd btn-lg">Register</button>
                                 </div>
                             </div>
                         </form>
@@ -111,6 +110,7 @@
                 </div>
             </div>
         </div>
+
         <jsp:include page="fragments/errors.jsp" flush="true"/>
     </div>
 </t:base>
