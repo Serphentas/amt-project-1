@@ -40,7 +40,7 @@ public class IdentityMngmtFacade {
 
         boolean success = person.authenticate(cmd.getClearTextPassword());
         if(!success){
-            throw new AuthenticateFailedException("Verification of cred");
+            throw new AuthenticateFailedException("Verification of credentials failed");
         }
 
         return CurrentUserDTO.builder()

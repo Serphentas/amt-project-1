@@ -33,7 +33,7 @@ public class RegisterCmdServlet extends HttpServlet {
 
         try {
             identityMngmtFacade.register(registerCmd);
-            req.getRequestDispatcher("login.do").forward(req, resp);
+            req.getRequestDispatcher("/login.do").forward(req, resp);
             return;
         } catch(RegistrationFailedException e) {
             req.getSession().setAttribute("errors", List.of(e.getMessage()));

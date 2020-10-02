@@ -5,5 +5,5 @@ import lombok.Value;
 @Value
 public class AuthenticateFailedException extends Exception{
 
-    private String msg;
+    public AuthenticateFailedException(String msg) { super(msg); }
 }

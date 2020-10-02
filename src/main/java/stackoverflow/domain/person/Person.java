@@ -26,7 +26,7 @@ public class Person implements IEntity<Person, PersonId>{
     private String lastName;
 
     @EqualsAndHashCode.Exclude
-    private String  encryptedPassword;
+    private String encryptedPassword;
 
     public boolean authenticate(String clearTextPassword){
         return clearTextPassword.toUpperCase().equals(encryptedPassword);
@@ -71,6 +71,10 @@ public class Person implements IEntity<Person, PersonId>{
 
             if(username == null || username.isEmpty()){
                 throw new IllegalArgumentException("Username is mandatory");
+            }
+
+            if(encryptedPassword == null || encryptedPassword.isEmpty()){
+                throw new IllegalArgumentException("Password is mandatory");
             }
 
             if(email == null || email.isEmpty()){

@@ -11,17 +11,12 @@ import java.io.IOException;
 @WebFilter(filterName="AuthorizationFilter", urlPatterns = "/*")
 public class AuthorizationFilter implements Filter {
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
     public void doFilter(ServletRequest servletReq, ServletResponse servletResp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletReq;
         HttpServletResponse resp = (HttpServletResponse) servletResp;
 
         if (isPublicResource(req.getRequestURI())) {
-            chain.doFilter(req, resp);
+            chain.doFilter(servletReq, servletResp);
             return;
         }
 
@@ -39,12 +34,7 @@ public class AuthorizationFilter implements Filter {
             return;
         }
 
-        chain.doFilter(req, resp);
-    }
-
-    @Override
-    public void destroy() {
-
+        chain.doFilter(servletReq, servletResp);
     }
 
     boolean isPublicResource(String URI){
