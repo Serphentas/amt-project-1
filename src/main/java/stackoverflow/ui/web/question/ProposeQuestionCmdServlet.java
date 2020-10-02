@@ -14,8 +14,8 @@ import java.io.IOException;
 @WebServlet(name="SubmitQuestionCommandHandler", urlPatterns = "/submitQuestion.do")
 public class ProposeQuestionCmdServlet extends HttpServlet {
 
-    private ServiceReg serviceRegistry = ServiceReg.getInstance();
-    private QuestionFacade questionFacade = serviceRegistry.getQuestionFacade();
+    private ServiceReg serviceReg = ServiceReg.getInstance();
+    private QuestionFacade questionFacade = serviceReg.getQuestionFacade();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

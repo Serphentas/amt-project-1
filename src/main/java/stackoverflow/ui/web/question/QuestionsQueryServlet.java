@@ -18,7 +18,6 @@ public class QuestionsQueryServlet extends HttpServlet {
     private ServiceReg serviceReg = ServiceReg.getInstance();
     private QuestionFacade questionFacade = serviceReg.getQuestionFacade();
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         QuestionsDTO questionsDTO = questionFacade.getQuestions(QuestionsQuery.builder()

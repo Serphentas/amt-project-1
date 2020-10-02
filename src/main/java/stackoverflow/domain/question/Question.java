@@ -1,14 +1,14 @@
 package stackoverflow.domain.question;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 import stackoverflow.domain.IEntity;
+import stackoverflow.domain.person.Person;
+import stackoverflow.domain.person.PersonId;
 
 @Data
+@Getter
 @Builder(toBuilder = true)
-public class Question implements IEntity {
+public class Question implements IEntity<Question, QuestionId> {
 
     @Setter(AccessLevel.NONE)
     private QuestionId id = new QuestionId();
@@ -20,11 +20,13 @@ public class Question implements IEntity {
     @Setter(AccessLevel.NONE)
     private QuestionType questionType;
 
-    public void categorizeAs(QuestionType questionType){this.questionType = questionType;}
+    public void categorizeAs(QuestionType questionType){ this.questionType = questionType; }
 
     @Override
-    public IEntity deepClone() {
-        return null;
+    public Question deepClone() {
+        return this.toBuilder()
+            .id(new QuestionId(id.asString()))
+            .build();
     }
 
     public static class QuestionBuilder {

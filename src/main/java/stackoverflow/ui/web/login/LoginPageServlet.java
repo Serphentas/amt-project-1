@@ -12,10 +12,10 @@ import java.io.IOException;
 public class LoginPageServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Object errors = request.getSession().getAttribute("errors");
-        request.setAttribute("errors", errors);
-        request.getSession().removeAttribute("errors");
-        request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Object errors = req.getSession().getAttribute("errors");
+        req.setAttribute("errors", errors);
+        req.getSession().removeAttribute("errors");
+        req.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(req, resp);
     }
 }
