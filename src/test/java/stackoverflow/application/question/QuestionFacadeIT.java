@@ -13,7 +13,7 @@ import stackoverflow.infrastructure.persistence.memory.MemoryQuestionRepo;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class QuestionDTOFacadeIT {
+public class QuestionFacadeIT {
 
     private QuestionFacade questionFacade;
 

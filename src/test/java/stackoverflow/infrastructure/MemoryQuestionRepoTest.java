@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import stackoverflow.domain.question.Question;
 
-public class MemoryQuestionDTORepoTest {
+public class MemoryQuestionRepoTest {
 
     @Test
     void removeNonExistingQuestionDontThrow(){

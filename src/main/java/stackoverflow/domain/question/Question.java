@@ -14,7 +14,6 @@ public class Question implements IEntity<Question, QuestionId> {
     private QuestionId id = new QuestionId();
 
     private String author;
-
     private String text;
 
     @Setter(AccessLevel.NONE)
