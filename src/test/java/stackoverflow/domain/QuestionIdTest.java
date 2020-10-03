@@ -1,18 +1,25 @@
 package stackoverflow.domain;
 
 import org.junit.jupiter.api.Test;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
 
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class QuestionIdTest {
     @Test
     void iCanUseQuestionId(){
         QuestionId id = new QuestionId();
-        Question q = Question.builder().build();
+        Question q = Question.builder()
+            .id(id)
+            .text("")
+            .build();
+
+        assertEquals(id,q.getId());
     }
 
     @Test
@@ -34,5 +41,13 @@ public class QuestionIdTest {
             QuestionId id = new QuestionId("invalid");
             fail();
         } catch (Exception e){}
+    }
+
+    @Test
+    void iCanTurnIdInString(){
+        QuestionId id = new QuestionId();
+        QuestionId id2 = new QuestionId(id.asString());
+
+        assertEquals(id.asString(), id2.asString());
     }
 }

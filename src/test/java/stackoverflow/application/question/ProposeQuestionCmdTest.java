@@ -2,8 +2,7 @@ package stackoverflow.application.question;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import stackoverflow.application.question.ProposeQuestionCmd;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProposeQuestionCmdTest {
 
@@ -13,4 +12,6 @@ public class ProposeQuestionCmdTest {
         assertEquals("Anonymous", q.getAuthor());
         assertEquals("No content", q.getText());
     }
+
+
 }
