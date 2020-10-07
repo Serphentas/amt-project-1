@@ -6,7 +6,7 @@ import javax.inject.Named;
 import javax.sql.DataSource;
 
 @ApplicationScoped
-@Named("JdbcTagRepository")
+@Named("JdbcVoteRepository")
 public class JdbcVoteRepository {
     @Resource(lookup = "jdbc/StackOverFlowDS")
     DataSource dataSource;
