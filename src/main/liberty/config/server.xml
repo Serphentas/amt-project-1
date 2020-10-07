@@ -9,4 +9,15 @@
     <webApplication location="amt-project-1.war" contextRoot="/"/>
 
     <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
+
+    <library id="MySqlLib">
+        <fileset dir="${server.config.dir}" includes="*.jar"/>
+    </library>
+
+    <datasource jndiName="jdbc/StackOverFlowDS">
+        <jdbcDriver libraryRef="MySqlLib"/>
+        <proprety databaseName="codemad"
+                  serverName="localhost" port="9906"
+                  user="root" password="root"/>
+    </datasource>
 </server>
