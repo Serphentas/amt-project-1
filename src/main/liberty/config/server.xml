@@ -14,10 +14,10 @@
         <fileset dir="${server.config.dir}" includes="*.jar"/>
     </library>
 
-    <datasource jndiName="jdbc/StackOverFlowDS">
+    <dataSource jndiName="jdbc/StackOverFlowDS">
         <jdbcDriver libraryRef="MySqlLib"/>
         <proprety databaseName="codemad"
-                  serverName="localhost" port="9906"
+                  serverName="localhost" portNumber="9906"
                   user="root" password="root"/>
-    </datasource>
+    </dataSource>
 </server>
