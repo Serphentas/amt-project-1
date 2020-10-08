@@ -27,7 +27,7 @@ public class JdbcUserRepository {
     public ResultSet addUser(Person person){
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "INSERT INTO User(pseudo, name, surname, email, password) VALUES ?, ?, ?, ?, ?");
+                    "INSERT INTO `codemad`.`user`(`pseudo`,`name`,`surname`,`email`,`password`) VALUES ?, ?, ?, ?, ?");
             statement.setString(1, person.getUsername());
             statement.setString(2, person.getFirstName());
             statement.setString(3, person.getLastName());
