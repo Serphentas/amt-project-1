@@ -32,7 +32,6 @@ public class JdbcUserRepository implements IPersonRepo {
     @Override
     public void save(Person person) {
         try {
-            System.out.println(dataSource == null);
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
                     "INSERT INTO `codemad`.`user`(`pseudo`,`name`,`surname`,`email`,`password`) VALUES ?, ?, ?, ?, ?");
             statement.setString(1, person.getUsername());
@@ -68,6 +67,8 @@ public class JdbcUserRepository implements IPersonRepo {
     @Override
     public Optional<Person> findByUsername(String username) {
         try {
+            System.out.println(dataSource);
+            System.out.println(dataSource.getConnection());
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
                     "SELECT * FROM `codemad`.`User` WHERE pseudo=?");
             statement.setString(1, username);

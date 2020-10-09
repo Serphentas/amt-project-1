@@ -4,7 +4,6 @@ import stackoverflow.application.identitymngmt.IdentityMngmtFacade;
 import stackoverflow.application.question.QuestionFacade;
 import stackoverflow.domain.person.IPersonRepo;
 import stackoverflow.domain.question.IQuestionRepo;
-import stackoverflow.infrastructure.persistence.memory.MemoryQuestionRepo;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -15,6 +14,7 @@ public class ServiceReg {
     @Inject @Named("JdbcUserRepository")
     IPersonRepo personRepo;
 
+    @Inject @Named("JdbcQuestionRepository")
     IQuestionRepo questionRepo;
 
     public IdentityMngmtFacade getIdentityMngmtFacade() {
