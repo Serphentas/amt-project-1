@@ -5,7 +5,6 @@ import stackoverflow.application.question.QuestionFacade;
 import stackoverflow.domain.person.IPersonRepo;
 import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.infrastructure.persistence.memory.MemoryQuestionRepo;
-import stackoverflow.infrastructure.persistence.memory.MemoryPersonRepo;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -13,34 +12,16 @@ import javax.inject.Named;
 
 @ApplicationScoped
 public class ServiceReg {
-    private static ServiceReg serviceReg;
-
     @Inject @Named("JdbcUserRepository")
     IPersonRepo personRepo;
-    private static IdentityMngmtFacade identityMngmtFacade;
 
-    @Inject @Named("JdbcQuestionRepository")
     IQuestionRepo questionRepo;
-    private static QuestionFacade questionFacade;
 
-    private ServiceReg(){
-        serviceReg = this;
-
-        personRepo = new MemoryPersonRepo();
-        identityMngmtFacade = new IdentityMngmtFacade(personRepo);
-
-        questionRepo = new MemoryQuestionRepo();
-        questionFacade = new QuestionFacade(questionRepo);
+    public IdentityMngmtFacade getIdentityMngmtFacade() {
+        return new IdentityMngmtFacade(personRepo);
     }
 
-    public static ServiceReg getInstance(){
-        if(serviceReg == null){
-            serviceReg = new ServiceReg();
-        }
-        return serviceReg;
+    public QuestionFacade getQuestionFacade() {
+        return new QuestionFacade(questionRepo);
     }
-
-    public IdentityMngmtFacade getIdentityMngmtFacade() { return identityMngmtFacade; }
-
-    public QuestionFacade getQuestionFacade() {return questionFacade;}
 }

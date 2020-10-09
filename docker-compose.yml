@@ -10,8 +10,6 @@ services:
       MYSQL_DATABASE: codemad
       MYSQL_USER: codemad-mdus
       MYSQL_PASSWORD: codemad-mdpw
-    networks:
-      - codemad_net
 
   app:
     # image: ghcr.io/amt-long-du-zboub/amt-project-1
@@ -22,8 +20,6 @@ services:
       - 9080:9080
     depends_on:
       - db
-    networks:
-      - codemad_net
 
   adminer:
     image: adminer
@@ -35,9 +31,3 @@ services:
       ADMINER_DEFAULT_SERVER: codemad_db
     depends_on:
       - db
-    networks:
-      - codemad_net
-
-networks:
-  codemad_net:
-    driver: bridge

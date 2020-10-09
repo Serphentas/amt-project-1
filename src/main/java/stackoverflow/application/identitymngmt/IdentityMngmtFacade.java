@@ -11,9 +11,10 @@ import stackoverflow.infrastructure.persistence.jdbc.JdbcUserRepository;
 
 public class IdentityMngmtFacade {
     private IPersonRepo personRepo;
-    private JdbcUserRepository JdbcUser;
 
-    public IdentityMngmtFacade(IPersonRepo personRepo) { this.personRepo = personRepo; }
+    public IdentityMngmtFacade(IPersonRepo personRepo) {
+        this.personRepo = personRepo;
+    }
 
     public void register(RegisterCmd cmd) throws RegistrationFailedException {
         Person yetExistingPerson = personRepo.findByUsername(cmd.getUsername()).orElse(null);
@@ -31,8 +32,6 @@ public class IdentityMngmtFacade {
                 .clearTextPassword(cmd.getClearTextPassword())
                 .build();
             personRepo.save(newPerson);
-            JdbcUser.addUser(newPerson);
-
         } catch (Exception e) {
             throw new RegistrationFailedException(e.getMessage());
         }
