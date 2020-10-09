@@ -7,9 +7,11 @@ import stackoverflow.application.identitymngmt.login.RegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
 import stackoverflow.domain.person.IPersonRepo;
 import stackoverflow.domain.person.Person;
+import stackoverflow.infrastructure.persistence.jdbc.JdbcUserRepository;
 
 public class IdentityMngmtFacade {
     private IPersonRepo personRepo;
+    private JdbcUserRepository JdbcUser;
 
     public IdentityMngmtFacade(IPersonRepo personRepo) { this.personRepo = personRepo; }
 
@@ -29,6 +31,8 @@ public class IdentityMngmtFacade {
                 .clearTextPassword(cmd.getClearTextPassword())
                 .build();
             personRepo.save(newPerson);
+            JdbcUser.addUser(newPerson);
+
         } catch (Exception e) {
             throw new RegistrationFailedException(e.getMessage());
         }
