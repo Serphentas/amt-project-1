@@ -7,13 +7,20 @@ import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.infrastructure.persistence.memory.MemoryQuestionRepo;
 import stackoverflow.infrastructure.persistence.memory.MemoryPersonRepo;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+@ApplicationScoped
 public class ServiceReg {
     private static ServiceReg serviceReg;
 
-    private static IPersonRepo personRepo;
+    @Inject @Named("JdbcUserRepository")
+    IPersonRepo personRepo;
     private static IdentityMngmtFacade identityMngmtFacade;
 
-    private static IQuestionRepo questionRepo;
+    @Inject @Named("JdbcQuestionRepository")
+    IQuestionRepo questionRepo;
     private static QuestionFacade questionFacade;
 
     private ServiceReg(){
