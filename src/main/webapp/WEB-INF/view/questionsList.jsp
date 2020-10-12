@@ -8,6 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<jsp:useBean scope="request" id="questions" type="stackoverflow.application.question.QuestionsDTO"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:base>
@@ -18,15 +19,13 @@
                     <h4 class="card-title">Questions List</h4>
                 </div>
                 <p class="description text-center">View the questions list below</p>
-                <div class="card-body text-center">
                     <div class="title">Questions</div>
                     <c:forEach var="question" items="${questions.questions}">
-                        <button  class="btn btn-primary btn-sm">${question.text}</button><br>
+                        <div class="card-body text-center">
+                            <p class="description text-left">${question.title}</p><br>
+                            <p class="description text-left">${question.text}</p><br>
+                        </div>
                     </c:forEach>
-                </div>
-                <div>
-                    <br>
-                </div>
             </div>
 
         </div>

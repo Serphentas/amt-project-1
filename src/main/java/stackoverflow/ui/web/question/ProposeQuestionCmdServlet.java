@@ -23,6 +23,7 @@ public class ProposeQuestionCmdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProposeQuestionCmd command = ProposeQuestionCmd.builder()
                 .author("anonymous")
+                .title(req.getParameter("title"))
                 .text(req.getParameter("text"))
                 .build();
         questionFacade.proposeQuestion(command);
