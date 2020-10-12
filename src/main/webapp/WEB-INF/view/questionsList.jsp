@@ -12,22 +12,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:base>
-    <div class="page-header header-filter" style="background-image: url('/assets/img/bg.jpg'); background-size: cover; background-position: top center;">
+    <div class="page-header header-filter" data-parallax="true" style="background-image: url('/assets/img/city-profile.jpg');">
         <div class="container">
-            <div class="card card-login">
-                <div class="card-header card-header-primary text-center">
-                    <h4 class="card-title">Questions List</h4>
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto">
+                    <div class="brand text-center text-light">
+                        <h1 class="description text-center text-light text-capitalize" >Questions List</h1>
+                        <h5 class="description text-center text-light text-uppercase">View the questions list below</h5>
+                    </div>
                 </div>
-                <p class="description text-center">View the questions list below</p>
-                    <div class="title">Questions</div>
-                    <c:forEach var="question" items="${questions.questions}">
-                        <div class="card-body text-center">
-                            <p class="description text-left">${question.title}</p><br>
-                            <p class="description text-left">${question.text}</p><br>
-                        </div>
-                    </c:forEach>
             </div>
-
+        </div>
+    </div>
+    <div class="main main-raised bg-dark">
+        <div class="container">
+            <div class="section">
+                <c:forEach var="question" items="${questions.questions}">
+                    <div class="alert alert-secondary" role="alert">
+                        <a class="nav-link" role="tab" data-toggle="tab">
+                            <i class="material-icons">camera</i>
+                            <h3 class="description text-left">${question.title}</h3><br>
+                            <p class="description text-left">${question.text}</p><br>
+                            <button type="button" class="btn btn-outline-secondary">Go to question</button>                    </a>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
     </div>
 </t:base>
