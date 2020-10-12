@@ -14,5 +14,8 @@ public class ProposeQuestionCmd {
     private String author = "Anonymous";
 
     @Builder.Default
+    private String title = "No title";
+
+    @Builder.Default
     private String text = "No content";
 }
