@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.UUID;
 
 @ApplicationScoped
 @Named("JdbcUserRepository")
@@ -33,12 +34,13 @@ public class JdbcUserRepository implements IPersonRepo {
     public void save(Person person) {
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "INSERT INTO `codemad`.`user`(`pseudo`,`name`,`surname`,`email`,`password`) VALUES ?, ?, ?, ?, ?");
-            statement.setString(1, person.getUsername());
-            statement.setString(2, person.getFirstName());
-            statement.setString(3, person.getLastName());
-            statement.setString(4, person.getEmail());
-            statement.setString(5, person.getEncryptedPassword());
+                    "INSERT INTO codemad.User (idUser, username, firstname, lastname, email, password) VALUES (?, ?, ?, ?, ?, ?)");
+            statement.setString(1, UUID.randomUUID().toString());
+            statement.setString(2, person.getUsername());
+            statement.setString(3, person.getFirstName());
+            statement.setString(4, person.getLastName());
+            statement.setString(5, person.getEmail());
+            statement.setString(6, person.getEncryptedPassword());
 
             statement.execute();
         } catch (SQLException throwables) {
@@ -67,22 +69,20 @@ public class JdbcUserRepository implements IPersonRepo {
     @Override
     public Optional<Person> findByUsername(String username) {
         try {
-            System.out.println(dataSource);
-            System.out.println(dataSource.getConnection());
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "SELECT * FROM `codemad`.`User` WHERE pseudo=?");
+                "SELECT * FROM codemad.User WHERE username=?");
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
 
             ArrayList<Person> rows = new ArrayList<>();
             while (rs.next()) {
                 Person person = Person.builder()
-                    .id(new PersonId(rs.getString("id")))
+                    .id(new PersonId(UUID.fromString(rs.getString("idUser"))))
                     .username(rs.getString("username"))
-                    .encryptedPassword(rs.getString("encryptedPassword"))
+                    .encryptedPassword(rs.getString("password"))
                     .email(rs.getString("email"))
-                    .firstName(rs.getString("firstName"))
-                    .lastName(rs.getString("lastName"))
+                    .firstName(rs.getString("firstname"))
+                    .lastName(rs.getString("lastname"))
                     .build();
                 rows.add(person);
             }

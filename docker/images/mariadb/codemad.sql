@@ -22,14 +22,14 @@ USE `codemad` ;
 -- Table `codemad`.`User`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`User` (
-  `idUser` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `pseudo` VARCHAR(45) NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `surname` VARCHAR(45) NOT NULL,
+  `idUser` VARCHAR(36) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `firstname` VARCHAR(45) NOT NULL,
+  `lastname` VARCHAR(45) NOT NULL,
   `email` VARCHAR(60) NOT NULL,
   `password` VARCHAR(24) NOT NULL,
   PRIMARY KEY (`idUser`),
-  UNIQUE INDEX `pseudo_UNIQUE` (`pseudo` ASC) VISIBLE,
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
 
