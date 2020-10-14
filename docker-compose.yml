@@ -1,12 +1,11 @@
 version: "3.7"
 services:
   db:
-    build:
-      context: ./docker/images/mariadb
+    image: mariadb/server
     container_name: codemad_db
     restart: always
     volumes:
-      - ./docker/images/mariadb/codemad.sql:/docker-entrypoint-initdb.d/codemad.sql
+      - ./docker/images/mariadb/:/docker-entrypoint-initdb.d/
     environment:
       MYSQL_ROOT_PASSWORD: codemad-mdpw
       MYSQL_DATABASE: codemad
