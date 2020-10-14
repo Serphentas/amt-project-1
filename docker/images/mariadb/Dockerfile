@@ -1,3 +1,3 @@
 FROM mariadb
 
-COPY codemad.sql /docker-entrypoint-initdb.d/
+COPY codemad.sql /docker-entrypoint-initdb.d/codemad.sql
