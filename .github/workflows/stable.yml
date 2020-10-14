@@ -24,10 +24,17 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Build Docker image
+      - name: Build application Docker image
         run: |
-          echo ${{ secrets.SECRET_KEY }}
           echo ${{ secrets.SECRET_KEY }} | docker login ghcr.io -u Serphentas --password-stdin
-          docker build -t amt-long-du-zboub/amt-project-1 .
-          docker tag amt-long-du-zboub/amt-project-1 ghcr.io/amt-long-du-zboub/amt-project-1
-          docker push ghcr.io/amt-long-du-zboub/amt-project-1
+          docker build -t amt-long-du-zboub/amt-project-1/app .
+          docker tag amt-long-du-zboub/amt-project-1/app ghcr.io/amt-long-du-zboub/amt-project-1/app
+          docker push ghcr.io/amt-long-du-zboub/amt-project-1/app
+
+      - name: Build database Docker image
+        run: |
+          cd docker/images/mariadb
+          echo ${{ secrets.SECRET_KEY }} | docker login ghcr.io -u Serphentas --password-stdin
+          docker build -t amt-long-du-zboub/amt-project-1/db .
+          docker tag amt-long-du-zboub/amt-project-1/db ghcr.io/amt-long-du-zboub/amt-project-1/db
+          docker push ghcr.io/amt-long-du-zboub/amt-project-1/db
