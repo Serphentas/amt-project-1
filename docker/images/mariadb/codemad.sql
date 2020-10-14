@@ -39,7 +39,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Question` (
   `idQuestion` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `idUser` INT UNSIGNED NOT NULL,
+  `idUser` VARCHAR(36) NOT NULL,
   `title` VARCHAR(60) NULL,
   `text` LONGTEXT NULL,
   PRIMARY KEY (`idQuestion`),
@@ -57,7 +57,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Answer` (
   `idAnswer` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `idUser` INT UNSIGNED NOT NULL,
+  `idUser` VARCHAR(36) NOT NULL,
   `idQuestion` INT UNSIGNED NOT NULL,
   `text` LONGTEXT NULL,
   PRIMARY KEY (`idAnswer`),
@@ -81,7 +81,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Commentary` (
   `idCommentary` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `idUser` INT UNSIGNED NOT NULL,
+  `idUser` VARCHAR(36) NOT NULL,
   `idAnswer` INT UNSIGNED NOT NULL,
   `idQuestion` INT UNSIGNED NOT NULL,
   `text` LONGTEXT NULL,
@@ -112,7 +112,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Vote` (
   `idVote` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `idUser` INT UNSIGNED NOT NULL,
+  `idUser` VARCHAR(36) NOT NULL,
   `idQuestion` INT UNSIGNED NOT NULL,
   `idCommentary` INT UNSIGNED NOT NULL,
   `vote` TINYINT NULL,

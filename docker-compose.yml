@@ -5,6 +5,8 @@ services:
       context: ./docker/images/mariadb
     container_name: codemad_db
     restart: always
+    volumes:
+      - ./docker/images/mariadb/codemad.sql:/docker-entrypoint-initdb.d/codemad.sql
     environment:
       MYSQL_ROOT_PASSWORD: codemad-mdpw
       MYSQL_DATABASE: codemad
