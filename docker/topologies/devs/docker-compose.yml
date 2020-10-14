@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  db_dev:
+    image: ghcr.io/amt-long-du-zboub/amt-project-1/db:dev
+    container_name: codemad_db_dev
+    environment:
+      MYSQL_ROOT_PASSWORD: codemad
+    ports:
+      - 3306:3306
+
+  app_dev:
+    image: ghcr.io/amt-long-du-zboub/amt-project-1/app:dev
+    container_name: codemad_app_dev
+    ports:
+      - 9080:9080
+    depends_on:
+      - db_dev
+
+  adminer_dev:
+    image: adminer
+    container_name: codemad_adminer_dev
+    ports:
+      - 8080:8080
+    environment:
+      ADMINER_DEFAULT_SERVER: codemad_db_dev
+    depends_on:
+      - db_dev
