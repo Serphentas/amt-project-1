@@ -1,12 +1,12 @@
 package stackoverflow.ui.web.login;
 
-
 import stackoverflow.application.ServiceReg;
 import stackoverflow.application.identitymngmt.IdentityMngmtFacade;
 import stackoverflow.application.identitymngmt.authenticate.AuthenticateCmd;
 import stackoverflow.application.identitymngmt.authenticate.AuthenticateFailedException;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +18,8 @@ import java.util.List;
 @WebServlet(name="LoginCmdServlet", urlPatterns = "/login.do")
 public class LoginCmdServlet extends HttpServlet {
 
-    private ServiceReg serviceReg = ServiceReg.getInstance();
-    private IdentityMngmtFacade identityMngmtFacade = serviceReg.getIdentityMngmtFacade();
+    @Inject
+    ServiceReg serviceReg;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class LoginCmdServlet extends HttpServlet {
                 .build();
 
         try {
-            currentUser = identityMngmtFacade.authenticate(authenticateCmd);
+            currentUser = serviceReg.getIdentityMngmtFacade().authenticate(authenticateCmd);
             req.getSession().setAttribute("currentUser", currentUser);
             String targetUrl = (String)req.getSession().getAttribute("targetUrl");
             targetUrl = (targetUrl != null) ? targetUrl : "/";
