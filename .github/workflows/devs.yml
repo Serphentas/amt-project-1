@@ -24,10 +24,12 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
+      - name: Update database hostname
+        run: sed -i 's/codemad_db/codemad_db_dev/g' src/main/liberty/config/server.xml
+
       - name: Build application Docker image
         run: |
           echo ${{ secrets.SECRET_KEY }} | docker login ghcr.io -u Serphentas --password-stdin
-          sed -i 's/codemad_db/codemad_db_dev/g' src/main/liberty/config/server.xml
           docker build -t amt-long-du-zboub/amt-project-1/app:dev .
           docker tag amt-long-du-zboub/amt-project-1/app:dev ghcr.io/amt-long-du-zboub/amt-project-1/app:dev
           docker push ghcr.io/amt-long-du-zboub/amt-project-1/app:dev
