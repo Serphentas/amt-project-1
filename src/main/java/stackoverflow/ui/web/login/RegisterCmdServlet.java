@@ -5,6 +5,7 @@ import stackoverflow.application.identitymngmt.IdentityMngmtFacade;
 import stackoverflow.application.identitymngmt.login.RegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +17,8 @@ import java.util.List;
 @WebServlet(name = "RegisterCmdServlet", urlPatterns = "/register.do")
 public class RegisterCmdServlet extends HttpServlet {
 
-    private ServiceReg serviceReg = ServiceReg.getInstance();
-    private IdentityMngmtFacade identityMngmtFacade = serviceReg.getIdentityMngmtFacade();
+    @Inject
+    ServiceReg serviceReg;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +33,7 @@ public class RegisterCmdServlet extends HttpServlet {
                 .build();
 
         try {
-            identityMngmtFacade.register(registerCmd);
+            serviceReg.getIdentityMngmtFacade().register(registerCmd);
             req.getRequestDispatcher("/login.do").forward(req, resp);
             return;
         } catch(RegistrationFailedException e) {

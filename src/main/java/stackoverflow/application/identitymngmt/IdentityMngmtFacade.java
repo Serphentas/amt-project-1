@@ -7,11 +7,14 @@ import stackoverflow.application.identitymngmt.login.RegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
 import stackoverflow.domain.person.IPersonRepo;
 import stackoverflow.domain.person.Person;
+import stackoverflow.infrastructure.persistence.jdbc.JdbcUserRepository;
 
 public class IdentityMngmtFacade {
     private IPersonRepo personRepo;
 
-    public IdentityMngmtFacade(IPersonRepo personRepo) { this.personRepo = personRepo; }
+    public IdentityMngmtFacade(IPersonRepo personRepo) {
+        this.personRepo = personRepo;
+    }
 
     public void register(RegisterCmd cmd) throws RegistrationFailedException {
         Person yetExistingPerson = personRepo.findByUsername(cmd.getUsername()).orElse(null);
