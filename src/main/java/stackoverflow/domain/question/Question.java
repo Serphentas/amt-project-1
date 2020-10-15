@@ -2,8 +2,6 @@ package stackoverflow.domain.question;
 
 import lombok.*;
 import stackoverflow.domain.IEntity;
-import stackoverflow.domain.person.Person;
-import stackoverflow.domain.person.PersonId;
 
 @Data
 @Getter

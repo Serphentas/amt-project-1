@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface IPersonRepo extends IRepo<Person, PersonId> {
 
-    public Optional<Person> findByUsername(String username);
+    Optional<Person> findByUsername(String username);
 }

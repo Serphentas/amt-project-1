@@ -7,7 +7,8 @@ import stackoverflow.domain.IEntity;
 @Setter
 @EqualsAndHashCode
 @Builder(toBuilder = true)
-public class Answer  implements IEntity<Answer, AnswerId> {
+public class Answer implements IEntity<Answer, AnswerId> {
+
     @Setter(AccessLevel.NONE)
     private AnswerId id;
 
@@ -17,7 +18,7 @@ public class Answer  implements IEntity<Answer, AnswerId> {
     @Override
     public Answer deepClone() {
         return this.toBuilder()
-                .id(new AnswerId(id.asString()))
-                .build();
+            .id(new AnswerId(id.asString()))
+            .build();
     }
 }
