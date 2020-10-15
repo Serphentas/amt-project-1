@@ -35,14 +35,12 @@
                             <p class="description text-left text-dark ">${question.text}</p><br>
                             <div class="row">
                                 <div class="column">
-                                    <form class="form" method="post" action="answer.do">
-                                        <input type="hidden" id = "postId"  name = "postId" value ="${question.id}">
+                                    <form class="form" method="get" action="/answer" id="${question.id}">
                                         <button type="submit" class="btn btn-outline-secondary">Answer</button>
                                     </form>
                                 </div>
                                 <div class="column">
-                                    <form class="form" method="post" action="comment.do">
-                                        <input type="hidden" id = "postId" name = "postId" value ="${question.id}">
+                                    <form class="form" method="get" action="/comment" id="${question.id}">
                                         <button type="submit" class="btn btn-default">Comment</button>
                                     </form>
                                 </div>
