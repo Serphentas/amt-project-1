@@ -17,6 +17,7 @@ public class QuestionFacade {
                 .author(command.getAuthor())
                 .title(command.getTitle())
                 .text(command.getText())
+                .id(command.getId())
                 .build();
         questionRepository.save(submittedQuestion);
     }
@@ -27,6 +28,7 @@ public class QuestionFacade {
         List<QuestionsDTO.QuestionDTO> allQuestionsDTO = allQuestions.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
                 .title(question.getTitle())
                 .text(question.getText())
+                .id(question.getId())
                 .build()).collect(Collectors.toList());
 
         return QuestionsDTO.builder()
