@@ -16,13 +16,14 @@ public class AnswerFacade {
     public void proposeAnswer(ProposeAnswerCmd command) {
         Answer submittedAnswer = Answer.builder()
                 .author(command.getAuthor())
+                .questionId(command.getQuestionId())
                 .text(command.getText())
                 .build();
         answerRepo.save(submittedAnswer);
     }
 
     public AnswersDTO getAnswers(AnswersQuery query) {
-        Collection<Answer> allAnswers = answerRepo.findByQuestionId(query.getId());
+        Collection<Answer> allAnswers = answerRepo.findAllAnswerByQuestion(query.getId());
 
         List<AnswersDTO.AnswerDTO> allAnswersDTO = allAnswers.stream().map(answer -> AnswersDTO.AnswerDTO.builder()
                 .text(answer.getText())
