@@ -15,13 +15,13 @@ public class QuestionTest {
         assertNotEquals(null,q.getId());
     }
 
-    @Test
-    void questionsTalkingAboutSexAreClassifiedAdult(){
-        Question q = Question.builder()
-            .text("sex")
-            .build();
-        assertEquals(QuestionType.ADULT,q.getQuestionType());
-    }
+    // @Test
+    // void questionsTalkingAboutSexAreClassifiedAdult(){
+    //     Question q = Question.builder()
+    //         .text("sex")
+    //         .build();
+    //     assertEquals(QuestionType.ADULT,q.getQuestionType());
+    // }
 
     @Test
     void questionsCanBeClassified(){

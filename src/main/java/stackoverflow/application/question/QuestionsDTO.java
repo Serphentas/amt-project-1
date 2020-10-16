@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Singular;
+import stackoverflow.domain.question.QuestionId;
 
 import java.util.List;
 
@@ -16,7 +17,9 @@ public class QuestionsDTO {
     @Getter
     @EqualsAndHashCode
     public static class QuestionDTO{
+        private String title;
         private String text;
+        private QuestionId id;
     }
 
     @Singular
