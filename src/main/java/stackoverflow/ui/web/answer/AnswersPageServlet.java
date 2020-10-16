@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "AnswerPageHandler", urlPatterns = "/answer")
-public class AnswersQueryServlet extends HttpServlet {
+public class AnswersPageServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;
@@ -28,6 +28,6 @@ public class AnswersQueryServlet extends HttpServlet {
             .id(new AnswerId(req.getParameter("id")))
             .build());
         req.setAttribute("answer", answersDTO);
-        req.getRequestDispatcher("/WEB-INF/view/questions.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/view/answer.jsp").forward(req, resp);
     }
 }

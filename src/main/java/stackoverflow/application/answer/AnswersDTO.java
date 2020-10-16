@@ -20,5 +20,5 @@ public class AnswersDTO {
     }
 
     @Singular
-    private List<AnswersDTO.AnswerDTO> answers;
+    private List<AnswerDTO> answers;
 }
