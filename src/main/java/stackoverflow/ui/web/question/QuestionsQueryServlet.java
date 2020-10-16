@@ -5,6 +5,7 @@ import stackoverflow.application.question.QuestionFacade;
 import stackoverflow.application.question.QuestionsDTO;
 import stackoverflow.application.question.QuestionsQuery;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +16,9 @@ import java.io.IOException;
 @WebServlet(name = "QuestionsPageHandler", urlPatterns = "/questions")
 public class QuestionsQueryServlet extends HttpServlet {
 
-    private ServiceReg serviceReg = ServiceReg.getInstance();
+    @Inject
+    ServiceReg serviceReg;
+
     private QuestionFacade questionFacade = serviceReg.getQuestionFacade();
 
     @Override
