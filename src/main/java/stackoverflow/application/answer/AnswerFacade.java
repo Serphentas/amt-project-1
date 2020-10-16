@@ -23,14 +23,14 @@ public class AnswerFacade {
     }
 
     public AnswersDTO getAnswers(AnswersQuery query) {
-        Collection<Answer> allAnswers = answerRepo.findAllAnswerByQuestion(query.getId());
+        Collection<Answer> allAnswers = answerRepo.find(query);
 
         List<AnswersDTO.AnswerDTO> allAnswersDTO = allAnswers.stream().map(answer -> AnswersDTO.AnswerDTO.builder()
                 .text(answer.getText())
                 .build()).collect(Collectors.toList());
 
         return AnswersDTO.builder()
-                .answer(allAnswersDTO)
+                .answers(allAnswersDTO)
                 .build();
     }
 }

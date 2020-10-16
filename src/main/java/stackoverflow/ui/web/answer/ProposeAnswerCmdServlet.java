@@ -22,11 +22,11 @@ public class ProposeAnswerCmdServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProposeAnswerCmd command = ProposeAnswerCmd.builder()
+        /*ProposeAnswerCmd command = ProposeAnswerCmd.builder()
                 .author("anonymous")
                 .text(req.getParameter("text"))
                 .build();
-        answerFacade.proposeAnswer(command);
+        answerFacade.proposeAnswer(command);*/
         resp.sendRedirect("/questions");
     }
 }

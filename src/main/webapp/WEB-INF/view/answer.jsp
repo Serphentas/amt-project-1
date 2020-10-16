@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>.
-<jsp:useBean scope="request" id="questions" type="stackoverflow.application.question.QuestionsDTO"/>
+<jsp:useBean scope="request" id="answers" type="stackoverflow.application.answer.answersDTO"/>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:base>

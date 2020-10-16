@@ -38,7 +38,11 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Question`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Question` (
+<<<<<<< HEAD
   `idQuestion` VARCHAR(36) NOT NULL,
+=======
+  `idQuestion` VARCHAR(36) NOT NULL AUTO_INCREMENT,
+>>>>>>> 9e72e7c6feae0305f9f1342f6415a5f00ff71d5f
   `idUser` VARCHAR(36) NOT NULL,
   `title` VARCHAR(60) NULL,
   `text` LONGTEXT NULL,

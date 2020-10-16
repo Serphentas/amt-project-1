@@ -5,6 +5,7 @@ import stackoverflow.application.answer.AnswerFacade;
 import stackoverflow.application.answer.AnswersDTO;
 import stackoverflow.application.answer.AnswersQuery;
 import stackoverflow.domain.answer.AnswerId;
+import stackoverflow.domain.question.QuestionId;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -24,10 +25,10 @@ public class AnswersPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AnswersDTO answersDTO = answerFacade.getAnswers(AnswersQuery.builder()
-            .id(new AnswerId(req.getParameter("id")))
+        /*AnswersDTO answersDTO = answerFacade.getAnswers(AnswersQuery.builder()
+            .id(new QuestionId(req.getParameter("id")))
             .build());
-        req.setAttribute("answer", answersDTO);
+        req.setAttribute("answer", answersDTO);*/
         req.getRequestDispatcher("/WEB-INF/view/answer.jsp").forward(req, resp);
     }
 }
