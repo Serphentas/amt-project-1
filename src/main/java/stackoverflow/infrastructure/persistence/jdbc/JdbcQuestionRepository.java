@@ -1,5 +1,6 @@
 package stackoverflow.infrastructure.persistence.jdbc;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -45,8 +46,12 @@ public class JdbcQuestionRepository implements IQuestionRepo {
 
     @Override
     public Collection<Question> findAll() {
-        // TODO Auto-generated method stub
-        return null;
+        Collection<Question> allQuestions = new ArrayList<>();
+
+
+
+
+        return allQuestions;
     }
 
     @Override
