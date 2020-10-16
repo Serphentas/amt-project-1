@@ -14,6 +14,7 @@ public class Question implements IEntity<Question, QuestionId> {
     private QuestionId id = new QuestionId();
 
     private String author;
+    private String title;
     private String text;
 
     @Setter(AccessLevel.NONE)
@@ -35,6 +36,10 @@ public class Question implements IEntity<Question, QuestionId> {
                 id = new QuestionId();
             }
 
+            if(title==null) {
+                text ="";
+            }
+
             if(text==null) {
                 text ="";
             }
@@ -47,7 +52,7 @@ public class Question implements IEntity<Question, QuestionId> {
                 questionType = QuestionType.ADULT;
             }
 
-            return new Question(id, author, text, questionType);
+            return new Question(id, author, title, text, questionType);
         }
     }
 }
