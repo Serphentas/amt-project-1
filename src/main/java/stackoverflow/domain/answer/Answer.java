@@ -2,6 +2,7 @@ package stackoverflow.domain.answer;
 
 import lombok.*;
 import stackoverflow.domain.IEntity;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
 
 @Getter
@@ -13,6 +14,7 @@ public class Answer implements IEntity<Answer, AnswerId> {
     @Setter(AccessLevel.NONE)
     private AnswerId id;
     private QuestionId questionId;
+    private PersonId personId;
     private String author;
     private String text;
 
