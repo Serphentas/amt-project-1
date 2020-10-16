@@ -2,6 +2,7 @@ package stackoverflow.domain.answer;
 
 import lombok.*;
 import stackoverflow.domain.IEntity;
+import stackoverflow.domain.question.QuestionId;
 
 @Getter
 @Setter
@@ -11,7 +12,7 @@ public class Answer implements IEntity<Answer, AnswerId> {
 
     @Setter(AccessLevel.NONE)
     private AnswerId id;
-
+    private QuestionId questionId;
     private String author;
     private String text;
 
