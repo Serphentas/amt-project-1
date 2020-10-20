@@ -2,6 +2,7 @@ package stackoverflow.application.question;
 
 import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.domain.question.Question;
+import stackoverflow.domain.question.QuestionId;
 
 import java.util.Collection;
 import java.util.List;
@@ -10,15 +11,15 @@ import java.util.stream.Collectors;
 public class QuestionFacade {
 
     private IQuestionRepo questionRepository;
-    public QuestionFacade(IQuestionRepo questionRepository){this.questionRepository = questionRepository;}
+    public QuestionFacade(IQuestionRepo questionRepository) { this.questionRepository = questionRepository; }
 
-    public void proposeQuestion(ProposeQuestionCmd command){
+    public void proposeQuestion(ProposeQuestionCmd command) {
         Question submittedQuestion = Question.builder()
-                .author(command.getAuthor())
-                .title(command.getTitle())
-                .text(command.getText())
-                .id(command.getId())
-                .build();
+            .author(command.getAuthor())
+            .title(command.getTitle())
+            .text(command.getText())
+            .id(command.getId())
+            .build();
         questionRepository.save(submittedQuestion);
     }
 
@@ -35,4 +36,17 @@ public class QuestionFacade {
                 .questions(allQuestionsDTO)
                 .build();
     }
+
+    public QuestionsDTO.QuestionDTO getQuestionbyId(QuestionId id){
+        Question question = questionRepository.findById(id).orElse(null);
+        if( question == null)
+            return null;
+        return QuestionsDTO.QuestionDTO.builder()
+                .text(question.getText())
+                .id(question.getId())
+                .title(question.getTitle())
+                .build();
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package stackoverflow.application;
 
+import lombok.Getter;
 import stackoverflow.application.answer.AnswerFacade;
 import stackoverflow.application.identitymngmt.IdentityMngmtFacade;
 import stackoverflow.application.question.QuestionFacade;
@@ -22,15 +23,36 @@ public class ServiceReg {
     @Inject @Named("JdbcAnswerRepository")
     IAnswerRepo answerRepo;
 
+    private static ServiceReg serviceReg;
+
+    private IdentityMngmtFacade identityMngmtFacade;
+    private QuestionFacade questionFacade;
+    private AnswerFacade answerFacade;
+
+    private ServiceReg(){
+        serviceReg = this;
+
+        identityMngmtFacade = new IdentityMngmtFacade(personRepo);
+        questionFacade = new QuestionFacade(questionRepo);
+        answerFacade = new AnswerFacade(answerRepo);
+    }
+
+    public static ServiceReg getInstance(){
+        if(serviceReg == null){
+            serviceReg = new ServiceReg();
+        }
+        return serviceReg;
+    }
+
     public IdentityMngmtFacade getIdentityMngmtFacade() {
-        return new IdentityMngmtFacade(personRepo);
+        return identityMngmtFacade;
     }
 
     public QuestionFacade getQuestionFacade() {
-        return new QuestionFacade(questionRepo);
+        return questionFacade;
     }
 
     public AnswerFacade getAnswerFacade() {
-        return new AnswerFacade(answerRepo);
+        return answerFacade;
     }
 }

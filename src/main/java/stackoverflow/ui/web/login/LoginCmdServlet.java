@@ -18,8 +18,7 @@ import java.util.List;
 @WebServlet(name="LoginCmdServlet", urlPatterns = "/login.do")
 public class LoginCmdServlet extends HttpServlet {
 
-    @Inject
-    ServiceReg serviceReg;
+    private IdentityMngmtFacade identityMngmtFacade = ServiceReg.getInstance().getIdentityMngmtFacade();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +31,7 @@ public class LoginCmdServlet extends HttpServlet {
                 .build();
 
         try {
-            currentUser = serviceReg.getIdentityMngmtFacade().authenticate(authenticateCmd);
+            currentUser = identityMngmtFacade.authenticate(authenticateCmd);
             req.getSession().setAttribute("currentUser", currentUser);
             String targetUrl = (String)req.getSession().getAttribute("targetUrl");
             targetUrl = (targetUrl != null) ? targetUrl : "/";

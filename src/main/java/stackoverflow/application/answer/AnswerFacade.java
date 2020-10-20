@@ -26,11 +26,12 @@ public class AnswerFacade {
         Collection<Answer> allAnswers = answerRepo.find(query);
 
         List<AnswersDTO.AnswerDTO> allAnswersDTO = allAnswers.stream().map(answer -> AnswersDTO.AnswerDTO.builder()
-                .text(answer.getText())
-                .build()).collect(Collectors.toList());
+            .text(answer.getText())
+            .build()
+        ).collect(Collectors.toList());
 
         return AnswersDTO.builder()
-                .answers(allAnswersDTO)
-                .build();
+            .answers(allAnswersDTO)
+            .build();
     }
 }

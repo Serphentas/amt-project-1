@@ -13,4 +13,5 @@ public class RegisterCmd {
     private String firstName;
     private String lastName;
     private String clearTextPassword;
+    //private String confirmPassword;
 }
