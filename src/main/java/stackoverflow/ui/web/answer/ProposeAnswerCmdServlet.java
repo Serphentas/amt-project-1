@@ -15,7 +15,10 @@ import java.io.IOException;
 @WebServlet(name="SubmitAnswerCommandHandler", urlPatterns = "/answer.do")
 public class ProposeAnswerCmdServlet extends HttpServlet {
 
-    private AnswerFacade answerFacade = ServiceReg.getInstance().getAnswerFacade();
+    @Inject
+    ServiceReg serviceReg;
+
+    private AnswerFacade answerFacade = serviceReg.getAnswerFacade();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

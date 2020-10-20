@@ -18,7 +18,10 @@ import java.util.List;
 @WebServlet(name="LoginCmdServlet", urlPatterns = "/login.do")
 public class LoginCmdServlet extends HttpServlet {
 
-    private IdentityMngmtFacade identityMngmtFacade = ServiceReg.getInstance().getIdentityMngmtFacade();
+    @Inject
+    ServiceReg serviceReg;
+
+    private IdentityMngmtFacade identityMngmtFacade = serviceReg.getIdentityMngmtFacade();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

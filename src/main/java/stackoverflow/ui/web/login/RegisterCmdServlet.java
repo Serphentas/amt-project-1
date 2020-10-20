@@ -17,7 +17,10 @@ import java.util.List;
 @WebServlet(name = "RegisterCmdServlet", urlPatterns = "/register.do")
 public class RegisterCmdServlet extends HttpServlet {
 
-    private IdentityMngmtFacade identityMngmtFacade = ServiceReg.getInstance().getIdentityMngmtFacade();
+    @Inject
+    ServiceReg serviceReg;
+
+    private IdentityMngmtFacade identityMngmtFacade = serviceReg.getIdentityMngmtFacade();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

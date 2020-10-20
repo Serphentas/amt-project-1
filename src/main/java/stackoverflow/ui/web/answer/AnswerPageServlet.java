@@ -20,7 +20,10 @@ import java.io.IOException;
 @WebServlet(name = "AnswerPageHandler", urlPatterns = "/answer")
 public class AnswerPageServlet extends HttpServlet {
 
-    private QuestionFacade questionFacade = ServiceReg.getInstance().getQuestionFacade();
+    @Inject
+    ServiceReg serviceReg;
+
+    private QuestionFacade questionFacade = serviceReg.getQuestionFacade();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

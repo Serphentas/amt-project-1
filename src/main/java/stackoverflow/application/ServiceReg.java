@@ -10,7 +10,7 @@ import stackoverflow.domain.question.IQuestionRepo;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
+/*
 @ApplicationScoped
 public class ServiceReg {
     @Inject @Named("JdbcUserRepository")
@@ -54,7 +54,7 @@ public class ServiceReg {
     public AnswerFacade getAnswerFacade() {
         return answerFacade;
     }
-}/*
+}*/
 @ApplicationScoped
 public class ServiceReg {
     @Inject @Named("JdbcUserRepository")
@@ -77,4 +77,4 @@ public class ServiceReg {
     public AnswerFacade getAnswerFacade() {
         return new AnswerFacade(answerRepo);
     }
-}*/
+}

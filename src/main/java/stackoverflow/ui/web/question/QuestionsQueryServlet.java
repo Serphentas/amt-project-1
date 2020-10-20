@@ -16,7 +16,10 @@ import java.io.IOException;
 @WebServlet(name = "QuestionsPageHandler", urlPatterns = "/questions")
 public class QuestionsQueryServlet extends HttpServlet {
 
-    private QuestionFacade questionFacade = ServiceReg.getInstance().getQuestionFacade();
+    @Inject
+    ServiceReg serviceReg;
+
+    private QuestionFacade questionFacade = serviceReg.getQuestionFacade();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
