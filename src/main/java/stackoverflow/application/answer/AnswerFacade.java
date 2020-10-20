@@ -25,7 +25,7 @@ public class AnswerFacade {
     public AnswersDTO getAnswers(AnswersQuery query) {
         Collection<Answer> allAnswers = answerRepo.find(query);
 
-        List<AnswersDTO.AnswerDTO> allAnswersDTO = allAnswers.stream().map(answer -> AnswersDTO.AnswerDTO.builder()
+        List<AnswersDTO.AnswerDTO> allAnswersDTO = allAnswers.stream().map( answer -> AnswersDTO.AnswerDTO.builder()
             .text(answer.getText())
             .build()
         ).collect(Collectors.toList());

@@ -17,7 +17,6 @@ public class ProposeQuestionCmd {
     @Builder.Default
     private String title = "No title";
 
-    @Builder.Default
     private QuestionId id;
 
     @Builder.Default

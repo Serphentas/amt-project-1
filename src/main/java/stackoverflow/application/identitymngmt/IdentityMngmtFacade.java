@@ -22,10 +22,10 @@ public class IdentityMngmtFacade {
         if( yetExistingPerson != null){
             throw new RegistrationFailedException("Username is already used");
         }
-/*
+
         if( ! cmd.getConfirmPassword().equals(cmd.getClearTextPassword()) ){
             throw new RegistrationFailedException("confirm password field don't match the password field");
-        }*/
+        }
 
         try {
             Person newPerson = Person.builder()

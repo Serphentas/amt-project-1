@@ -21,7 +21,7 @@ public class Answer implements IEntity<Answer, AnswerId> {
     @Override
     public Answer deepClone() {
         return this.toBuilder()
-            .id(new AnswerId(id.asString()))
+            .id( new AnswerId(id.asString()))
             .build();
     }
 }

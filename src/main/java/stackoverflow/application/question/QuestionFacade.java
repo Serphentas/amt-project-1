@@ -37,7 +37,7 @@ public class QuestionFacade {
                 .build();
     }
 
-    public QuestionsDTO.QuestionDTO getQuestionbyId(QuestionId id){
+    public QuestionsDTO.QuestionDTO getQuestionById(QuestionId id){
         Question question = questionRepository.findById(id).orElse(null);
         if( question == null)
             return null;

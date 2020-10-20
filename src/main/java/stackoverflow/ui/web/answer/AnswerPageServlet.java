@@ -26,7 +26,7 @@ public class AnswerPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setAttribute("page", "Answer");
-        req.setAttribute("question", questionFacade.getQuestionbyId( new QuestionId( req.getParameter("id"))));
+        req.setAttribute("question", questionFacade.getQuestionById( new QuestionId( req.getParameter("id"))));
         req.getRequestDispatcher("/WEB-INF/view/answer.jsp").forward(req, resp);
     }
 }

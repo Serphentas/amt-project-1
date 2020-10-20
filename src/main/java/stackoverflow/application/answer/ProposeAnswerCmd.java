@@ -16,5 +16,6 @@ public class ProposeAnswerCmd {
     @Builder.Default
     private String text = "No content";
 
-    private QuestionId questionId;
+    @Builder.Default
+    private QuestionId questionId = new QuestionId();
 }
