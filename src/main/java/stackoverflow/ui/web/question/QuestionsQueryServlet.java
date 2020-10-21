@@ -1,7 +1,6 @@
 package stackoverflow.ui.web.question;
 
 import stackoverflow.application.ServiceReg;
-import stackoverflow.application.question.QuestionFacade;
 import stackoverflow.application.question.QuestionsDTO;
 import stackoverflow.application.question.QuestionsQuery;
 
@@ -19,11 +18,9 @@ public class QuestionsQueryServlet extends HttpServlet {
     @Inject
     ServiceReg serviceReg;
 
-    private QuestionFacade questionFacade = serviceReg.getQuestionFacade();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        QuestionsDTO questionsDTO = questionFacade.getQuestions(QuestionsQuery.builder()
+        QuestionsDTO questionsDTO = serviceReg.getQuestionFacade().getQuestions(QuestionsQuery.builder()
                 .safeForChildren(false)
                 .build());
         req.setAttribute("questions", questionsDTO);

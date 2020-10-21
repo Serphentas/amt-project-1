@@ -2,7 +2,6 @@ package stackoverflow.ui.web.question;
 
 import stackoverflow.application.ServiceReg;
 import stackoverflow.application.question.ProposeQuestionCmd;
-import stackoverflow.application.question.QuestionFacade;
 import stackoverflow.application.question.QuestionsDTO;
 import stackoverflow.application.question.QuestionsQuery;
 import stackoverflow.domain.question.QuestionId;
@@ -21,8 +20,6 @@ public class ProposeQuestionCmdServlet extends HttpServlet {
     @Inject
     ServiceReg serviceReg;
 
-    private QuestionFacade questionFacade = serviceReg.getQuestionFacade();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProposeQuestionCmd command = ProposeQuestionCmd.builder()
@@ -31,13 +28,13 @@ public class ProposeQuestionCmdServlet extends HttpServlet {
                 .text(req.getParameter("text"))
                 .id(new QuestionId())
                 .build();
-        questionFacade.proposeQuestion(command);
+        serviceReg.getQuestionFacade().proposeQuestion(command);
         resp.sendRedirect("/questions");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        QuestionsDTO questionsDTO = questionFacade.getQuestions(QuestionsQuery.builder()
+        QuestionsDTO questionsDTO = serviceReg.getQuestionFacade().getQuestions(QuestionsQuery.builder()
                 .safeForChildren(false)
                 .build());
         req.setAttribute("questions", questionsDTO);

@@ -1,7 +1,6 @@
 package stackoverflow.ui.web.answer;
 
 import stackoverflow.application.ServiceReg;
-import stackoverflow.application.answer.AnswerFacade;
 import stackoverflow.application.answer.ProposeAnswerCmd;
 
 import javax.inject.Inject;
@@ -18,15 +17,13 @@ public class ProposeAnswerCmdServlet extends HttpServlet {
     @Inject
     ServiceReg serviceReg;
 
-    private AnswerFacade answerFacade = serviceReg.getAnswerFacade();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProposeAnswerCmd command = ProposeAnswerCmd.builder()
                 .author("anonymous")
                 .text(req.getParameter("text"))
                 .build();
-        answerFacade.proposeAnswer(command);
+        serviceReg.getAnswerFacade().proposeAnswer(command);
         resp.sendRedirect("/questions");
     }
 }

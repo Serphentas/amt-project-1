@@ -23,13 +23,11 @@ public class AnswerPageServlet extends HttpServlet {
     @Inject
     ServiceReg serviceReg;
 
-    private QuestionFacade questionFacade = serviceReg.getQuestionFacade();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setAttribute("page", "Answer");
-        req.setAttribute("question", questionFacade.getQuestionById( new QuestionId( req.getParameter("id"))));
+        req.setAttribute("question", serviceReg.getQuestionFacade().getQuestionById( new QuestionId( req.getParameter("id"))));
         req.getRequestDispatcher("/WEB-INF/view/answer.jsp").forward(req, resp);
     }
 }

@@ -1,7 +1,6 @@
 package stackoverflow.ui.web.login;
 
 import stackoverflow.application.ServiceReg;
-import stackoverflow.application.identitymngmt.IdentityMngmtFacade;
 import stackoverflow.application.identitymngmt.login.RegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
 
@@ -20,8 +19,6 @@ public class RegisterCmdServlet extends HttpServlet {
     @Inject
     ServiceReg serviceReg;
 
-    private IdentityMngmtFacade identityMngmtFacade = serviceReg.getIdentityMngmtFacade();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().getAttribute("errors");
@@ -32,11 +29,11 @@ public class RegisterCmdServlet extends HttpServlet {
             .firstName(req.getParameter("firstName"))
             .lastName(req.getParameter("lastName"))
             .clearTextPassword(req.getParameter("password"))
-            //.confirmPassword(req.getParameter("confirmPassword"))
+            .confirmPassword(req.getParameter("confirmPassword"))
             .build();
 
         try {
-            identityMngmtFacade.register(registerCmd);
+            serviceReg.getIdentityMngmtFacade().register(registerCmd);
             req.getRequestDispatcher("/login.do").forward(req, resp);
             return;
         } catch(RegistrationFailedException e) {
