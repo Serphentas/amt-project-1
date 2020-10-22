@@ -5,19 +5,17 @@ import stackoverflow.domain.IEntity;
 import stackoverflow.domain.person.Person;
 import stackoverflow.domain.person.PersonId;
 
-@Data
+//@Data
 @Getter
+@Setter
+@EqualsAndHashCode
 @Builder(toBuilder = true)
 public class Question implements IEntity<Question, QuestionId> {
 
-    @Setter(AccessLevel.NONE)
-    private QuestionId id = new QuestionId();
-
+    private QuestionId id;
     private String author;
     private String title;
     private String text;
-
-    @Setter(AccessLevel.NONE)
     private QuestionType questionType;
 
     public void categorizeAs(QuestionType questionType){ this.questionType = questionType; }
@@ -36,12 +34,12 @@ public class Question implements IEntity<Question, QuestionId> {
                 id = new QuestionId();
             }
 
-            if(title==null) {
-                text ="";
+            if(text == null || text.isEmpty()){
+                throw new IllegalArgumentException("Text is mandatory");
             }
 
-            if(text==null) {
-                text ="";
+            if(title == null || title.isEmpty()){
+                throw new IllegalArgumentException("Title is mandatory");
             }
 
             if(questionType == null){
@@ -49,6 +47,12 @@ public class Question implements IEntity<Question, QuestionId> {
             }
 
             if(text.contains("sex")){
+                System.out.println(String.format(
+                    "q %s @ %s is %s",
+                    title,
+                    text,
+                    text.contains("sex")
+                ));
                 questionType = QuestionType.ADULT;
             }
 

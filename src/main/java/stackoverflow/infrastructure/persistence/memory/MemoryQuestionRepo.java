@@ -7,9 +7,6 @@ import stackoverflow.domain.question.QuestionId;
 import stackoverflow.domain.question.QuestionType;
 
 import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class MemoryQuestionRepo extends MemoryRepo<Question, QuestionId> implements IQuestionRepo {

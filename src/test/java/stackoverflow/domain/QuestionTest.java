@@ -11,7 +11,10 @@ public class QuestionTest {
 
     @Test
     void questionIdShouldBeGeneratedAuto(){
-        Question q = Question.builder().build();
+        Question q = Question.builder()
+            .title("test")
+            .text("test")
+            .build();
         assertNotEquals(null,q.getId());
     }
 
@@ -19,6 +22,8 @@ public class QuestionTest {
     void questionsTalkingAboutSexAreClassifiedAdult(){
         Question q = Question.builder()
             .text("sex")
+            .title("test")
+            .author("123")
             .build();
         assertEquals(QuestionType.ADULT,q.getQuestionType());
     }
@@ -26,8 +31,9 @@ public class QuestionTest {
     @Test
     void questionsCanBeClassified(){
         Question q = Question.builder()
-                .text("c++")
-                .build();
+            .title("test")
+            .text("c++")
+            .build();
         q.categorizeAs(QuestionType.CODING);
         assertEquals(QuestionType.CODING,q.getQuestionType());
     }

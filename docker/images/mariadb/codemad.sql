@@ -38,7 +38,7 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Question`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Question` (
-  `idQuestion` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idQuestion` VARCHAR(36),
   `idUser` VARCHAR(36) NOT NULL,
   `title` VARCHAR(60) NULL,
   `text` LONGTEXT NULL,
@@ -56,7 +56,7 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Answer`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Answer` (
-  `idAnswer` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idAnswer` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
   `idQuestion` INT UNSIGNED NOT NULL,
   `text` LONGTEXT NULL,
@@ -80,7 +80,7 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Commentary`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Commentary` (
-  `idCommentary` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idCommentary` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
   `idAnswer` INT UNSIGNED NOT NULL,
   `idQuestion` INT UNSIGNED NOT NULL,
@@ -111,7 +111,7 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Vote`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Vote` (
-  `idVote` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idVote` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
   `idQuestion` INT UNSIGNED NOT NULL,
   `idCommentary` INT UNSIGNED NOT NULL,
@@ -142,7 +142,7 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Tag`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Tag` (
-  `idTag` INT UNSIGNED NOT NULL,
+  `idTag` VARCHAR(36) NOT NULL,
   `tag` VARCHAR(45) NULL,
   PRIMARY KEY (`idTag`))
 ENGINE = InnoDB;
@@ -152,7 +152,7 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Question_Tag`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Question_Tag` (
-  `idQuestion` INT UNSIGNED NOT NULL,
+  `idQuestion` VARCHAR(36) NOT NULL,
   `idTag` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`idQuestion`, `idTag`),
   INDEX `fk_Question_has_Tag_Tag1_idx` (`idTag` ASC) VISIBLE,

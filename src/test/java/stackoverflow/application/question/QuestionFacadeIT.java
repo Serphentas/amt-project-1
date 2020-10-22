@@ -3,11 +3,9 @@ package stackoverflow.application.question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import stackoverflow.application.question.ProposeQuestionCmd;
-import stackoverflow.application.question.QuestionFacade;
-import stackoverflow.application.question.QuestionsDTO;
-import stackoverflow.application.question.QuestionsQuery;
+import stackoverflow.application.question.QuestionsDTO.QuestionDTO;
 import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.infrastructure.persistence.memory.MemoryQuestionRepo;
 
@@ -19,18 +17,18 @@ public class QuestionFacadeIT {
 
     @BeforeEach
     void setupQuestionFacade(){
-        IQuestionRepo questionRepo = new MemoryQuestionRepo();
-        this.questionFacade = new QuestionFacade(questionRepo);
+        this.questionFacade = new QuestionFacade(new MemoryQuestionRepo());
     }
 
     @Test
     void publishQuestion(){
         ProposeQuestionCmd cmd = ProposeQuestionCmd.builder()
             .author("Rabbit")
+            .title("test")
             .text("Bla bla bla")
             .build();
         questionFacade.proposeQuestion(cmd);
-        QuestionsDTO view = questionFacade.getQuestions( null);
+        QuestionsDTO view = questionFacade.getAllQuestions();
 
         assertNotNull(view);
         assertEquals(1, view.getQuestions().size());
@@ -40,14 +38,17 @@ public class QuestionFacadeIT {
     @Test
     void getQuestionsSafeForChildren(){
         questionFacade.proposeQuestion(ProposeQuestionCmd.builder()
+            .title("test safe")
             .text("safe")
             .build()
         );
         questionFacade.proposeQuestion(ProposeQuestionCmd.builder()
+            .title("test also safe")
             .text("also safe")
             .build()
         );
         questionFacade.proposeQuestion(ProposeQuestionCmd.builder()
+            .title("test sex")
             .text("sex")
             .build()
         );
@@ -56,7 +57,14 @@ public class QuestionFacadeIT {
             .safeForChildren(true)
             .build()
         );
-        assertEquals(2, viewWithoutAdultQuestions.getQuestions().size());
+        boolean safe = true;
+        for (QuestionDTO qDTO: viewWithoutAdultQuestions.getQuestions()) {
+            if (qDTO.getText().contains("sex")) {
+                safe = false;
+                break;
+            }
+        }
+        assertTrue(safe);
 
         QuestionsDTO viewWithAdultQuestions = questionFacade.getQuestions(QuestionsQuery.builder()
             .safeForChildren(false)

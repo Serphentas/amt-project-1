@@ -29,7 +29,8 @@ public class MemoryQuestionRepoTest {
     void findByIdReturnCopy(){
         Question.QuestionBuilder questionBuilder = Question.builder()
                 .author("Rabbit")
-                .text(" random text");
+                .title("test")
+                .text("random text");
 
         Question question = questionBuilder.build();
         Question questionCopy = question.deepClone();
