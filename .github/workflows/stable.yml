@@ -26,13 +26,13 @@ jobs:
 
       - name: Build application Docker image
         run: |
-          echo ${{ secrets.token }} | docker login -u serphentas --password-stdin          docker build -t amt-long-du-zboub/amt-project-1/app:dev .
+          echo ${{ secrets.token }} | docker login -u serphentas --password-stdin
           docker build -t serphentas/amt-project-1-app .
           docker push serphentas/amt-project-1-app
 
       - name: Build database Docker image
         run: |
           cd docker/images/mariadb
-          echo ${{ secrets.token }} | docker login -u serphentas --password-stdin          docker build -t amt-long-du-zboub/amt-project-1/app:dev .
+          echo ${{ secrets.token }} | docker login -u serphentas --password-stdin
           docker build -t serphentas/amt-project-1-db .
           docker push serphentas/amt-project-1-db
