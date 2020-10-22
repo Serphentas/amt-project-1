@@ -176,10 +176,9 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
-
-INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'C');
-INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'C++');
-INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'Java');
-INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'Python');
-INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'SCALA');
-INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'JavaScript');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'C');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'C++');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'Java');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'Python');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'SCALA');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'JavaScript');

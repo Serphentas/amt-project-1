@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name="SubmitQuestionCommandServlet", urlPatterns = "/submitQuestion.do")
+@WebServlet(name="SubmitQuestionCmdServlet", urlPatterns = "/submitQuestion.do")
 public class ProposeQuestionCmdServlet extends HttpServlet {
 
     @Inject
