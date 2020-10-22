@@ -20,6 +20,7 @@ public class QuestionFacade {
             .text(command.getText())
             .id(command.getId())
             .personId(command.getPersonId())
+            .tags(command.getTags())
             .build();
         questionRepository.save(submittedQuestion);
     }

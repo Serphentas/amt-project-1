@@ -4,8 +4,6 @@ import stackoverflow.domain.person.Person;
 import stackoverflow.infrastructure.persistence.exception.IntegrityConstraintViolationException;
 import stackoverflow.infrastructure.persistence.memory.MemoryPersonRepo;
 
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;

@@ -3,6 +3,9 @@ package stackoverflow.domain.question;
 import lombok.*;
 import stackoverflow.domain.IEntity;
 import stackoverflow.domain.person.PersonId;
+import stackoverflow.domain.tag.Tag;
+
+import java.util.Collection;
 
 @Data
 @Getter
@@ -16,6 +19,7 @@ public class Question implements IEntity<Question, QuestionId> {
     private String title;
     private String text;
     private PersonId personId;
+    private Collection<Tag> tags;
 
     @Setter(AccessLevel.NONE)
     private QuestionType questionType;
@@ -52,7 +56,7 @@ public class Question implements IEntity<Question, QuestionId> {
                 questionType = QuestionType.ADULT;
             }
 
-            return new Question(id, author, title, text, personId, questionType);
+            return new Question(id, author, title, text, personId, tags, questionType);
         }
     }
 }

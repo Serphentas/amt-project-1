@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
-import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
@@ -14,15 +13,12 @@ import javax.inject.Named;
 import javax.sql.DataSource;
 
 import stackoverflow.application.question.QuestionsQuery;
-import stackoverflow.domain.answer.Answer;
-import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
 import stackoverflow.domain.tag.Tag;
 import stackoverflow.domain.tag.TagId;
-import sun.jvm.hotspot.oops.DataLayout;
 
 @ApplicationScoped
 @Named("JdbcQuestionRepository")
@@ -49,7 +45,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
             statement.execute();
 
 
-            for(Tag tag : entity.getTag()) {
+            for(Tag tag : entity.getTags()) {
                 statement = dataSource.getConnection().prepareStatement(
                         "INSERT INTO codemad.Question_Tag (idQuestion, idTag) VALUES (?, ?)");
                 statement.setString(1, entity.getId().asString());
