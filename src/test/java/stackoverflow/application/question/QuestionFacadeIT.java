@@ -8,6 +8,7 @@ import stackoverflow.application.question.ProposeQuestionCmd;
 import stackoverflow.application.question.QuestionFacade;
 import stackoverflow.application.question.QuestionsDTO;
 import stackoverflow.application.question.QuestionsQuery;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.infrastructure.persistence.memory.MemoryQuestionRepo;
 
@@ -26,7 +27,7 @@ public class QuestionFacadeIT {
     @Test
     void publishQuestion(){
         ProposeQuestionCmd cmd = ProposeQuestionCmd.builder()
-            .author("Rabbit")
+            .personId(new PersonId())
             .text("Bla bla bla")
             .build();
         questionFacade.proposeQuestion(cmd);

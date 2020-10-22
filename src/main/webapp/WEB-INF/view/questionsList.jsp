@@ -5,10 +5,12 @@
   Date: 12/10/2020
   Time: 10:08
   To change this template use File | Settings | File Templates.
+
+  <jsp:useBean scope="request" id="questions" type="stackoverflow.application.question.QuestionsDTO"/>
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<jsp:useBean scope="request" id="questions" type="stackoverflow.application.question.QuestionsDTO"/>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:base>

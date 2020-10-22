@@ -12,7 +12,8 @@ import stackoverflow.domain.question.QuestionId;
 public class Answer implements IEntity<Answer, AnswerId> {
 
     @Setter(AccessLevel.NONE)
-    private AnswerId id;
+    private AnswerId id = new AnswerId();
+
     private QuestionId questionId;
     private PersonId personId;
     private String author;

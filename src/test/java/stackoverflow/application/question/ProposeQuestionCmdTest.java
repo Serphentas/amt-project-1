@@ -9,7 +9,7 @@ public class ProposeQuestionCmdTest {
     @Test
     void defaultValuesAreProvided(){
         ProposeQuestionCmd q = ProposeQuestionCmd.builder().build();
-        assertEquals("Anonymous", q.getAuthor());
+        assertEquals("No title", q.getTitle());
         assertEquals("No content", q.getText());
     }
 

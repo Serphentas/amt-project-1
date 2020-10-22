@@ -2,6 +2,7 @@ package stackoverflow.domain.question;
 
 import lombok.*;
 import stackoverflow.domain.IEntity;
+import stackoverflow.domain.person.PersonId;
 
 @Data
 @Getter
@@ -14,6 +15,7 @@ public class Question implements IEntity<Question, QuestionId> {
     private String author;
     private String title;
     private String text;
+    private PersonId personId;
 
     @Setter(AccessLevel.NONE)
     private QuestionType questionType;
@@ -50,7 +52,7 @@ public class Question implements IEntity<Question, QuestionId> {
                 questionType = QuestionType.ADULT;
             }
 
-            return new Question(id, author, title, text, questionType);
+            return new Question(id, author, title, text, personId, questionType);
         }
     }
 }

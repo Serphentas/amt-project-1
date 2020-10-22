@@ -51,6 +51,7 @@ public class IdentityMngmtFacade {
         }
 
         return CurrentUserDTO.builder()
+            .id(person.getId())
             .username(person.getUsername())
             .email(person.getEmail())
             .firstName(person.getFirstName())

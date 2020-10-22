@@ -1,6 +1,7 @@
 package stackoverflow.ui.web.question;
 
 import stackoverflow.application.ServiceReg;
+import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 import stackoverflow.application.question.ProposeQuestionCmd;
 import stackoverflow.application.question.QuestionsDTO;
 import stackoverflow.application.question.QuestionsQuery;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="SubmitQuestionCommandHandler", urlPatterns = {"/submitQuestion.do", "/questionsList"})
+@WebServlet(name="SubmitQuestionCommandServlet", urlPatterns = "/submitQuestion.do")
 public class ProposeQuestionCmdServlet extends HttpServlet {
 
     @Inject
@@ -22,22 +23,14 @@ public class ProposeQuestionCmdServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
         ProposeQuestionCmd command = ProposeQuestionCmd.builder()
-                .author("anonymous")
+                .personId(currentUser.getId())
                 .title(req.getParameter("title"))
                 .text(req.getParameter("text"))
                 .id(new QuestionId())
                 .build();
         serviceReg.getQuestionFacade().proposeQuestion(command);
-        resp.sendRedirect("/questions");
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        QuestionsDTO questionsDTO = serviceReg.getQuestionFacade().getQuestions(QuestionsQuery.builder()
-                .safeForChildren(false)
-                .build());
-        req.setAttribute("questions", questionsDTO);
-        req.getRequestDispatcher("/WEB-INF/view/questionsList.jsp").forward(req, resp);
+        resp.sendRedirect("/questionsList");
     }
 }

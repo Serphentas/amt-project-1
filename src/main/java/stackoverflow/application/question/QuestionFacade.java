@@ -15,10 +15,10 @@ public class QuestionFacade {
 
     public void proposeQuestion(ProposeQuestionCmd command) {
         Question submittedQuestion = Question.builder()
-            .author(command.getAuthor())
             .title(command.getTitle())
             .text(command.getText())
             .id(command.getId())
+            .personId(command.getPersonId())
             .build();
         questionRepository.save(submittedQuestion);
     }
@@ -26,15 +26,18 @@ public class QuestionFacade {
     public QuestionsDTO getQuestions(QuestionsQuery query){
         Collection<Question> allQuestions = questionRepository.find(query);
 
-        List<QuestionsDTO.QuestionDTO> allQuestionsDTO = allQuestions.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
-                .title(question.getTitle())
-                .text(question.getText())
-                .id(question.getId())
-                .build()).collect(Collectors.toList());
+        if(allQuestions != null){
+            List<QuestionsDTO.QuestionDTO> allQuestionsDTO = allQuestions.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
+                    .title(question.getTitle())
+                    .text(question.getText())
+                    .id(question.getId())
+                    .build()).collect(Collectors.toList());
 
         return QuestionsDTO.builder()
                 .questions(allQuestionsDTO)
                 .build();
+        }
+        return null;
     }
 
     public QuestionsDTO.QuestionDTO getQuestionById(QuestionId id){
