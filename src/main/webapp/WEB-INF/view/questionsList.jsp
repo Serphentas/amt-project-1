@@ -29,9 +29,21 @@
                     <div class="alert alert-secondary" role="alert">
                         <a class="nav-link" role="tab" data-toggle="tab">
                             <i class="material-icons">camera</i>
-                            <h3 class="description text-left">${question.title}</h3><br>
-                            <p class="description text-left">${question.text}</p><br>
-                            <button type="button" class="btn btn-outline-secondary">Go to question</button>                    </a>
+                            <h3 class="description text-left text-uppercase font-weight-bold text-dark">${question.title}</h3>
+                            <p class="description text-left text-dark ">${question.text}</p><br>
+                            <div class="row">
+                                <div class="column">
+                                    <form class="form" method="get" action="/answer" id="${question.id}">
+                                        <button type="submit" class="btn btn-outline-secondary">Answer</button>
+                                    </form>
+                                </div>
+                                <div class="column">
+                                    <form class="form" method="get" action="/comment" id="${question.id}">
+                                        <button type="submit" class="btn btn-default">Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </c:forEach>
             </div>

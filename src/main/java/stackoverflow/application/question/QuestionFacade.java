@@ -7,6 +7,7 @@ import stackoverflow.domain.question.QuestionType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class QuestionFacade {
@@ -18,6 +19,7 @@ public class QuestionFacade {
 
     public void proposeQuestion(ProposeQuestionCmd command){
         questionRepository.save(Question.builder()
+            .id(command.getId())
             .author(command.getAuthor())
             .title(command.getTitle())
             .text(command.getText())
@@ -43,6 +45,7 @@ public class QuestionFacade {
             }
         } else {
             allQuestionsDTO = allQuestions.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
+                .idQuestion(UUID.fromString(question.getId().asString()))
                 .title(question.getTitle())
                 .text(question.getText())
                 .safeForChildren(!question.getText().contains("sex"))

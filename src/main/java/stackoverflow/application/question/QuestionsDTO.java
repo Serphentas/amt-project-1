@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Singular;
+import stackoverflow.domain.question.QuestionId;
 
 import java.util.List;
 import java.util.UUID;

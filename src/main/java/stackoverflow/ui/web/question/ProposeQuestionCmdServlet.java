@@ -4,6 +4,7 @@ import stackoverflow.application.ServiceReg;
 import stackoverflow.application.question.ProposeQuestionCmd;
 import stackoverflow.application.question.QuestionsDTO;
 import stackoverflow.application.question.QuestionsQuery;
+import stackoverflow.domain.question.QuestionId;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -25,6 +26,7 @@ public class ProposeQuestionCmdServlet extends HttpServlet {
                 .author("anonymous")
                 .title(req.getParameter("title"))
                 .text(req.getParameter("text"))
+                .id(new QuestionId())
                 .build();
         // questionFacade.proposeQuestion(command);
         resp.sendRedirect("/questions");
