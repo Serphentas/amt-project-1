@@ -20,6 +20,9 @@ import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
+import stackoverflow.domain.tag.Tag;
+import stackoverflow.domain.tag.TagId;
+import sun.jvm.hotspot.oops.DataLayout;
 
 @ApplicationScoped
 @Named("JdbcQuestionRepository")
@@ -46,16 +49,14 @@ public class JdbcQuestionRepository implements IQuestionRepo {
             statement.execute();
 
 
-            //todo quand nous aurons les tags
-            /*
             for(Tag tag : entity.getTag()) {
                 statement = dataSource.getConnection().prepareStatement(
                         "INSERT INTO codemad.Question_Tag (idQuestion, idTag) VALUES (?, ?)");
                 statement.setString(1, entity.getId().asString());
-                statement.setString(2, tag.getId.asString());
+                statement.setString(2, tag.getId().asString());
                 statement.execute();
             }
-            */
+
 
 
         } catch (SQLException throwables) {
@@ -84,7 +85,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
 
             while (rs.next()) {
 
-                //Collection<Tag> tags = searchTags(rs.getString("idQuestion"));
+                Collection<Tag> tags = searchTags(rs.getString("idQuestion"));
 
                 Question questionSearch = Question.builder()
                         .id(new QuestionId(rs.getString("idQuestion")))
@@ -92,7 +93,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
                         .title(rs.getString("title"))
                         .text(rs.getString("text"))
                         .personId(new PersonId(rs.getString("idUser")))
-                        //.tags(tags)
+                        .tags(tags)
                         .build();
                 question.add(questionSearch);
             }
@@ -121,7 +122,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
 
             while (rs.next()) {
 
-                //Collection<Tag> tags = searchTags(rs.getString("idQuestion"));
+                Collection<Tag> tags = searchTags(rs.getString("idQuestion"));
 
                 Question question = Question.builder()
                         .id(new QuestionId(rs.getString("idQuestion")))
@@ -129,7 +130,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
                         .title(rs.getString("title"))
                         .text(rs.getString("text"))
                         .personId(new PersonId(rs.getString("idUser")))
-                        //.tags(tags)
+                        .tags(tags)
                         .build();
                 allQuestions.add(question);
             }
@@ -147,7 +148,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
         return null;
     }
 
-    /*
+
     private Collection<Tag> searchTags(String questionId) throws SQLException {
 
         Collection<Tag> tags = new ArrayList<Tag>();
@@ -160,8 +161,8 @@ public class JdbcQuestionRepository implements IQuestionRepo {
         ResultSet rsTag = statementTag.executeQuery();
 
         while (rsTag.next()){
-            Tag tag = Tag.builder().
-                    .idTag(new TagId(rsTag.getString("idTag")))
+            Tag tag = Tag.builder()
+                    .tagId(new TagId(rsTag.getString("idTag")))
                     .tag(rsTag.getString("tag"))
                     .build();
             tags.add(tag);
@@ -169,5 +170,5 @@ public class JdbcQuestionRepository implements IQuestionRepo {
         return tags;
 
     }
-    */
+
 }
