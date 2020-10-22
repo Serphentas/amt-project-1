@@ -39,9 +39,7 @@ public class ProposeQuestionCmdServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        QuestionsDTO questionsDTO = serviceReg.getQuestionFacade().getQuestions(QuestionsQuery.builder()
-                .safeForChildren(false)
-                .build());
+        QuestionsDTO questionsDTO = serviceReg.getQuestionFacade().getAllQuestions();
         req.setAttribute("questions", questionsDTO);
         req.getRequestDispatcher("/WEB-INF/view/questionsList.jsp").forward(req, resp);
     }

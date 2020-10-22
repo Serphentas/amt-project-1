@@ -79,6 +79,7 @@ public class QuestionFacade {
     private QuestionsDTO questionListAsDTOList(Collection<Question> qList) {
         return QuestionsDTO.builder()
             .questions(qList.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
+                .idQuestion(UUID.fromString(question.getId().asString()))
                 .title(question.getTitle())
                 .text(question.getText())
                 .safeForChildren(!question.getText().contains("sex"))
