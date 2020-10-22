@@ -53,7 +53,7 @@ public class JdbcTagRepository implements ITag {
 
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "SELECT *" +
+                    "SELECT * " +
                             "FROM codemad.Tag");
 
             ResultSet rs = statement.executeQuery();
