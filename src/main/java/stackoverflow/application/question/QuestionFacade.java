@@ -21,7 +21,6 @@ public class QuestionFacade {
     public void proposeQuestion(ProposeQuestionCmd command){
         questionRepository.save(Question.builder()
             .id(command.getId())
-            .author(command.getAuthor())
             .title(command.getTitle())
             .text(command.getText())
             .personId(command.getPersonId())
@@ -68,7 +67,7 @@ public class QuestionFacade {
             return null;
         return QuestionsDTO.QuestionDTO.builder()
                 .text(question.getText())
-                .id(question.getId())
+                .idQuestion(UUID.fromString(question.getId().asString()))
                 .title(question.getTitle())
                 .build();
     }

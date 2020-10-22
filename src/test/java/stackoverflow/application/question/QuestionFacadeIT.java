@@ -28,7 +28,6 @@ public class QuestionFacadeIT {
     @Test
     void publishQuestion(){
         ProposeQuestionCmd cmd = ProposeQuestionCmd.builder()
-            .author("Rabbit")
             .title("test")
             .text("Bla bla bla")
             .build();

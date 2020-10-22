@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+import javax.annotation.Resource;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
+import javax.sql.DataSource;
+
 @ApplicationScoped
 @Named("JdbcTagRepository")
 public class JdbcTagRepository implements ITag {

@@ -14,9 +14,12 @@ import javax.inject.Named;
 import javax.sql.DataSource;
 
 import stackoverflow.application.question.QuestionsQuery;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
+import stackoverflow.domain.tag.Tag;
+import stackoverflow.domain.tag.TagId;
 
 @ApplicationScoped
 @Named("JdbcQuestionRepository")
@@ -165,7 +168,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
     private PreparedStatement getStatement (String cmd) throws SQLException {
         return dataSource.getConnection().prepareStatement(cmd);
     }
-  
+
     private Collection<Tag> searchTags(String questionId) throws SQLException {
         Collection<Tag> tags = new ArrayList<Tag>();
 
