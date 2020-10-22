@@ -14,9 +14,9 @@ public class Answer implements IEntity<Answer, AnswerId> {
     @Setter(AccessLevel.NONE)
     private AnswerId id = new AnswerId();
 
+    private String author;
     private QuestionId questionId;
     private PersonId personId;
-    private String author;
     private String text;
 
     @Override

@@ -76,7 +76,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
 
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "SELECT Question.idQuestion, Question.idUser, Question.title, Question.text, User.username" +
+                    "SELECT Question.idQuestion, Question.idUser, Question.title, Question.text, User.username " +
                             "FROM codemad.Question JOIN codemad.User ON Question.idUser = User.idUser WHERE Question.idQuestion = ?");
             statement.setString(1, id.asString());
 
@@ -114,7 +114,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
 
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "SELECT Question.idQuestion, Question.idUser, Question.title, Question.text, User.username" +
+                    "SELECT Question.idQuestion, Question.idUser, Question.title, Question.text, User.username " +
                             "FROM codemad.Question JOIN codemad.User ON Question.idUser = User.idUser");
 
             ResultSet rs = statement.executeQuery();

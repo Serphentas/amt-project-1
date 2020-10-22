@@ -15,7 +15,8 @@ public class AnswerFacade {
 
     public void proposeAnswer(ProposeAnswerCmd command) {
         Answer submittedAnswer = Answer.builder()
-                .author(command.getAuthor())
+                .id(command.getId())
+                .personId(command.getPersonId())
                 .questionId(command.getQuestionId())
                 .text(command.getText())
                 .build();

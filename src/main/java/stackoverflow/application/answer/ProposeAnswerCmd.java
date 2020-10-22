@@ -3,6 +3,8 @@ package stackoverflow.application.answer;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import stackoverflow.domain.answer.AnswerId;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
 
 @Builder
@@ -10,12 +12,11 @@ import stackoverflow.domain.question.QuestionId;
 @EqualsAndHashCode
 public class ProposeAnswerCmd {
 
-    @Builder.Default
-    private String author = "Anonymous";
+    private AnswerId id;
+    private QuestionId questionId;
+    private PersonId personId;
 
     @Builder.Default
     private String text = "No content";
 
-    @Builder.Default
-    private QuestionId questionId = new QuestionId();
 }

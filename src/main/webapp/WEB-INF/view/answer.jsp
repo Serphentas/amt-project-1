@@ -5,24 +5,24 @@
   Time: 13:03
   To change this template use File | Settings | File Templates.
 
-  <jsp:useBean scope="request" id="answers" type="stackoverflow.application.answer.answersDTO"/>
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>.
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<jsp:useBean scope="request" id="question" type="stackoverflow.application.question.QuestionsDTO.QuestionDTO"/>
 
 <t:base>
-
     <div class="page-header header-filter" style="background-image: url('../assets/img/bg.jpg'); background-size: cover; background-position: top center;">
         <div class="container">
             <div class="card card-login">
                 <form id="newAnswer" method="POST" action="submitAnswer.do" class="form">
+                    <input type="hidden" id="fId" name="id" value="${question.id.asString()}">
                     <div class="card-header card-header-primary text-center">
                         <h4 class="card-title">Answer a Question</h4>
                     </div>
                     <p class="description text-center">the question</p>
                     <div class="card-body text-center">
-                        <p>coucou ${question}</p>
+                        <p>${question.text}</p>
                     </div>
                     <div class="card-body text-center">
                         <div class="input-group">

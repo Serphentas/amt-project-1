@@ -4,6 +4,7 @@ import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,11 +24,9 @@ public class QuestionFacade {
         questionRepository.save(submittedQuestion);
     }
 
-    public QuestionsDTO getQuestions(QuestionsQuery query){
-        Collection<Question> allQuestions = questionRepository.find(query);
-
-        if(allQuestions != null){
-            List<QuestionsDTO.QuestionDTO> allQuestionsDTO = allQuestions.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
+    public QuestionsDTO getQuestions(){
+        Collection<Question> allQuestions = questionRepository.findAll();
+        List<QuestionsDTO.QuestionDTO> allQuestionsDTO = allQuestions.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
                     .title(question.getTitle())
                     .text(question.getText())
                     .id(question.getId())
@@ -36,8 +35,7 @@ public class QuestionFacade {
         return QuestionsDTO.builder()
                 .questions(allQuestionsDTO)
                 .build();
-        }
-        return null;
+
     }
 
     public QuestionsDTO.QuestionDTO getQuestionById(QuestionId id){

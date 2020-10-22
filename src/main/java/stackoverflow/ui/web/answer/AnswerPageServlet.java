@@ -5,6 +5,7 @@ import stackoverflow.application.answer.AnswerFacade;
 import stackoverflow.application.answer.AnswersDTO;
 import stackoverflow.application.answer.AnswersQuery;
 import stackoverflow.application.question.QuestionFacade;
+import stackoverflow.application.question.QuestionsDTO;
 import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "AnswerPageHandler", urlPatterns = "/answer")
+@WebServlet(name = "AnswerPageServlet", urlPatterns = "/answer")
 public class AnswerPageServlet extends HttpServlet {
 
     @Inject
@@ -25,9 +26,9 @@ public class AnswerPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        QuestionsDTO.QuestionDTO question = serviceReg.getQuestionFacade().getQuestionById( new QuestionId( req.getParameter("id")));
         req.setAttribute("page", "Answer");
-        req.setAttribute("question", serviceReg.getQuestionFacade().getQuestionById( new QuestionId( req.getParameter("id"))));
+        req.setAttribute("question", question);
         req.getRequestDispatcher("/WEB-INF/view/answer.jsp").forward(req, resp);
     }
 }

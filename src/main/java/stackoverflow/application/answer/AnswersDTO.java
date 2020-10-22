@@ -17,6 +17,7 @@ public class AnswersDTO {
     @EqualsAndHashCode
     public static class AnswerDTO{
         private String text;
+        private String author;
     }
 
     @Singular

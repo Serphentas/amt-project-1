@@ -31,38 +31,11 @@ public class QuestionFacadeIT {
             .text("Bla bla bla")
             .build();
         questionFacade.proposeQuestion(cmd);
-        QuestionsDTO view = questionFacade.getQuestions( null);
+        QuestionsDTO view = questionFacade.getQuestions();
 
         assertNotNull(view);
         assertEquals(1, view.getQuestions().size());
         assertEquals(cmd.getText(), view.getQuestions().get(0).getText());
     }
 
-    @Test
-    void getQuestionsSafeForChildren(){
-        questionFacade.proposeQuestion(ProposeQuestionCmd.builder()
-            .text("safe")
-            .build()
-        );
-        questionFacade.proposeQuestion(ProposeQuestionCmd.builder()
-            .text("also safe")
-            .build()
-        );
-        questionFacade.proposeQuestion(ProposeQuestionCmd.builder()
-            .text("sex")
-            .build()
-        );
-
-        QuestionsDTO viewWithoutAdultQuestions = questionFacade.getQuestions(QuestionsQuery.builder()
-            .safeForChildren(true)
-            .build()
-        );
-        assertEquals(2, viewWithoutAdultQuestions.getQuestions().size());
-
-        QuestionsDTO viewWithAdultQuestions = questionFacade.getQuestions(QuestionsQuery.builder()
-            .safeForChildren(false)
-            .build()
-        );
-        assertEquals(3, viewWithAdultQuestions.getQuestions().size());
-    }
 }
