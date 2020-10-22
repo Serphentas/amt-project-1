@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
@@ -35,15 +36,13 @@ public class JdbcQuestionRepository implements IQuestionRepo {
     @Override
     public void save(Question entity) {
         try {
-            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+            PreparedStatement statement = getStatement(
                     "INSERT INTO codemad.Question (idQuestion, idUser, title, text) VALUES (?, ?, ?, ?)");
-            statement.setString(1, entity.getId().asString());
-            statement.setString(2, entity.getPersonId().asString());
+            statement.setString(1, UUID.randomUUID().toString());
+            statement.setString(2, entity.getIdUser().asString());
             statement.setString(3, entity.getTitle());
             statement.setString(4, entity.getText());
-
             statement.execute();
-
 
             for(Tag tag : entity.getTags()) {
                 statement = dataSource.getConnection().prepareStatement(
@@ -52,13 +51,9 @@ public class JdbcQuestionRepository implements IQuestionRepo {
                 statement.setString(2, tag.getId().asString());
                 statement.execute();
             }
-
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
     @Override
@@ -88,7 +83,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
                         .author(rs.getString("username"))
                         .title(rs.getString("title"))
                         .text(rs.getString("text"))
-                        .personId(new PersonId(rs.getString("idUser")))
+                        .idUser(new PersonId(rs.getString("idUser")))
                         .tags(tags)
                         .build();
                 question.add(questionSearch);
@@ -101,7 +96,6 @@ public class JdbcQuestionRepository implements IQuestionRepo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return Optional.empty();
     }
 
@@ -125,7 +119,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
                         .author(rs.getString("username"))
                         .title(rs.getString("title"))
                         .text(rs.getString("text"))
-                        .personId(new PersonId(rs.getString("idUser")))
+                        .idUser(new PersonId(rs.getString("idUser")))
                         .tags(tags)
                         .build();
                 allQuestions.add(question);
@@ -140,13 +134,42 @@ public class JdbcQuestionRepository implements IQuestionRepo {
 
     @Override
     public Collection<Question> find(QuestionsQuery query) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            PreparedStatement statement = getStatement(query.isSafeForChildren() ?
+                "SELECT * FROM codemad.Question WHERE title LIKE '%?%' AND text NOT LIKE '%?%'" :
+                "SELECT * FROM codemad.Question WHERE title LIKE '%?%' AND text LIKE '%?%'"
+            );
+            statement.setString(1, query.getTitle());
+            statement.setString(2, query.isSafeForChildren() ? "sex" : query.getText());
+
+            return resultSetAsList(statement.executeQuery());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return new ArrayList<Question>();
     }
 
+    private ArrayList<Question> resultSetAsList(ResultSet rs) throws SQLException {
+        ArrayList<Question> res = new ArrayList<>();
+
+        while (rs.next()) {
+            res.add(Question.builder()
+                .id(new QuestionId(rs.getString("idQuestion")))
+                .author(rs.getString("idUser"))
+                .title(rs.getString("title"))
+                .text(rs.getString("text"))
+                .build()
+            );
+        }
+
+        return res;
+    }
+
+    private PreparedStatement getStatement (String cmd) throws SQLException {
+        return dataSource.getConnection().prepareStatement(cmd);
+    }
 
     private Collection<Tag> searchTags(String questionId) throws SQLException {
-
         Collection<Tag> tags = new ArrayList<Tag>();
 
         PreparedStatement statementTag = dataSource.getConnection().prepareStatement(
@@ -166,5 +189,4 @@ public class JdbcQuestionRepository implements IQuestionRepo {
         return tags;
 
     }
-
 }

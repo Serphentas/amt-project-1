@@ -1,9 +1,10 @@
 package stackoverflow.application.question;
 
-
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
+
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
@@ -13,10 +14,11 @@ import java.util.Collection;
 
 @Builder
 @Getter
+@Setter
 @EqualsAndHashCode
 public class ProposeQuestionCmd {
 
-    private PersonId personId;
+    private PersonId idUser;
 
     @Builder.Default
     private String title = "No title";

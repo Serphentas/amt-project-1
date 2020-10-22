@@ -16,7 +16,8 @@ public class QuestionIdTest {
         QuestionId id = new QuestionId();
         Question q = Question.builder()
             .id(id)
-            .text("")
+            .title("test")
+            .text("test")
             .build();
 
         assertEquals(id,q.getId());

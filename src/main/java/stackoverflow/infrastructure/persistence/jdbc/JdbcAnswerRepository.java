@@ -94,5 +94,4 @@ public class JdbcAnswerRepository implements IAnswerRepo {
     public Collection<Answer> findAll() {
         return null;
     }
-
 }
