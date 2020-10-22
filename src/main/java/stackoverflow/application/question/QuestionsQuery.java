@@ -14,10 +14,13 @@ import lombok.Setter;
 public class QuestionsQuery {
 
     @Builder.Default
-    private UUID idQuestion = null;
+    private UUID id = null;
 
     @Builder.Default
     private UUID idUser = null;
+
+    @Builder.Default
+    private String author = "No author";
 
     @Builder.Default
     private String title = "No title";

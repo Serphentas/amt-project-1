@@ -21,8 +21,9 @@ public class QuestionsDTO {
     @Setter
     @EqualsAndHashCode
     public static class QuestionDTO{
-        private UUID idQuestion;
+        private UUID id;
         private UUID idUser;
+        private String author;
         private String title;
         private String text;
         private boolean safeForChildren;

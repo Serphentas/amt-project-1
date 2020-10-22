@@ -15,11 +15,12 @@ import java.util.Collection;
 public class Question implements IEntity<Question, QuestionId> {
 
     private QuestionId id;
+    private PersonId idUser;
+
     private String author;
     private String title;
     private String text;
 
-    private PersonId personId;
     private Collection<Tag> tags;
     private QuestionType questionType;
 
@@ -55,7 +56,7 @@ public class Question implements IEntity<Question, QuestionId> {
                 questionType = QuestionType.ADULT;
             }
 
-            return new Question(id, author, title, text, personId, tags, questionType);
+            return new Question(id, idUser, author, title, text, tags, questionType);
         }
     }
 }

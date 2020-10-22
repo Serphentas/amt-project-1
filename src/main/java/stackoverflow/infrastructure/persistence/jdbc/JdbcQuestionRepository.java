@@ -39,7 +39,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
             PreparedStatement statement = getStatement(
                     "INSERT INTO codemad.Question (idQuestion, idUser, title, text) VALUES (?, ?, ?, ?)");
             statement.setString(1, UUID.randomUUID().toString());
-            statement.setString(2, entity.getPersonId().asString());
+            statement.setString(2, entity.getIdUser().asString());
             statement.setString(3, entity.getTitle());
             statement.setString(4, entity.getText());
             statement.execute();
@@ -83,7 +83,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
                         .author(rs.getString("username"))
                         .title(rs.getString("title"))
                         .text(rs.getString("text"))
-                        .personId(new PersonId(rs.getString("idUser")))
+                        .idUser(new PersonId(rs.getString("idUser")))
                         .tags(tags)
                         .build();
                 question.add(questionSearch);
@@ -119,7 +119,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
                         .author(rs.getString("username"))
                         .title(rs.getString("title"))
                         .text(rs.getString("text"))
-                        .personId(new PersonId(rs.getString("idUser")))
+                        .idUser(new PersonId(rs.getString("idUser")))
                         .tags(tags)
                         .build();
                 allQuestions.add(question);

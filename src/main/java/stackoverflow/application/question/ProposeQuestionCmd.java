@@ -18,7 +18,7 @@ import java.util.Collection;
 @EqualsAndHashCode
 public class ProposeQuestionCmd {
 
-    private PersonId personId;
+    private PersonId idUser;
 
     @Builder.Default
     private String title = "No title";

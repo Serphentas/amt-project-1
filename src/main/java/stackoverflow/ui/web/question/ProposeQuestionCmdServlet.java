@@ -27,7 +27,7 @@ public class ProposeQuestionCmdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
         ProposeQuestionCmd command = ProposeQuestionCmd.builder()
-                .personId(currentUser.getId())
+                .idUser(currentUser.getId())
                 .title(req.getParameter("title"))
                 .text(req.getParameter("text"))
                 .id(new QuestionId())

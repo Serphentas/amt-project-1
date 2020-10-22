@@ -23,7 +23,7 @@ public class QuestionFacade {
             .id(command.getId())
             .title(command.getTitle())
             .text(command.getText())
-            .personId(command.getPersonId())
+            .idUser(command.getIdUser())
             .tags(command.getTags())
             .build()
         );
@@ -47,7 +47,7 @@ public class QuestionFacade {
             }
         } else {
             allQuestionsDTO = allQuestions.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
-                .idQuestion(UUID.fromString(question.getId().asString()))
+                .id(UUID.fromString(question.getId().asString()))
                 .title(question.getTitle())
                 .text(question.getText())
                 .safeForChildren(!question.getText().contains("sex"))
@@ -67,7 +67,7 @@ public class QuestionFacade {
             return null;
         return QuestionsDTO.QuestionDTO.builder()
                 .text(question.getText())
-                .idQuestion(UUID.fromString(question.getId().asString()))
+                .id(UUID.fromString(question.getId().asString()))
                 .title(question.getTitle())
                 .build();
     }
@@ -79,7 +79,7 @@ public class QuestionFacade {
     private QuestionsDTO questionListAsDTOList(Collection<Question> qList) {
         return QuestionsDTO.builder()
             .questions(qList.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
-                .idQuestion(UUID.fromString(question.getId().asString()))
+                .id(UUID.fromString(question.getId().asString()))
                 .title(question.getTitle())
                 .text(question.getText())
                 .safeForChildren(!question.getText().contains("sex"))
