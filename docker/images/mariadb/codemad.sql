@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `codemad`.`Tag` (
   `idTag` VARCHAR(36) NOT NULL,
   `tag` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idTag`),
-    UNIQUE INDEX `tag_UNIQUE` (`tag` ASC) VISIBLE)
+  UNIQUE INDEX `tag_UNIQUE` (`tag` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
