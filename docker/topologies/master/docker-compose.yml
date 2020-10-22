@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   db:
-    image: ghcr.io/amt-long-du-zboub/amt-project-1/db
+    image: serphentas/amt-project-1-db
     container_name: codemad_db
     environment:
       MYSQL_ROOT_PASSWORD: codemad
@@ -9,7 +9,7 @@ services:
       - 3306:3306
 
   app:
-    image: ghcr.io/amt-long-du-zboub/amt-project-1/app
+    image: serphentas/amt-project-1-app
     container_name: codemad_app
     ports:
       - 9080:9080

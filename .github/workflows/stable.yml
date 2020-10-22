@@ -26,15 +26,13 @@ jobs:
 
       - name: Build application Docker image
         run: |
-          echo ${{ secrets.SECRET_KEY }} | docker login ghcr.io -u Serphentas --password-stdin
-          docker build -t amt-long-du-zboub/amt-project-1/app .
-          docker tag amt-long-du-zboub/amt-project-1/app ghcr.io/amt-long-du-zboub/amt-project-1/app
-          docker push ghcr.io/amt-long-du-zboub/amt-project-1/app
+          echo ${{ secrets.token }} | docker login -u serphentas --password-stdin          docker build -t amt-long-du-zboub/amt-project-1/app:dev .
+          docker build -t serphentas/amt-project-1-app .
+          docker push serphentas/amt-project-1-app
 
       - name: Build database Docker image
         run: |
           cd docker/images/mariadb
-          echo ${{ secrets.SECRET_KEY }} | docker login ghcr.io -u Serphentas --password-stdin
-          docker build -t amt-long-du-zboub/amt-project-1/db .
-          docker tag amt-long-du-zboub/amt-project-1/db ghcr.io/amt-long-du-zboub/amt-project-1/db
-          docker push ghcr.io/amt-long-du-zboub/amt-project-1/db
+          echo ${{ secrets.token }} | docker login -u serphentas --password-stdin          docker build -t amt-long-du-zboub/amt-project-1/app:dev .
+          docker build -t serphentas/amt-project-1-db .
+          docker push serphentas/amt-project-1-db
