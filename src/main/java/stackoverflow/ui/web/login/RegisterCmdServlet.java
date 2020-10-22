@@ -1,7 +1,6 @@
 package stackoverflow.ui.web.login;
 
 import stackoverflow.application.ServiceReg;
-import stackoverflow.application.identitymngmt.IdentityMngmtFacade;
 import stackoverflow.application.identitymngmt.login.RegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
 
@@ -25,12 +24,13 @@ public class RegisterCmdServlet extends HttpServlet {
         req.getSession().getAttribute("errors");
 
         RegisterCmd registerCmd = RegisterCmd.builder()
-                .username(req.getParameter("username"))
-                .email(req.getParameter("email"))
-                .firstName(req.getParameter("firstName"))
-                .lastName(req.getParameter("lastName"))
-                .clearTextPassword(req.getParameter("password"))
-                .build();
+            .username(req.getParameter("username"))
+            .email(req.getParameter("email"))
+            .firstName(req.getParameter("firstName"))
+            .lastName(req.getParameter("lastName"))
+            .clearTextPassword(req.getParameter("password"))
+            .confirmPassword(req.getParameter("confirmPassword"))
+            .build();
 
         try {
             serviceReg.getIdentityMngmtFacade().register(registerCmd);

@@ -2,8 +2,10 @@ package stackoverflow.domain.question;
 
 import lombok.*;
 import stackoverflow.domain.IEntity;
-import stackoverflow.domain.person.Person;
 import stackoverflow.domain.person.PersonId;
+import stackoverflow.domain.tag.Tag;
+
+import java.util.Collection;
 
 //@Data
 @Getter
@@ -16,6 +18,9 @@ public class Question implements IEntity<Question, QuestionId> {
     private String author;
     private String title;
     private String text;
+
+    private PersonId personId;
+    private Collection<Tag> tags;
     private QuestionType questionType;
 
     public void categorizeAs(QuestionType questionType){ this.questionType = questionType; }
@@ -47,16 +52,10 @@ public class Question implements IEntity<Question, QuestionId> {
             }
 
             if(text.contains("sex")){
-                System.out.println(String.format(
-                    "q %s @ %s is %s",
-                    title,
-                    text,
-                    text.contains("sex")
-                ));
                 questionType = QuestionType.ADULT;
             }
 
-            return new Question(id, author, title, text, questionType);
+            return new Question(id, author, title, text, personId, tags, questionType);
         }
     }
 }

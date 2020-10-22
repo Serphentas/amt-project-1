@@ -1,9 +1,6 @@
 package stackoverflow.domain.person;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import stackoverflow.domain.IEntity;
 
 import javax.crypto.SecretKeyFactory;
@@ -19,7 +16,9 @@ import java.security.spec.KeySpec;
 @Builder(toBuilder = true)
 public class Person implements IEntity<Person, PersonId>{
 
-    private PersonId id;
+    @Setter(AccessLevel.NONE)
+    private PersonId id = new PersonId();
+
     private String username;
     private String email;
     private String firstName;

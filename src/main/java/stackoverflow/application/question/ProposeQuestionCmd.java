@@ -4,7 +4,13 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
+import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
+import stackoverflow.domain.tag.Tag;
+
+import java.util.Collection;
 
 @Builder
 @Getter
@@ -12,14 +18,14 @@ import stackoverflow.domain.question.QuestionId;
 @EqualsAndHashCode
 public class ProposeQuestionCmd {
 
-    @Builder.Default
-    private String author = "Anonymous";
+    private PersonId personId;
 
     @Builder.Default
     private String title = "No title";
 
-    @Builder.Default
     private QuestionId id;
+    private Collection<Tag> tags;
+
 
     @Builder.Default
     private String text = "No content";

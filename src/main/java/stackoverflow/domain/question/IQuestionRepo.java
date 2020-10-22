@@ -7,5 +7,5 @@ import java.util.Collection;
 
 public interface IQuestionRepo extends IRepo<Question, QuestionId> {
 
-    public Collection<Question> find (QuestionsQuery query);
+    Collection<Question> find (QuestionsQuery query);
 }

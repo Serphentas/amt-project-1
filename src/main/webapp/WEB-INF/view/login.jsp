@@ -67,7 +67,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                      <i class="material-icons">face</i>
+                                      <i class="material-icons">mail</i>
                                     </span>
                                     </div>
                                     <input id="fEmail" name="email" type="text" class="form-control" placeholder="Email...">
@@ -96,6 +96,15 @@
                                     </div>
                                     <input id="fPassword" name="password" type="password" class="form-control" placeholder="Password...">
                                 </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="material-icons">lock_outline</i>
+                                    </span>
+                                    </div>
+                                    <input id="fConfirmPassword" name="confirmPassword" type="password" class="form-control" placeholder="Confirm Password...">
+                                </div>
+
                                 <div class="footer text-center">
                                     <br>
                                     <label>

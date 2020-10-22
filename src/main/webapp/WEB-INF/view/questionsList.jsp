@@ -5,9 +5,13 @@
   Date: 12/10/2020
   Time: 10:08
   To change this template use File | Settings | File Templates.
+
+
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean scope="request" id="questions" type="stackoverflow.application.question.QuestionsDTO"/>
 
 <t:base>
     <div class="page-header header-filter" data-parallax="true" style="background-image: url('/assets/img/city-profile.jpg');">
@@ -33,14 +37,22 @@
                             <p class="description text-left text-dark ">${question.text}</p><br>
                             <div class="row">
                                 <div class="column">
-                                    <form class="form" method="get" action="/answer" id="${question.id}">
+                                    <!--<form class="form" method="get" action="answer">
+                                        <input type="hidden" name="id" value="${question.id.asString()}"/>
                                         <button type="submit" class="btn btn-outline-secondary">Answer</button>
-                                    </form>
+                                    </form>-->
+                                    <div>
+                                        <a href="/answer?id=${question.id.asString()}" class="btn btn-outline-secondary">Answer</a>
+                                    </div>
                                 </div>
                                 <div class="column">
-                                    <form class="form" method="get" action="/comment" id="${question.id}">
+                                    <!--<form class="form" method="get" action="comment">
+                                        <input type="hidden" name="id" value="${question.id.asString()}"/>
                                         <button type="submit" class="btn btn-default">Comment</button>
-                                    </form>
+                                    </form>-->
+                                    <div>
+                                        <a href="/comment?id=${question.id.asString()}" class="btn btn-outline-secondary">Comment</a>
+                                    </div>
                                 </div>
                             </div>
                         </a>

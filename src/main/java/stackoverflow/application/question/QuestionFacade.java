@@ -3,6 +3,7 @@ package stackoverflow.application.question;
 import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionType;
+import stackoverflow.domain.question.QuestionId;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,6 +24,8 @@ public class QuestionFacade {
             .author(command.getAuthor())
             .title(command.getTitle())
             .text(command.getText())
+            .personId(command.getPersonId())
+            .tags(command.getTags())
             .build()
         );
     }
@@ -55,6 +58,18 @@ public class QuestionFacade {
 
         return QuestionsDTO.builder()
                 .questions(allQuestionsDTO)
+                .build();
+
+    }
+
+    public QuestionsDTO.QuestionDTO getQuestionById(QuestionId id){
+        Question question = questionRepository.findById(id).orElse(null);
+        if( question == null)
+            return null;
+        return QuestionsDTO.QuestionDTO.builder()
+                .text(question.getText())
+                .id(question.getId())
+                .title(question.getTitle())
                 .build();
     }
 

@@ -6,6 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import stackoverflow.application.question.QuestionsDTO.QuestionDTO;
+import stackoverflow.application.question.ProposeQuestionCmd;
+import stackoverflow.application.question.QuestionFacade;
+import stackoverflow.application.question.QuestionsDTO;
+import stackoverflow.application.question.QuestionsQuery;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.infrastructure.persistence.memory.MemoryQuestionRepo;
 

@@ -1,7 +1,6 @@
 package stackoverflow.ui.web.login;
 
 import stackoverflow.application.ServiceReg;
-import stackoverflow.application.identitymngmt.IdentityMngmtFacade;
 import stackoverflow.application.identitymngmt.authenticate.AuthenticateCmd;
 import stackoverflow.application.identitymngmt.authenticate.AuthenticateFailedException;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;

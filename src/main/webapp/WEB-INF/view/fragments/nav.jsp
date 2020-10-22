@@ -19,7 +19,7 @@
                         <i class="material-icons">apps</i> Menu
                     </a>
                     <div class="dropdown-menu dropdown-with-icons">
-                        <a href="<c:url value="/questions"/>" class="dropdown-item">
+                        <a href="<c:url value="/submitQuestion"/>" class="dropdown-item">
                             <i class="material-icons">layers</i> Ask your questions
                         </a>
                         <a href="<c:url value="/questionsList"/>" class="dropdown-item">

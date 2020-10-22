@@ -5,9 +5,9 @@ import java.util.Optional;
 
 public interface IRepo<ENTITY extends IEntity, ID extends Id> {
 
-    public void save(ENTITY entity);
-    public  void remove(ID id);
-    public Optional<ENTITY> findById(ID id);
-    public Collection<ENTITY> findAll();
+    void save(ENTITY entity);
+    void remove(ID id);
+    Optional<ENTITY> findById(ID id);
+    Collection<ENTITY> findAll();
 
 }

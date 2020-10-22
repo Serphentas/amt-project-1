@@ -38,7 +38,7 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Question`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Question` (
-  `idQuestion` VARCHAR(36),
+  `idQuestion` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
   `title` VARCHAR(60) NULL,
   `text` LONGTEXT NULL,
@@ -58,7 +58,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `codemad`.`Answer` (
   `idAnswer` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
-  `idQuestion` INT UNSIGNED NOT NULL,
+  `idQuestion` VARCHAR(36) NOT NULL,
   `text` LONGTEXT NULL,
   PRIMARY KEY (`idAnswer`),
   INDEX `fk_Answer_User1_idx` (`idUser` ASC) VISIBLE,
@@ -82,8 +82,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `codemad`.`Commentary` (
   `idCommentary` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
-  `idAnswer` INT UNSIGNED NOT NULL,
-  `idQuestion` INT UNSIGNED NOT NULL,
+  `idAnswer` VARCHAR(36) NULL,
+  `idQuestion` VARCHAR(36) NULL,
   `text` LONGTEXT NULL,
   PRIMARY KEY (`idCommentary`, `idUser`),
   INDEX `fk_Commentary_User1_idx` (`idUser` ASC) VISIBLE,
@@ -113,8 +113,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `codemad`.`Vote` (
   `idVote` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
-  `idQuestion` INT UNSIGNED NOT NULL,
-  `idCommentary` INT UNSIGNED NOT NULL,
+  `idQuestion` VARCHAR(36) NULL,
+  `idCommentary` VARCHAR(36) NULL,
   `vote` TINYINT NULL,
   PRIMARY KEY (`idVote`, `idUser`),
   INDEX `fk_Vote_User1_idx` (`idUser` ASC) VISIBLE,
@@ -143,8 +143,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Tag` (
   `idTag` VARCHAR(36) NOT NULL,
-  `tag` VARCHAR(45) NULL,
-  PRIMARY KEY (`idTag`))
+  `tag` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idTag`),
+  UNIQUE INDEX `tag_UNIQUE` (`tag` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -153,7 +154,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Question_Tag` (
   `idQuestion` VARCHAR(36) NOT NULL,
-  `idTag` INT UNSIGNED NOT NULL,
+  `idTag` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`idQuestion`, `idTag`),
   INDEX `fk_Question_has_Tag_Tag1_idx` (`idTag` ASC) VISIBLE,
   INDEX `fk_Question_has_Tag_Question1_idx` (`idQuestion` ASC) VISIBLE,
@@ -173,3 +174,10 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'C');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'C++');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'Java');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'Python');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'SCALA');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID_TO_BIN(UUID()), 'JavaScript');

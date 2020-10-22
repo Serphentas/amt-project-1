@@ -35,7 +35,7 @@ public class JdbcUserRepository implements IPersonRepo {
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
                     "INSERT INTO codemad.User (idUser, username, firstname, lastname, email, password) VALUES (?, ?, ?, ?, ?, ?)");
-            statement.setString(1, UUID.randomUUID().toString());
+            statement.setString(1, new PersonId().asString());
             statement.setString(2, person.getUsername());
             statement.setString(3, person.getFirstName());
             statement.setString(4, person.getLastName());
@@ -77,7 +77,7 @@ public class JdbcUserRepository implements IPersonRepo {
             ArrayList<Person> rows = new ArrayList<>();
             while (rs.next()) {
                 Person person = Person.builder()
-                    .id(new PersonId(UUID.fromString(rs.getString("idUser"))))
+                    .id(new PersonId(rs.getString("idUser")))
                     .username(rs.getString("username"))
                     .encryptedPassword(rs.getString("password"))
                     .email(rs.getString("email"))
