@@ -46,6 +46,10 @@ public class AuthorizationFilter implements Filter {
             return true;
         }
 
+        if(URI.startsWith("/assets")){
+            return true;
+        }
+
         if(URI.startsWith("/logout")){
             return true;
         }
@@ -55,6 +59,9 @@ public class AuthorizationFilter implements Filter {
         }
 
         if(URI.startsWith("/questionsList")){
+            return true;
+        }
+        if(URI.startsWith("/questions")){
             return true;
         }
 

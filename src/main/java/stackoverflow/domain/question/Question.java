@@ -7,21 +7,22 @@ import stackoverflow.domain.tag.Tag;
 
 import java.util.Collection;
 
-@Data
+//@Data
 @Getter
+@Setter
+@EqualsAndHashCode
 @Builder(toBuilder = true)
 public class Question implements IEntity<Question, QuestionId> {
 
-    @Setter(AccessLevel.NONE)
-    private QuestionId id = new QuestionId();
+    private QuestionId id;
+    private PersonId idUser;
 
     private String author;
     private String title;
     private String text;
-    private PersonId personId;
+
     private Collection<Tag> tags;
 
-    @Setter(AccessLevel.NONE)
     private QuestionType questionType;
 
     public void categorizeAs(QuestionType questionType){ this.questionType = questionType; }
@@ -40,12 +41,12 @@ public class Question implements IEntity<Question, QuestionId> {
                 id = new QuestionId();
             }
 
-            if(title==null) {
-                text ="";
+            if(text == null || text.isEmpty()){
+                throw new IllegalArgumentException("Text is mandatory");
             }
 
-            if(text==null) {
-                text ="";
+            if(title == null || title.isEmpty()){
+                throw new IllegalArgumentException("Title is mandatory");
             }
 
             if(questionType == null){
@@ -56,7 +57,7 @@ public class Question implements IEntity<Question, QuestionId> {
                 questionType = QuestionType.ADULT;
             }
 
-            return new Question(id, author, title, text, personId, tags, questionType);
+            return new Question(id, idUser, author, title, text, tags, questionType);
         }
     }
 }

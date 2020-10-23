@@ -1,6 +1,7 @@
 package stackoverflow.ui.web.question;
 
 import stackoverflow.application.ServiceReg;
+import stackoverflow.application.question.QuestionFacade;
 import stackoverflow.application.question.QuestionsDTO;
 import stackoverflow.application.question.QuestionsQuery;
 
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "QuestionsPageServlet", urlPatterns = "/questionsList")
+@WebServlet(name="QuestionsQueryServlet", urlPatterns="/questions")
 public class QuestionsQueryServlet extends HttpServlet {
 
     @Inject
@@ -20,8 +21,8 @@ public class QuestionsQueryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        QuestionsDTO questionsDTO = serviceReg.getQuestionFacade().getQuestions();
-        req.setAttribute("questions", questionsDTO);
-        req.getRequestDispatcher("/WEB-INF/view/questionsList.jsp").forward(req, resp);
+        QuestionsDTO questionsDTO = serviceReg.getQuestionFacade().getAllQuestions();
+        req.setAttribute("questions", questionsDTO.getQuestions());
+        req.getRequestDispatcher("/WEB-INF/view/questions.jsp").forward(req, resp);
     }
 }

@@ -77,12 +77,12 @@ public class JdbcUserRepository implements IPersonRepo {
             ArrayList<Person> rows = new ArrayList<>();
             while (rs.next()) {
                 Person person = Person.builder()
-                    .id( new PersonId(rs.getString("idUser")))
-                    .username( rs.getString("username"))
-                    .encryptedPassword( rs.getString("password"))
-                    .email( rs.getString("email"))
-                    .firstName( rs.getString("firstname"))
-                    .lastName( rs.getString("lastname"))
+                    .id(new PersonId(rs.getString("idUser")))
+                    .username(rs.getString("username"))
+                    .encryptedPassword(rs.getString("password"))
+                    .email(rs.getString("email"))
+                    .firstName(rs.getString("firstname"))
+                    .lastName(rs.getString("lastname"))
                     .build();
                 rows.add(person);
             }

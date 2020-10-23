@@ -1,29 +1,32 @@
 package stackoverflow.domain.vote;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import stackoverflow.domain.IEntity;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
 
-@Data
 @Getter
+@Setter
 @Builder(toBuilder = true)
 public class Vote implements IEntity<Vote, VoteId> {
-
-    @Setter(AccessLevel.NONE)
-    private VoteId id = new VoteId();
-
-    private PersonId userId;
+    private VoteId voteId;
+    private PersonId personId;
 
     private QuestionId questionId;
-    //private CommentId commentId;
 
-    private int vote;
+    @Override
+    public VoteId getId() {
+        return voteId;
+    }
 
     @Override
     public Vote deepClone() {
         return this.toBuilder()
-                .id(new VoteId(id.asString()))
+                .voteId(new VoteId(voteId.asString()))
+                .personId(new PersonId(personId.asString()))
+                .questionId(new QuestionId(questionId.asString()))
                 .build();
     }
 }

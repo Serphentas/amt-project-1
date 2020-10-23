@@ -1,4 +1,4 @@
-package stackoverflow.application.question;
+package stackoverflow.application.identitymngmt;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -90,7 +90,7 @@ public class IdentityMngmtFacadeIT {
         } catch (RegistrationFailedException e){
             hasException = true;
         }
-        
+
         assertTrue(hasException);
     }
 
@@ -108,7 +108,7 @@ public class IdentityMngmtFacadeIT {
         } catch (RegistrationFailedException e){
             hasException = true;
         }
-        
+
         assertTrue(hasException);
     }
 
@@ -127,7 +127,7 @@ public class IdentityMngmtFacadeIT {
         } catch (RegistrationFailedException e){
             hasException = true;
         }
-        
+
         assertTrue(hasException);
     }
 
@@ -145,7 +145,7 @@ public class IdentityMngmtFacadeIT {
         } catch (RegistrationFailedException e){
             hasException = true;
         }
-        
+
         assertTrue(hasException);
     }
 
@@ -163,7 +163,7 @@ public class IdentityMngmtFacadeIT {
         } catch (RegistrationFailedException e){
             hasException = true;
         }
-        
+
         assertTrue(hasException);
     }
 
@@ -193,7 +193,7 @@ public class IdentityMngmtFacadeIT {
         } catch (AuthenticateFailedException e){
             hasException = true;
         }
-        
+
         assertTrue(hasException);
     }
 
@@ -210,7 +210,7 @@ public class IdentityMngmtFacadeIT {
         } catch (AuthenticateFailedException e){
             hasException = true;
         }
-        
+
         assertTrue(hasException);
     }
 }

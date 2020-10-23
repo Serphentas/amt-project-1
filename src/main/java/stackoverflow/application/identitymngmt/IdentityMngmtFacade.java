@@ -16,6 +16,15 @@ public class IdentityMngmtFacade {
         this.personRepo = personRepo;
     }
 
+    private boolean isStrongPassword(String clearTextPassword){
+        boolean result = clearTextPassword.matches(".*[0-9].*");
+        result &= clearTextPassword.matches(".*[A-Z].*");
+        result &= clearTextPassword.matches(".*[a-z].*");
+        result &= clearTextPassword.matches(".*^[a-z|A-Z|0-9].*");
+
+        return result && clearTextPassword.length()>7;
+    }
+
     public void register(RegisterCmd cmd) throws RegistrationFailedException {
         Person yetExistingPerson = personRepo.findByUsername(cmd.getUsername()).orElse(null);
 
@@ -25,6 +34,15 @@ public class IdentityMngmtFacade {
 
         if( ! cmd.getConfirmPassword().equals(cmd.getClearTextPassword()) ){
             throw new RegistrationFailedException("confirm password field don't match the password field");
+        }
+
+        if( ! isStrongPassword(cmd.getClearTextPassword()) ){
+            throw new RegistrationFailedException("password should respect the following rules:\n" +
+                " at least a majuscule\n" +
+                " at least a miniscule\n" +
+                " at least a digit\n" +
+                " at least a special character\n" +
+                " have minimum 8 characters");
         }
 
         try {
