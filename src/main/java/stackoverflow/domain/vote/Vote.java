@@ -1,5 +1,6 @@
 package stackoverflow.domain.vote;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,10 +12,14 @@ import stackoverflow.domain.question.QuestionId;
 @Setter
 @Builder(toBuilder = true)
 public class Vote implements IEntity<Vote, VoteId> {
+    @Setter(AccessLevel.NONE)
     private VoteId voteId;
     private PersonId personId;
 
-    private QuestionId questionId;
+    @Builder.Default
+    private QuestionId questionId=null;
+    //@Builder.Default
+    //private CommentId commentId=null;
 
     @Override
     public VoteId getId() {

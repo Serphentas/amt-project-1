@@ -18,14 +18,13 @@ public class VotesDTO {
     @Getter
     @EqualsAndHashCode
     public static class VoteDTO{
-        private int vote;
+        private boolean vote;
+        private PersonId personId;
+        private QuestionId questionId;
+        //todo à décomenter quand commentary est là
+        //private CommentId commentId;
     }
 
     @Singular
-    private List<stackoverflow.application.answer.AnswersDTO.AnswerDTO> answers;
-
-    //todo à déplacer dans VoteDTO selon l'utilisation VotesDTO
-    private PersonId personId;
-    private QuestionId questionId;
-    //private CommentId commentId;
+    private List<stackoverflow.application.answer.AnswersDTO.AnswerDTO> votes;
 }
