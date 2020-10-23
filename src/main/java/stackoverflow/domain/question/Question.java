@@ -22,6 +22,7 @@ public class Question implements IEntity<Question, QuestionId> {
     private String text;
 
     private Collection<Tag> tags;
+
     private QuestionType questionType;
 
     public void categorizeAs(QuestionType questionType){ this.questionType = questionType; }
