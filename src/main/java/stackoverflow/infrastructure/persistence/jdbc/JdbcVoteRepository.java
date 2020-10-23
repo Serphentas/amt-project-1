@@ -32,6 +32,23 @@ public class JdbcVoteRepository implements IVoteRepo {
     }
 
     @Override
+    public void toggle(Vote entity) {
+        if(!hasVotedQuestion(entity.getQuestionId(), entity.getPersonId())) {
+            if (entity.getQuestionId() != null) {
+                voteForQuestion(entity.getQuestionId(), entity.getPersonId());
+            } else {
+                //voteForComment(entity.getQuestionId(), entity.getPersonId());
+            }
+        } else {
+            if (entity.getQuestionId() != null) {
+                unvoteForQuestion(entity.getQuestionId(), entity.getPersonId());
+            } else {
+                //unvoteForComment(entity.getQuestionId(), entity.getPersonId());
+            }
+        }
+    }
+
+    @Override
     public void save(Vote entity) {
 
     }
@@ -51,7 +68,8 @@ public class JdbcVoteRepository implements IVoteRepo {
         return null;
     }
 
-    public void voteForQuestion(QuestionId questionId, PersonId personId){
+
+    private void voteForQuestion(QuestionId questionId, PersonId personId){
         try {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
@@ -105,7 +123,7 @@ public class JdbcVoteRepository implements IVoteRepo {
         return 0;
     }
 
-    public void unvoteForQuestion(QuestionId questionId, PersonId personId){
+    private void unvoteForQuestion(QuestionId questionId, PersonId personId){
         try {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
@@ -121,7 +139,7 @@ public class JdbcVoteRepository implements IVoteRepo {
 
 
     /*
-    public void voteForCommentary(CommentaryId commentaryId, PersonId personId){
+    private void voteForComment(CommentId commentId, PersonId personId){
         try {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
@@ -136,12 +154,13 @@ public class JdbcVoteRepository implements IVoteRepo {
         }
     }
 
-    public boolean hasVotedCommentary(){
+    @Override
+    public boolean hasVotedComment(CommentId commentId, PersonId currentUser){
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
                     "SELECT * FROM codemad.Vote WHERE idUser=? AND idCommentary=?");
             statement.setString(1, currentUser.asString());
-            statement.setString(2, questionId.asString());
+            statement.setString(2, commentId.asString());
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()){
@@ -155,11 +174,11 @@ public class JdbcVoteRepository implements IVoteRepo {
         return false;
     }
 
-    public int nbrVoteCommentary(CommentaryId commentaryId){
+    public int nbrVoteComment(CommentId commentId){
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
                     "SELECT COUNT(Vote.idVote) AS nbrVote FROM codemad.Vote GROUP BY Vote.idCommentary HAVING idCommentary=?");
-            statement.setString(1, commentaryId.asString());
+            statement.setString(1, commentId.asString());
 
             ResultSet rs = statement.executeQuery();
 
@@ -174,13 +193,13 @@ public class JdbcVoteRepository implements IVoteRepo {
         return 0;
     }
 
-    public void unvoteForCommentary(CommentaryId commentaryId, PersonId personId){
+    private void unvoteForComment(CommentId commentId, PersonId personId){
         try {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
                     "DELETE FROM `codemad`.`Vote` WHERE idUser=? AND idCommentary=?");
             statement.setString(1, personId.asString());
-            statement.setString(2, questionId.asString());
+            statement.setString(2, commentId.asString());
             statement.execute();
 
         } catch (SQLException throwables) {

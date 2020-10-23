@@ -1,5 +1,6 @@
 package stackoverflow.domain.tag;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,8 +11,10 @@ import stackoverflow.domain.IEntity;
 @Builder(toBuilder = true)
 public class Tag implements IEntity<Tag, TagId> {
 
-    private String tag;
+    @Setter(AccessLevel.NONE)
     private TagId tagId;
+    private String tag;
+
 
 
     @Override
