@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name="ProposeQuestionCmdServlet", urlPatterns = {"/submitQuestion.do", "/questionsList"})
+@WebServlet(name="SubmitQuestionCmdServlet", urlPatterns = "/submitQuestion.do")
 public class ProposeQuestionCmdServlet extends HttpServlet {
 
     @Inject
@@ -35,12 +35,5 @@ public class ProposeQuestionCmdServlet extends HttpServlet {
                 .build();
         // questionFacade.proposeQuestion(command);
         resp.sendRedirect("/questions");
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        QuestionsDTO questionsDTO = serviceReg.getQuestionFacade().getAllQuestions();
-        req.setAttribute("questions", questionsDTO);
-        req.getRequestDispatcher("/WEB-INF/view/questionsList.jsp").forward(req, resp);
     }
 }

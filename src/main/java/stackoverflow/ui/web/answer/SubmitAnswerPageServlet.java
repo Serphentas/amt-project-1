@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "AnswerPageServlet", urlPatterns = "/answer")
-public class AnswerPageServlet extends HttpServlet {
+@WebServlet(name = "SubmitAnswerPageServlet", urlPatterns = "/submitAnswer")
+public class SubmitAnswerPageServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;

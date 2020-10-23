@@ -5,6 +5,7 @@ import stackoverflow.domain.Id;
 import java.util.UUID;
 
 public class VoteId extends Id {
+
     public VoteId() {
         super();
     }

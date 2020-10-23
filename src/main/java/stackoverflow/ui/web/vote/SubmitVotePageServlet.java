@@ -1,9 +1,7 @@
-package stackoverflow.ui.web.question;
+package stackoverflow.ui.web.vote;
 
 import stackoverflow.application.ServiceReg;
-import stackoverflow.application.question.ProposeQuestionCmd;
 import stackoverflow.application.question.QuestionsDTO;
-import stackoverflow.application.question.QuestionsQuery;
 import stackoverflow.domain.question.QuestionId;
 
 import javax.inject.Inject;
@@ -14,12 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet(name = "SubmitVotePageServlet", urlPatterns = "/submitVote")
+public class SubmitVotePageServlet extends HttpServlet {
 
-@WebServlet(name="submitQuestionPageServlet", urlPatterns = {"/submitQuestion"})
-public class AskQuestionPageServlet extends HttpServlet {
+    @Inject
+    ServiceReg serviceReg;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/view/questions.jsp").forward(req, resp);
+        QuestionsDTO.QuestionDTO entity = serviceReg.getQuestionFacade().getQuestionById( new QuestionId( req.getParameter("id")));
+        req.setAttribute("entity", entity);
+        req.getRequestDispatcher("/WEB-INF/view/vote.jsp").forward(req, resp);
     }
 }

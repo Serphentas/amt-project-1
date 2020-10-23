@@ -2,6 +2,6 @@ package stackoverflow.domain.vote;
 
 import stackoverflow.domain.IRepo;
 
-public interface IVote extends IRepo<Vote, VoteId> {
+public interface IVoteRepo extends IRepo<Vote, VoteId> {
 
 }

@@ -42,7 +42,8 @@
                                         <button type="submit" class="btn btn-outline-secondary">Answer</button>
                                     </form>-->
                                     <div>
-                                        <a href="/answer?id=${question.id.toString()}" class="btn btn-outline-secondary">Answer</a>
+                                        <a href="/submitAnswer?id=${question.id.asString()}" class="btn btn-outline-secondary">Answer</a>
+
                                     </div>
                                 </div>
                                 <div class="column">
@@ -51,7 +52,7 @@
                                         <button type="submit" class="btn btn-default">Comment</button>
                                     </form>-->
                                     <div>
-                                        <a href="/comment?id=${question.id.toString()}" class="btn btn-outline-secondary">Comment</a>
+                                        <a href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary">Comment</a>
                                     </div>
                                 </div>
                             </div>

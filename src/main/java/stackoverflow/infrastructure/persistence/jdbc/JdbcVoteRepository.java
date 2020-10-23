@@ -2,7 +2,7 @@ package stackoverflow.infrastructure.persistence.jdbc;
 
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
-import stackoverflow.domain.vote.IVote;
+import stackoverflow.domain.vote.IVoteRepo;
 import stackoverflow.domain.vote.Vote;
 import stackoverflow.domain.vote.VoteId;
 
@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @ApplicationScoped
 @Named("JdbcVoteRepository")
-public class JdbcVoteRepository implements IVote {
+public class JdbcVoteRepository implements IVoteRepo {
     @Resource(lookup = "jdbc/StackOverFlowDS")
     DataSource dataSource;
 

@@ -1,9 +1,6 @@
 package stackoverflow.infrastructure.persistence.jdbc;
 
-import stackoverflow.domain.person.PersonId;
-import stackoverflow.domain.question.Question;
-import stackoverflow.domain.question.QuestionId;
-import stackoverflow.domain.tag.ITag;
+import stackoverflow.domain.tag.ITagRepo;
 import stackoverflow.domain.tag.Tag;
 import stackoverflow.domain.tag.TagId;
 
@@ -21,7 +18,7 @@ import javax.sql.DataSource;
 
 @ApplicationScoped
 @Named("JdbcTagRepository")
-public class JdbcTagRepository implements ITag {
+public class JdbcTagRepository implements ITagRepo {
     @Resource(lookup = "jdbc/StackOverFlowDS")
     DataSource dataSource;
 

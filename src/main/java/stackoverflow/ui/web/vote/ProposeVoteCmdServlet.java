@@ -1,11 +1,9 @@
-package stackoverflow.ui.web.answer;
+package stackoverflow.ui.web.vote;
 
 import stackoverflow.application.ServiceReg;
 import stackoverflow.application.answer.ProposeAnswerCmd;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
-import stackoverflow.application.question.QuestionsDTO;
 import stackoverflow.domain.answer.AnswerId;
-import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
 
 import javax.inject.Inject;
@@ -16,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="SubmitAnswerCmdServlet", urlPatterns = "/submitAnswer.do")
-public class ProposeAnswerCmdServlet extends HttpServlet {
+@WebServlet(name="SubmitVoteCmdServlet", urlPatterns = "/submitVote.do")
+public class ProposeVoteCmdServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;
