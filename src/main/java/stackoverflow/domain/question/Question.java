@@ -7,7 +7,6 @@ import stackoverflow.domain.tag.Tag;
 
 import java.util.Collection;
 
-//@Data
 @Getter
 @Setter
 @EqualsAndHashCode
