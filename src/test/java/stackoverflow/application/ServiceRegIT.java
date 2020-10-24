@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 /*
+todo faire marcher arquillian avec notre projet
 @RunWith(Arquillian.class)
 public class ServiceRegIT {
 
