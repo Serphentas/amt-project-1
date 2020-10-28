@@ -21,15 +21,15 @@ import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
 
 @ApplicationScoped
-@Named("JdbcCommentaryRepository")
-public class JdbcCommentaryRepository implements ICommentRepo {
+@Named("JdbcCommentRepository")
+public class JdbcCommentRepository implements ICommentRepo {
     @Resource(lookup = "jdbc/StackOverFlowDS")
     DataSource dataSource;
 
-    public JdbcCommentaryRepository() {
+    public JdbcCommentRepository() {
     }
 
-    public JdbcCommentaryRepository(DataSource dataSource) {
+    public JdbcCommentRepository(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -101,17 +101,52 @@ public class JdbcCommentaryRepository implements ICommentRepo {
 
     @Override
     public Collection<Comment> findByQuestion(CommentQuery query) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            PreparedStatement statement = getStatement(
+                "SELECT * FROM Comment WHERE idComment=?"
+            );
+            statement.setString(1, query.getIdQuestion().toString());
+
+            return resultSetAsList(statement.executeQuery());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return new ArrayList<Comment>();
     }
 
     @Override
     public Collection<Comment> findByAnswer(CommentQuery query) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            PreparedStatement statement = getStatement(
+                "SELECT * FROM Comment WHERE idAnswer=?"
+            );
+            statement.setString(1, query.getIdAnswer().toString());
+
+            return resultSetAsList(statement.executeQuery());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return new ArrayList<Comment>();
     }
 
     private PreparedStatement getStatement (String cmd) throws SQLException {
         return dataSource.getConnection().prepareStatement(cmd);
+    }
+
+    private ArrayList<Comment> resultSetAsList(ResultSet rs) throws SQLException {
+        ArrayList<Comment> res = new ArrayList<>();
+
+        while (rs.next()) {
+            res.add(Comment.builder()
+                .id(new CommentId(rs.getString("idComment")))
+                .idAnswer(new AnswerId(rs.getString("idAnswer")))
+                .idQuestion(new QuestionId(rs.getString("idQuestion")))
+                .idUser(new PersonId(rs.getString("idUser")))
+                .text(rs.getString("text"))
+                .build()
+            );
+        }
+
+        return res;
     }
 }
