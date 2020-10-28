@@ -29,6 +29,8 @@ This is provided with the use of Java EE APIs according to an MVC pattern, along
 
 ## Usage
 
+### Release
+
 The easiest way to run our app is with the bundled scripts:
 
 ```
@@ -40,6 +42,18 @@ Should you wish to use our development release, run:
 ```
 ./run_devs.sh
 ```
+
+and access the website at [http://localhost:9080](http://localhost:9080).
+
+### Development
+
+Simply run this from the repository root:
+
+```
+mvn liberty:dev
+```
+
+and access the website at [http://localhost:9080](http://localhost:9080).
 
 ## Repository structure
 
