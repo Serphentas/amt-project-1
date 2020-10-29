@@ -13,12 +13,13 @@ import java.util.Collection;
 @Builder(toBuilder = true)
 public class Question implements IEntity<Question, QuestionId> {
 
-    @NonNull
-    private QuestionId id;
+    @Builder.Default
+    private QuestionId id = new QuestionId();
     @NonNull
     private PersonId userId;
 
-    private String author;
+    @Builder.Default
+    private String author = null;
 
     @NonNull
     private String title;

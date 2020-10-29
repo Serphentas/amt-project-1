@@ -14,8 +14,6 @@ import stackoverflow.domain.vote.VoteId;
 public class ProposeVoteCmd {
     @NonNull
     private PersonId personId;
-    @NonNull
-    private VoteId id;
 
     @Builder.Default
     private QuestionId questionId = null;

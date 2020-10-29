@@ -28,10 +28,8 @@ public class ProposeQuestionCmdServlet extends HttpServlet {
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
         ProposeQuestionCmd command = ProposeQuestionCmd.builder()
                 .userId(currentUser.getId())
-                .author(currentUser.getUsername())
                 .title(req.getParameter("title"))
                 .text(req.getParameter("text"))
-                .id(new QuestionId())
                 .build();
         serviceReg.getQuestionFacade().proposeQuestion(command);
         resp.sendRedirect("/questions");

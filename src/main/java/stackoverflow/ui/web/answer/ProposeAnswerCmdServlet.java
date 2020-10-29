@@ -27,12 +27,11 @@ public class ProposeAnswerCmdServlet extends HttpServlet {
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
         QuestionId questionId = new QuestionId(req.getParameter("id"));
         ProposeAnswerCmd command = ProposeAnswerCmd.builder()
-                .id(new AnswerId())
                 .personId(currentUser.getId())
                 .questionId(questionId)
                 .text(req.getParameter("text"))
                 .build();
         serviceReg.getAnswerFacade().proposeAnswer(command);
-        resp.sendRedirect("/questionsList");
+        resp.sendRedirect("/questions");
     }
 }
