@@ -23,15 +23,20 @@ public class VoteFacade {
         voteRepo.toggle(vote);
     }
 
-    public boolean hasVotedByQuestionId(QuestionId questionId, PersonId personId){
-        return voteRepo.hasVotedQuestion(questionId, personId);
+    public boolean hasVotedQuestion(QuestionId questionId, PersonId currentUser){
+        return voteRepo.hasVotedQuestion(questionId, currentUser);
     }
-
+    public int nbrVoteQuestion(QuestionId questionId){
+        return voteRepo.nbrVoteQuestion(questionId);
+    }
 
     /*
     public boolean hasVotedByCommentId(CommentId commentId, PersonId personId){
-
         return voteRepo.hasVotedComment(commentId, personId);
+    }
+
+    public int nbrVoteComment(CommentId commentId){
+        return voteRepo.nbdrVoteComment(CommentId commentId);
     }
     */
 }
