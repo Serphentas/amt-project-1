@@ -146,7 +146,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
             return resultSetAsList(statement.executeQuery());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }*/
+        }
         return new ArrayList<Question>();
     }
 
