@@ -40,7 +40,7 @@ public class JdbcAnswerRepository implements IAnswerRepo {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
                     "SELECT Answer.text, Answer.idAnswer, Answer.idQuestion, User.username, Answer.idUser " +
                             "FROM codemad.Answer JOIN User ON Answer.idUser = User.idUser WHERE idQuestion=?");
-            statement.setString(1, query.getId().toString());
+            statement.setString(1, query.getId().asString());
 
             ResultSet rs = statement.executeQuery();
 

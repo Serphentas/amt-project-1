@@ -7,15 +7,15 @@ import javax.sql.DataSource;
 
 @ApplicationScoped
 @Named("JdbcCommentaryRepository")
-public class JdbcCommentaryRepository {
+public class JdbcCommentRepository {
     @Resource(lookup = "jdbc/StackOverFlowDS")
     DataSource dataSource;
 
-    public JdbcCommentaryRepository(){
+    public JdbcCommentRepository(){
 
     }
 
-    public JdbcCommentaryRepository(DataSource dataSource){
+    public JdbcCommentRepository(DataSource dataSource){
         this.dataSource = dataSource;
     }
 }

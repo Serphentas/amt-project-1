@@ -16,8 +16,12 @@ public class Answer implements IEntity<Answer, AnswerId> {
     private AnswerId id = new AnswerId();
 
     private String author;
+
+    @NonNull
     private QuestionId questionId;
+    @NonNull
     private PersonId personId;
+    @NonNull
     private String text;
 
     @Override
