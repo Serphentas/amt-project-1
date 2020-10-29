@@ -46,6 +46,7 @@ public class ServiceReg {
 
     public CommentFacade getCommentFacade() {
         return new CommentFacade(commentRepo);
+    }
 
     public VoteFacade getVoteFacade() {
         return new VoteFacade(voteRepo);
