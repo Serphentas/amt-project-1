@@ -17,7 +17,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
-import java.util.UUID;
 
 @ApplicationScoped
 @Named("JdbcAnswerRepository")
@@ -93,5 +92,19 @@ public class JdbcAnswerRepository implements IAnswerRepo {
     @Override
     public Collection<Answer> findAll() {
         return null;
+    }
+
+    @Override
+    public void update(Answer entity) {
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "UPDATE codemad.Answer SET text=? WHERE idAnswer=?");
+            statement.setString(1, entity.getText());
+            statement.setString(2, entity.getId().asString());
+
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

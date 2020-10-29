@@ -9,5 +9,5 @@ public interface IRepo<ENTITY extends IEntity, ID extends Id> {
     void remove(ID id);
     Optional<ENTITY> findById(ID id);
     Collection<ENTITY> findAll();
-
+    void update(ENTITY entity);
 }
