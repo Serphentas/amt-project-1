@@ -47,6 +47,15 @@
                                         <a href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary">Comment</a>
                                     </div>
                                 </div>
+                                <div class="column">
+                                    <!--<form class="form" method="get" action="comment">
+                                        <input type="hidden" name="id" value="${question.id.toString()}"/>
+                                        <button type="submit" class="btn btn-default">Comment</button>
+                                    </form>-->
+                                    <div>
+                                        <a href="/question?id=${question.id.asString()}" class="btn btn-outline-secondary">Go to question</a>
+                                    </div>
+                                </div>
                             </div>
                         </a>
                     </div>

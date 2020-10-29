@@ -43,6 +43,7 @@ public class ProposeQuestionCmdTest {
     public void tagsShouldBeNullByDefault() {
         ProposeQuestionCmd cmd = ProposeQuestionCmd.builder()
                 .userId(new PersonId())
+                .author("author")
                 .title("title")
                 .text("question")
                 .build();
