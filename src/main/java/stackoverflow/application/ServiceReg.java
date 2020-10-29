@@ -21,15 +21,7 @@ public class ServiceReg {
 
     @Inject @Named("JdbcAnswerRepository")
     IAnswerRepo answerRepo;
-/*
-    public static ServiceReg instance = new ServiceReg();
 
-    protected ServiceReg(){}
-
-    public ServiceReg getInstance(){
-        return instance;
-    }
-*/
     public IdentityMngmtFacade getIdentityMngmtFacade() {
         return new IdentityMngmtFacade(personRepo);
     }

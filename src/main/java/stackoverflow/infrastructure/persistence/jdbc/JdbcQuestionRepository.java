@@ -39,17 +39,19 @@ public class JdbcQuestionRepository implements IQuestionRepo {
             PreparedStatement statement = getStatement(
                     "INSERT INTO codemad.Question (idQuestion, idUser, title, text) VALUES (?, ?, ?, ?)");
             statement.setString(1, UUID.randomUUID().toString());
-            statement.setString(2, entity.getIdUser().asString());
+            statement.setString(2, entity.getUserId().asString());
             statement.setString(3, entity.getTitle());
             statement.setString(4, entity.getText());
             statement.execute();
 
-            for(Tag tag : entity.getTags()) {
-                statement = dataSource.getConnection().prepareStatement(
-                        "INSERT INTO codemad.Question_Tag (idQuestion, idTag) VALUES (?, ?)");
-                statement.setString(1, entity.getId().asString());
-                statement.setString(2, tag.getId().asString());
-                statement.execute();
+            if( entity.getTags() != null) {
+                for (Tag tag : entity.getTags()) {
+                    statement = dataSource.getConnection().prepareStatement(
+                            "INSERT INTO codemad.Question_Tag (idQuestion, idTag) VALUES (?, ?)");
+                    statement.setString(1, entity.getId().asString());
+                    statement.setString(2, tag.getId().asString());
+                    statement.execute();
+                }
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -83,7 +85,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
                         .author(rs.getString("username"))
                         .title(rs.getString("title"))
                         .text(rs.getString("text"))
-                        .idUser(new PersonId(rs.getString("idUser")))
+                        .userId(new PersonId(rs.getString("idUser")))
                         .tags(tags)
                         .build();
                 question.add(questionSearch);
@@ -119,7 +121,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
                         .author(rs.getString("username"))
                         .title(rs.getString("title"))
                         .text(rs.getString("text"))
-                        .idUser(new PersonId(rs.getString("idUser")))
+                        .userId(new PersonId(rs.getString("idUser")))
                         .tags(tags)
                         .build();
                 allQuestions.add(question);
@@ -144,7 +146,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
             return resultSetAsList(statement.executeQuery());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
+        }*/
         return new ArrayList<Question>();
     }
 

@@ -1,4 +1,4 @@
-package stackoverflow.application.identitymngmt;
+package stackoverflow.application.identitymngmt.login;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,7 +7,7 @@ import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 
 public class CurrentUserDTOTest {
     @Test
-    void iCanUseDTO(){
+    void iCanUseCurrentUserDTO(){
         CurrentUserDTO user = CurrentUserDTO.builder()
             .username("Rabbit")
             .email("alice.wonderland@gmail.com")

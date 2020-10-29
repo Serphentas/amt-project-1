@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Singular;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
 
 import java.util.List;
@@ -21,12 +22,11 @@ public class QuestionsDTO {
     @Setter
     @EqualsAndHashCode
     public static class QuestionDTO{
-        private UUID id;
-        private UUID idUser;
+        private QuestionId id;
+        private PersonId userId;
         private String author;
         private String title;
         private String text;
-        private boolean safeForChildren;
     }
 
     @Singular
