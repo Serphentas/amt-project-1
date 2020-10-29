@@ -25,9 +25,10 @@ public class QuestionPageServlet  extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         QuestionsDTO.QuestionDTO question = serviceReg.getQuestionFacade().getQuestionById( new QuestionId( req.getParameter("id")));
         req.setAttribute("question", question);
+        AnswersQuery query = AnswersQuery.builder().id(new QuestionId( req.getParameter("id"))).build();
+        AnswersDTO answers = serviceReg.getAnswerFacade().getAnswers(query);
+        req.setAttribute("answers", answers);
 
-
-        //AnswersDTO.AnswerDTO answer = serviceReg.getAnswerFacade().getAnswers(new AnswersQuery(req.getSession().getAttribute("question")).getId());
 
         req.getRequestDispatcher("/WEB-INF/view/question.jsp").forward(req, resp);
     }
