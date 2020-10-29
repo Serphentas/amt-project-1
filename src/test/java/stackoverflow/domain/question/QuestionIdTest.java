@@ -1,4 +1,4 @@
-package stackoverflow.domain;
+package stackoverflow.domain.question;
 
 import org.junit.jupiter.api.Test;
 import stackoverflow.domain.person.PersonId;
@@ -14,13 +14,14 @@ public class QuestionIdTest {
     @Test
     void iCanUseQuestionId(){
         QuestionId id = new QuestionId();
-        Question q = Question.builder()
+        Question question = Question.builder()
             .id(id)
+            .userId(new PersonId())
+            .author("author")
             .title("test")
             .text("test")
             .build();
-
-        assertEquals(id,q.getId());
+        assertEquals(id, question.getId());
     }
 
     @Test

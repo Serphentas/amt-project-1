@@ -1,10 +1,11 @@
 package stackoverflow.domain.tag;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import stackoverflow.domain.IEntity;
+import stackoverflow.domain.person.PersonId;
+import stackoverflow.domain.question.Question;
+import stackoverflow.domain.question.QuestionId;
+import stackoverflow.domain.question.QuestionType;
 
 @Getter
 @Setter
@@ -12,7 +13,9 @@ import stackoverflow.domain.IEntity;
 public class Tag implements IEntity<Tag, TagId> {
 
     @Setter(AccessLevel.NONE)
-    private TagId tagId;
+    @Builder.Default
+    private TagId tagId = new TagId();
+    @NonNull
     private String tag;
 
 
@@ -26,8 +29,7 @@ public class Tag implements IEntity<Tag, TagId> {
     public Tag deepClone() {
         return this.toBuilder()
                 .tagId(new TagId(tagId.asString()))
+                .tag(tag)
                 .build();
     }
-
-
 }

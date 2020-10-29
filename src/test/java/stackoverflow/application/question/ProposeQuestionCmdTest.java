@@ -1,17 +1,66 @@
 package stackoverflow.application.question;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import stackoverflow.domain.person.PersonId;
+import stackoverflow.domain.question.QuestionId;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProposeQuestionCmdTest {
+    @Test
+    public void questionIdShouldBeMandatory() {
+        assertThrows(java.lang.NullPointerException.class, () -> {
+            ProposeQuestionCmd.builder()
+                    .userId(new PersonId())
+                    .title("title")
+                    .text("question")
+                    .build();
+        });
+    }
 
     @Test
-    void defaultValuesAreProvided(){
-        ProposeQuestionCmd q = ProposeQuestionCmd.builder().build();
-        assertEquals("No title", q.getTitle());
-        assertEquals("No content", q.getText());
+    public void personIdShouldBeMandatory() {
+        assertThrows(java.lang.NullPointerException.class, () -> {
+            ProposeQuestionCmd.builder()
+                    .id(new QuestionId())
+                    .title("title")
+                    .text("question")
+                    .build();
+        });
+    }
+
+    @Test
+    public void textShouldBeMandatory() {
+        assertThrows(java.lang.NullPointerException.class, () -> {
+            ProposeQuestionCmd.builder()
+                    .id(new QuestionId())
+                    .userId(new PersonId())
+                    .title("title")
+                    .build();
+        });
+    }
+
+    @Test
+    public void titleShouldBeMandatory() {
+        assertThrows(java.lang.NullPointerException.class, () -> {
+            ProposeQuestionCmd.builder()
+                    .id(new QuestionId())
+                    .userId(new PersonId())
+                    .text("question")
+                    .build();
+        });
     }
 
 
+    @Test
+    public void tagsShouldBeNullByDefault() {
+        ProposeQuestionCmd cmd = ProposeQuestionCmd.builder()
+                .id(new QuestionId())
+                .userId(new PersonId())
+                .author("author")
+                .title("title")
+                .text("question")
+                .build();
+        assertEquals(null, cmd.getTags());
+    }
 }

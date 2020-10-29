@@ -111,3 +111,12 @@ Temporary Items
 
 # no node module
 node_modules/
+.classpath
+.project
+amt-project-1.ipr
+.settings/org.eclipse.core.resources.prefs
+.settings/org.eclipse.jdt.apt.core.prefs
+.settings/org.eclipse.jdt.core.prefs
+.settings/org.eclipse.m2e.core.prefs
+.vscode
+.factorypath

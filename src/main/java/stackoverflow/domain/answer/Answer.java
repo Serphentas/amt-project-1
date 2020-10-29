@@ -12,6 +12,7 @@ import stackoverflow.domain.question.QuestionId;
 public class Answer implements IEntity<Answer, AnswerId> {
 
     @Setter(AccessLevel.NONE)
+    @Builder.Default
     private AnswerId id = new AnswerId();
 
     private String author;
