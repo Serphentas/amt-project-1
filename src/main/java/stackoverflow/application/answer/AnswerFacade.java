@@ -1,6 +1,7 @@
 package stackoverflow.application.answer;
 
 import stackoverflow.domain.answer.Answer;
+import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.answer.IAnswerRepo;
 
 import java.util.Collection;
@@ -15,7 +16,6 @@ public class AnswerFacade {
 
     public void proposeAnswer(ProposeAnswerCmd command) {
         Answer submittedAnswer = Answer.builder()
-                .id(command.getId())
                 .personId(command.getPersonId())
                 .questionId(command.getQuestionId())
                 .text(command.getText())

@@ -15,7 +15,6 @@ public class VoteFacade {
 
     public void proposeVote(ProposeVoteCmd proposeVoteCmd){
         Vote vote = Vote.builder()
-                .voteId(proposeVoteCmd.getId())
                 .personId(proposeVoteCmd.getPersonId())
                 .questionId(proposeVoteCmd.getQuestionId())
                 //.commentId(proposeVoteCmd.getCommentId())

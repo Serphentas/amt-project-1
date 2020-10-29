@@ -14,8 +14,6 @@ import stackoverflow.domain.question.QuestionId;
 public class ProposeAnswerCmd {
 
     @NonNull
-    private AnswerId id;
-    @NonNull
     private QuestionId questionId;
     @NonNull
     private PersonId personId;

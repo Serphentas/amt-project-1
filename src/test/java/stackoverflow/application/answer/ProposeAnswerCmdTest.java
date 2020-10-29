@@ -10,21 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ProposeAnswerCmdTest {
 
     @Test
-    public void answerIdShouldBeMandatory() {
-        assertThrows(java.lang.NullPointerException.class, () -> {
-            ProposeAnswerCmd.builder()
-                .personId(new PersonId())
-                .questionId(new QuestionId())
-                .text("google it")
-                .build();
-        });
-    }
-
-    @Test
     public void questionIdShouldBeMandatory() {
         assertThrows(java.lang.NullPointerException.class, () -> {
             ProposeAnswerCmd.builder()
-                    .id(new AnswerId())
                     .personId(new PersonId())
                     .text("google it")
                     .build();
@@ -35,7 +23,6 @@ public class ProposeAnswerCmdTest {
     public void personIdShouldBeMandatory() {
         assertThrows(java.lang.NullPointerException.class, () -> {
             ProposeAnswerCmd.builder()
-                    .id(new AnswerId())
                     .questionId(new QuestionId())
                     .text("google it")
                     .build();
@@ -46,7 +33,6 @@ public class ProposeAnswerCmdTest {
     public void textIdShouldBeMandatory() {
         assertThrows(java.lang.NullPointerException.class, () -> {
             ProposeAnswerCmd.builder()
-                    .id(new AnswerId())
                     .personId(new PersonId())
                     .questionId(new QuestionId())
                     .build();

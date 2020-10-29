@@ -7,22 +7,11 @@ import stackoverflow.domain.question.QuestionId;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProposeQuestionCmdTest {
-    @Test
-    public void questionIdShouldBeMandatory() {
-        assertThrows(java.lang.NullPointerException.class, () -> {
-            ProposeQuestionCmd.builder()
-                    .userId(new PersonId())
-                    .title("title")
-                    .text("question")
-                    .build();
-        });
-    }
 
     @Test
     public void personIdShouldBeMandatory() {
         assertThrows(java.lang.NullPointerException.class, () -> {
             ProposeQuestionCmd.builder()
-                    .id(new QuestionId())
                     .title("title")
                     .text("question")
                     .build();
@@ -33,7 +22,6 @@ public class ProposeQuestionCmdTest {
     public void textShouldBeMandatory() {
         assertThrows(java.lang.NullPointerException.class, () -> {
             ProposeQuestionCmd.builder()
-                    .id(new QuestionId())
                     .userId(new PersonId())
                     .title("title")
                     .build();
@@ -44,7 +32,6 @@ public class ProposeQuestionCmdTest {
     public void titleShouldBeMandatory() {
         assertThrows(java.lang.NullPointerException.class, () -> {
             ProposeQuestionCmd.builder()
-                    .id(new QuestionId())
                     .userId(new PersonId())
                     .text("question")
                     .build();
@@ -55,7 +42,6 @@ public class ProposeQuestionCmdTest {
     @Test
     public void tagsShouldBeNullByDefault() {
         ProposeQuestionCmd cmd = ProposeQuestionCmd.builder()
-                .id(new QuestionId())
                 .userId(new PersonId())
                 .title("title")
                 .text("question")
