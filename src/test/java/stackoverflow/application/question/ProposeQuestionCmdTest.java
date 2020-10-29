@@ -57,6 +57,7 @@ public class ProposeQuestionCmdTest {
         ProposeQuestionCmd cmd = ProposeQuestionCmd.builder()
                 .id(new QuestionId())
                 .userId(new PersonId())
+                .author("author")
                 .title("title")
                 .text("question")
                 .build();
