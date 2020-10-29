@@ -1,5 +1,7 @@
 # Codemad
 
+![](img/homepage.jpg)
+
 ## Table of contents
 
 - [Introduction](#introduction)
@@ -21,11 +23,13 @@ The purpose of Codemad is to provide a simplified version of StackOverflow, with
   - Answer to questions
   - Comment on answer & questions
   - Vote on questions, answers, and comments
-  - Update its account information
+  - Update their account information
 
 This is provided with the use of Java EE APIs according to an MVC pattern, along with CodeceptJS to test the UI.
 
 ## Usage
+
+### Release
 
 The easiest way to run our app is with the bundled scripts:
 
@@ -39,17 +43,39 @@ Should you wish to use our development release, run:
 ./run_devs.sh
 ```
 
+and access the website at [http://localhost:9080](http://localhost:9080).
+
+### Development
+
+Simply run this from the repository root:
+
+```
+mvn liberty:dev
+```
+
+and access the website at [http://localhost:9080](http://localhost:9080).
+
 ## Repository structure
 
-- `Docker` - files required for Docker deployments
+- `.github/workflows` - GitHub Actions workflow definitions
+- `docker` - files required for Docker deployments
+  - `images` - service-specific Dockerfiles and dependencies
+  - `topologies` - stable and unstable docker-compose YAML files
 - `e2e` - UI tests (CodeceptJS)
-- `src` - app sources
+- `src` - application sources
+  - `main`
+    - `java/stackoverflow`
+      - `application` - business logic
+      - `domain` - model definitions
+      - `infrastructure/persistence` - JDBC-based and in-memory data repositories
+      - `ui/web` - servlets
+    - `liberty/config` - OpenLiberty configuration and dependencies
+    - `webapp` - front-end resources (JSP files and UI toolkits)
+  - `test` - JUnit files
 
 ## Workflow
 
 Unstable/development code belongs in [devs](https://github.com/AMT-Long-Du-Zboub/amt-project-1/tree/devs) while stable code is in [master](https://github.com/AMT-Long-Du-Zboub/amt-project-1/tree/master).
-
-Code is merged into `master` using PRs following associated issues, and a similar procedure is used for `devs` when dealing with feature branches.
 
 ## Authors
 

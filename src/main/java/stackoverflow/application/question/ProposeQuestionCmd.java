@@ -19,6 +19,8 @@ public class ProposeQuestionCmd {
     @NonNull
     private QuestionId id;
     @NonNull
+    private String author;
+    @NonNull
     private String title;
     @NonNull
     private String text;

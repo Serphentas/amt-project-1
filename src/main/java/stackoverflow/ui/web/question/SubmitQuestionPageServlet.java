@@ -20,6 +20,6 @@ public class SubmitQuestionPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/view/questions.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/view/submitQuestion.jsp").forward(req, resp);
     }
 }
