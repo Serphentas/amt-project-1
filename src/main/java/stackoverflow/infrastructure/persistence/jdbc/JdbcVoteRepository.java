@@ -143,10 +143,10 @@ public class JdbcVoteRepository implements IVoteRepo {
         try {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "INSERT INTO `codemad`.`Vote`(idVote, idUser, idCommentary) VALUES (?, ?, ?)");
+                    "INSERT INTO `codemad`.`Vote`(idVote, idUser, idComment) VALUES (?, ?, ?)");
             statement.setString(1, UUID.randomUUID().toString());
             statement.setString(2, personId.asString());
-            statement.setString(3, commentaryId.asString());
+            statement.setString(3, CommentId.asString());
             statement.execute();
 
         } catch (SQLException throwables) {
@@ -158,7 +158,7 @@ public class JdbcVoteRepository implements IVoteRepo {
     public boolean hasVotedComment(CommentId commentId, PersonId currentUser){
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "SELECT * FROM codemad.Vote WHERE idUser=? AND idCommentary=?");
+                    "SELECT * FROM codemad.Vote WHERE idUser=? AND idComment=?");
             statement.setString(1, currentUser.asString());
             statement.setString(2, commentId.asString());
             ResultSet rs = statement.executeQuery();
@@ -177,7 +177,7 @@ public class JdbcVoteRepository implements IVoteRepo {
     public int nbrVoteComment(CommentId commentId){
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "SELECT COUNT(Vote.idVote) AS nbrVote FROM codemad.Vote GROUP BY Vote.idCommentary HAVING idCommentary=?");
+                    "SELECT COUNT(Vote.idVote) AS nbrVote FROM codemad.Vote GROUP BY Vote.idComment HAVING idComment=?");
             statement.setString(1, commentId.asString());
 
             ResultSet rs = statement.executeQuery();
@@ -197,7 +197,7 @@ public class JdbcVoteRepository implements IVoteRepo {
         try {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "DELETE FROM `codemad`.`Vote` WHERE idUser=? AND idCommentary=?");
+                    "DELETE FROM `codemad`.`Vote` WHERE idUser=? AND idComment=?");
             statement.setString(1, personId.asString());
             statement.setString(2, commentId.asString());
             statement.execute();

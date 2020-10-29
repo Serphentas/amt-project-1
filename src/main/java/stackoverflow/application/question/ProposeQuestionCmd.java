@@ -16,10 +16,7 @@ import java.util.Collection;
 public class ProposeQuestionCmd {
     @NonNull
     private PersonId userId;
-    @NonNull
-    private QuestionId id;
-    @NonNull
-    private String author;
+
     @NonNull
     private String title;
     @NonNull
