@@ -4,10 +4,12 @@ import stackoverflow.application.answer.AnswerFacade;
 import stackoverflow.application.comment.CommentFacade;
 import stackoverflow.application.identitymngmt.IdentityMngmtFacade;
 import stackoverflow.application.question.QuestionFacade;
+import stackoverflow.application.vote.VoteFacade;
 import stackoverflow.domain.answer.IAnswerRepo;
 import stackoverflow.domain.comment.ICommentRepo;
 import stackoverflow.domain.person.IPersonRepo;
 import stackoverflow.domain.question.IQuestionRepo;
+import stackoverflow.domain.vote.IVoteRepo;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -27,6 +29,9 @@ public class ServiceReg {
     @Inject @Named("JdbcCommentRepository")
     ICommentRepo commentRepo;
 
+    @Inject @Named("JdbcVoteRepository")
+    IVoteRepo voteRepo;
+
     public IdentityMngmtFacade getIdentityMngmtFacade() {
         return new IdentityMngmtFacade(personRepo);
     }
@@ -41,5 +46,8 @@ public class ServiceReg {
 
     public CommentFacade getCommentFacade() {
         return new CommentFacade(commentRepo);
+
+    public VoteFacade getVoteFacade() {
+        return new VoteFacade(voteRepo);
     }
 }

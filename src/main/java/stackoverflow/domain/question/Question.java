@@ -18,8 +18,8 @@ public class Question implements IEntity<Question, QuestionId> {
     @NonNull
     private PersonId userId;
 
-    @NonNull
     private String author;
+
     @NonNull
     private String title;
     @NonNull
