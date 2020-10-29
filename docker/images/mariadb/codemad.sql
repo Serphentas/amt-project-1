@@ -77,29 +77,29 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `codemad`.`Commentary`
+-- Table `codemad`.`Comment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codemad`.`Commentary` (
-  `idCommentary` VARCHAR(36) NOT NULL,
+CREATE TABLE IF NOT EXISTS `codemad`.`Comment` (
+  `idComment` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
   `idAnswer` VARCHAR(36) NULL,
   `idQuestion` VARCHAR(36) NULL,
   `text` LONGTEXT NULL,
-  PRIMARY KEY (`idCommentary`, `idUser`),
-  INDEX `fk_Commentary_User1_idx` (`idUser` ASC) VISIBLE,
-  INDEX `fk_Commentary_Answer1_idx` (`idAnswer` ASC) VISIBLE,
-  INDEX `fk_Commentary_Question1_idx` (`idQuestion` ASC) VISIBLE,
-  CONSTRAINT `fk_Commentary_User1`
+  PRIMARY KEY (`idComment`, `idUser`),
+  INDEX `fk_Comment_User1_idx` (`idUser` ASC) VISIBLE,
+  INDEX `fk_Comment_Answer1_idx` (`idAnswer` ASC) VISIBLE,
+  INDEX `fk_Comment_Question1_idx` (`idQuestion` ASC) VISIBLE,
+  CONSTRAINT `fk_Comment_User1`
     FOREIGN KEY (`idUser`)
     REFERENCES `codemad`.`User` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Commentary_Answer1`
+  CONSTRAINT `fk_Comment_Answer1`
     FOREIGN KEY (`idAnswer`)
     REFERENCES `codemad`.`Answer` (`idAnswer`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Commentary_Question1`
+  CONSTRAINT `fk_Comment_Question1`
     FOREIGN KEY (`idQuestion`)
     REFERENCES `codemad`.`Question` (`idQuestion`)
     ON DELETE NO ACTION
@@ -114,12 +114,12 @@ CREATE TABLE IF NOT EXISTS `codemad`.`Vote` (
   `idVote` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
   `idQuestion` VARCHAR(36) NULL,
-  `idCommentary` VARCHAR(36) NULL,
+  `idComment` VARCHAR(36) NULL,
   `vote` TINYINT NULL,
   PRIMARY KEY (`idVote`, `idUser`),
   INDEX `fk_Vote_User1_idx` (`idUser` ASC) VISIBLE,
   INDEX `fk_Vote_Question1_idx` (`idQuestion` ASC) VISIBLE,
-  INDEX `fk_Vote_Commentary1_idx` (`idCommentary` ASC) VISIBLE,
+  INDEX `fk_Vote_Comment1_idx` (`idComment` ASC) VISIBLE,
   CONSTRAINT `fk_Vote_User1`
     FOREIGN KEY (`idUser`)
     REFERENCES `codemad`.`User` (`idUser`)
@@ -130,9 +130,9 @@ CREATE TABLE IF NOT EXISTS `codemad`.`Vote` (
     REFERENCES `codemad`.`Question` (`idQuestion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Vote_Commentary1`
-    FOREIGN KEY (`idCommentary`)
-    REFERENCES `codemad`.`Commentary` (`idCommentary`)
+  CONSTRAINT `fk_Vote_Comment1`
+    FOREIGN KEY (`idComment`)
+    REFERENCES `codemad`.`Comment` (`idComment`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
