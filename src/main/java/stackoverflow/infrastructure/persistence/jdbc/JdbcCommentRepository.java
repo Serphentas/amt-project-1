@@ -36,13 +36,16 @@ public class JdbcCommentRepository implements ICommentRepo {
     @Override
     public void save(Comment entity) {
         try {
-            PreparedStatement statement = getStatement(
-                    "INSERT INTO codemad.Comment (idComment, idUser, " +
-                    "idAnswer, idQuestion, text) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement statement = getStatement(String.format(
+                "INSERT INTO codemad.Comment (idComment, idUser, %s, text) VALUES (?, ?, ?, ?)",
+                entity.getIdQuestion() != null ? "idQuestion" : "idAnswer"
+            ));
             statement.setString(1, new CommentId().asString());
             statement.setString(2, entity.getIdUser().asString());
-            statement.setString(3, entity.getIdAnswer().asString());
-            statement.setString(4, entity.getIdQuestion().asString());
+            statement.setString(3, (entity.getIdQuestion() != null ?
+                    entity.getIdQuestion(): entity.getIdAnswer()
+                ).asString()
+            );
             statement.setString(5, entity.getText());
             statement.execute();
         } catch (SQLException throwables) {
@@ -66,7 +69,8 @@ public class JdbcCommentRepository implements ICommentRepo {
     public Optional<Comment> findById(CommentId id) {
         try {
             PreparedStatement statement = getStatement(
-                    "SELECT * codemad.Comment WHERE idComment=?");
+                "SELECT Comment.idComment, Comment.idUser, Comment.idQuestion, Comment.idAnswer, Comment.text, User.username " +
+                "FROM codemad.Comment JOIN codemad.User ON User.idUser = Comment.idUser WHERE idComment = ?");
             statement.setString(1, id.asString());
 
             ArrayList<Comment> comments = new ArrayList<>();
@@ -78,6 +82,7 @@ public class JdbcCommentRepository implements ICommentRepo {
                     .idUser(new PersonId(rs.getString("idUser")))
                     .idAnswer(new AnswerId(rs.getString("idAnswer")))
                     .idQuestion(new QuestionId(rs.getString("idQuestion")))
+                    .author(rs.getString("author"))
                     .text(rs.getString("text"))
                     .build()
                 );
@@ -103,7 +108,8 @@ public class JdbcCommentRepository implements ICommentRepo {
     public Collection<Comment> findByQuestion(CommentQuery query) {
         try {
             PreparedStatement statement = getStatement(
-                "SELECT * FROM Comment WHERE idComment=?"
+                "SELECT Comment.idComment, Comment.idUser, Comment.idQuestion, Comment.text, User.username " +
+                "FROM codemad.Comment JOIN codemad.User ON User.idUser = Comment.idUser WHERE idQuestion = ?"
             );
             statement.setString(1, query.getIdQuestion().toString());
 
@@ -118,7 +124,8 @@ public class JdbcCommentRepository implements ICommentRepo {
     public Collection<Comment> findByAnswer(CommentQuery query) {
         try {
             PreparedStatement statement = getStatement(
-                "SELECT * FROM Comment WHERE idAnswer=?"
+                "SELECT Comment.idComment, Comment.idUser, Comment.idAnswer, Comment.text, User.username " +
+                "FROM codemad.Comment JOIN codemad.User ON User.idUser = Comment.idUser WHERE idAnswer = ?"
             );
             statement.setString(1, query.getIdAnswer().toString());
 
@@ -142,6 +149,7 @@ public class JdbcCommentRepository implements ICommentRepo {
                 .idAnswer(new AnswerId(rs.getString("idAnswer")))
                 .idQuestion(new QuestionId(rs.getString("idQuestion")))
                 .idUser(new PersonId(rs.getString("idUser")))
+                .author(rs.getString("author"))
                 .text(rs.getString("text"))
                 .build()
             );

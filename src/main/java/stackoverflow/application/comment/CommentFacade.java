@@ -41,6 +41,7 @@ public class CommentFacade {
                 .idQuestion(c.getIdQuestion())
                 .idUser(c.getIdUser())
                 .text(c.getText())
+                .author(c.getAuthor())
                 .build()
             ).collect(Collectors.toList()))
         .build();

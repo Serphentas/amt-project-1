@@ -27,6 +27,7 @@ public class CommentsDTO {
         private AnswerId idAnswer;
         private QuestionId idQuestion;
         private String text;
+        private String author;
     }
 
     @Singular

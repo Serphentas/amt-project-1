@@ -19,6 +19,7 @@ public class Comment implements IEntity<Comment, CommentId> {
     private QuestionId idQuestion;
 
     private String text;
+    private String author;
 
     @Override
     public Comment deepClone() {
@@ -49,7 +50,11 @@ public class Comment implements IEntity<Comment, CommentId> {
                 throw new IllegalArgumentException("Text is mandatory for comments.");
             }
 
-            return new Comment(id, idUser, idAnswer, idQuestion, text);
+            if (author == null || author.length() == 0) {
+                throw new IllegalArgumentException("Author is mandatory for comments.");
+            }
+
+            return new Comment(id, idUser, idAnswer, idQuestion, text, author);
         }
     }
 }
