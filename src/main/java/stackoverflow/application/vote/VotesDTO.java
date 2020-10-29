@@ -21,7 +21,7 @@ public class VotesDTO {
         private boolean vote;
         private PersonId personId;
         private QuestionId questionId;
-        //todo à décomenter quand commentary est là
+        //todo à décommenter quand commentary est là
         //private CommentId commentId;
     }
 

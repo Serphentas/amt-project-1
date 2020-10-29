@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @ApplicationScoped
 @Named("JdbcVoteRepository")
-public class JdbcVoteRepository implements IVoteRepo {
+public class    JdbcVoteRepository implements IVoteRepo {
     @Resource(lookup = "jdbc/StackOverFlowDS")
     DataSource dataSource;
 

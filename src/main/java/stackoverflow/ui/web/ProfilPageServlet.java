@@ -1,5 +1,8 @@
 package stackoverflow.ui.web;
 
+import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
+import stackoverflow.domain.question.QuestionId;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +16,8 @@ public class ProfilPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
+        req.setAttribute("currentUser", currentUser);
         req.getRequestDispatcher("/WEB-INF/view/profil.jsp").forward(req, resp);
     }
 }

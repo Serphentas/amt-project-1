@@ -11,5 +11,5 @@ import stackoverflow.domain.question.QuestionId;
 public class AnswersQuery {
 
     @Builder.Default
-    private QuestionId id = null;
+    public QuestionId id = null;
 }
