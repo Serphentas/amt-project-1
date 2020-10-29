@@ -136,13 +136,12 @@ public class JdbcQuestionRepository implements IQuestionRepo {
 
     @Override
     public Collection<Question> find(QuestionsQuery query) {
-        /*try {
-            PreparedStatement statement = getStatement(query.isSafeForChildren() ?
-                "SELECT * FROM codemad.Question WHERE title LIKE '%?%' AND text NOT LIKE '%?%'" :
-                "SELECT * FROM codemad.Question WHERE title LIKE '%?%' AND text LIKE '%?%'"
+        try {
+            PreparedStatement statement = getStatement(String.format(
+                "SELECT * FROM codemad.Question WHERE title LIKE 'POURCENT%sPOURCENT'",
+                    query.getTitle()
+                ).replaceAll("POURCENT", "%")
             );
-            statement.setString(1, query.getTitle());
-            statement.setString(2, query.isSafeForChildren() ? "sex" : query.getText());
 
             return resultSetAsList(statement.executeQuery());
         } catch (SQLException throwables) {
