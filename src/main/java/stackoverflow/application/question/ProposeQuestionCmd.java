@@ -15,7 +15,7 @@ import java.util.Collection;
 @EqualsAndHashCode
 public class ProposeQuestionCmd {
     @NonNull
-    private PersonId idUser;
+    private PersonId userId;
     @NonNull
     private QuestionId id;
     @NonNull

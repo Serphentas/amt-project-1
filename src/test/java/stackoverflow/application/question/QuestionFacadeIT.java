@@ -3,26 +3,19 @@ package stackoverflow.application.question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import stackoverflow.application.question.QuestionsDTO.QuestionDTO;
-import stackoverflow.application.question.ProposeQuestionCmd;
-import stackoverflow.application.question.QuestionFacade;
-import stackoverflow.application.question.QuestionsDTO;
-import stackoverflow.application.question.QuestionsQuery;
 import stackoverflow.domain.person.PersonId;
-import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.domain.question.QuestionId;
-import stackoverflow.infrastructure.persistence.memory.MemoryQuestionRepo;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class QuestionFacadeIT {
-
+/*
     private QuestionFacade questionFacade;
     private QuestionId id;
     private ProposeQuestionCmd cmd;
 
     @BeforeEach
-    void setupQuestionFacade(){
+    void setupQuestionFacade() {
         this.questionFacade = new QuestionFacade( new MemoryQuestionRepo());
         id = new QuestionId("1c40316e-163d-11eb-adc1-0242ac120002");
     }
@@ -31,7 +24,7 @@ public class QuestionFacadeIT {
     void iCanUseProposeQuestion() {
         cmd = ProposeQuestionCmd.builder()
             .id( id)
-            .idUser( new PersonId())
+            .userId( new PersonId())
             .title("test")
             .text("Bla bla bla")
             .build();
@@ -66,9 +59,5 @@ public class QuestionFacadeIT {
         iCanUseProposeQuestion();
         //todo
     }
-
-    @Test
-    void iCanUseQuestionListAsDTOList() {
-        //todo est ce que cette fonction est utile? et est elle au bon endroit?
-    }
+ */
 }

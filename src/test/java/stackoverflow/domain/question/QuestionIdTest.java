@@ -1,6 +1,7 @@
 package stackoverflow.domain.question;
 
 import org.junit.jupiter.api.Test;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
 
@@ -15,10 +16,11 @@ public class QuestionIdTest {
         QuestionId id = new QuestionId();
         Question question = Question.builder()
             .id(id)
+            .userId(new PersonId())
+            .author("author")
             .title("test")
             .text("test")
             .build();
-
         assertEquals(id, question.getId());
     }
 

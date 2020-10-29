@@ -13,50 +13,25 @@ import java.util.Collection;
 @Builder(toBuilder = true)
 public class Question implements IEntity<Question, QuestionId> {
 
+    @NonNull
     private QuestionId id;
-    private PersonId idUser;
+    @NonNull
+    private PersonId userId;
 
+    @NonNull
     private String author;
+    @NonNull
     private String title;
+    @NonNull
     private String text;
 
-    private Collection<Tag> tags;
-
-    private QuestionType questionType;
-
-    public void categorizeAs(QuestionType questionType){ this.questionType = questionType; }
+    @Builder.Default
+    private Collection<Tag> tags = null;
 
     @Override
     public Question deepClone() {
         return this.toBuilder()
             .id(new QuestionId(id.asString()))
             .build();
-    }
-
-    public static class QuestionBuilder {
-
-        public Question build(){
-            if(id == null) {
-                id = new QuestionId();
-            }
-
-            if(text == null || text.isEmpty()){
-                throw new IllegalArgumentException("Text is mandatory");
-            }
-
-            if(title == null || title.isEmpty()){
-                throw new IllegalArgumentException("Title is mandatory");
-            }
-
-            if(questionType == null){
-                questionType = QuestionType.UNCLASSIFIED;
-            }
-
-            if(text.contains("sex")){
-                questionType = QuestionType.ADULT;
-            }
-
-            return new Question(id, idUser, author, title, text, tags, questionType);
-        }
     }
 }

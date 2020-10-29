@@ -6,10 +6,8 @@ import stackoverflow.application.identitymngmt.authenticate.ProposeAuthenticateC
 import stackoverflow.application.identitymngmt.authenticate.AuthenticateFailedException;
 import stackoverflow.application.identitymngmt.login.ProposeRegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
-import stackoverflow.infrastructure.persistence.memory.MemoryPersonRepo;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 
 public class IdentityMngmtFacadeTest {
 /*
@@ -21,8 +19,8 @@ public class IdentityMngmtFacadeTest {
     }
 
     //todo comment utiliser cette stratégie avec un datasource?
-    */
-
+*/
+/*
     private IdentityMngmtFacade identityMngmtFacade;
 
     @BeforeEach
@@ -102,5 +100,5 @@ public class IdentityMngmtFacadeTest {
         assertThrows(AuthenticateFailedException.class, () -> {
             identityMngmtFacade.authenticate(cmd);
         });
-    }
+    }*/
 }
