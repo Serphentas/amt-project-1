@@ -23,42 +23,14 @@ public class QuestionFacade {
             .id(command.getId())
             .title(command.getTitle())
             .text(command.getText())
-            .idUser(command.getIdUser())
+            .userId(command.getUserId())
             .tags(command.getTags())
             .build()
         );
     }
 
     public QuestionsDTO getQuestions(QuestionsQuery query){
-        Collection<Question> allQuestions = questionRepository.find(query);
-
-        List<QuestionsDTO.QuestionDTO> allQuestionsDTO;
-
-        if (query.getText().contains("sex")) {
-            allQuestionsDTO = new ArrayList<>();
-            for (Question q: allQuestions) {
-                if (q.getQuestionType() != QuestionType.ADULT) {
-                    allQuestionsDTO.add(QuestionsDTO.QuestionDTO.builder()
-                        .title(q.getTitle())
-                        .text(q.getText())
-                        .build()
-                    );
-                }
-            }
-        } else {
-            allQuestionsDTO = allQuestions.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
-                .id(UUID.fromString(question.getId().asString()))
-                .title(question.getTitle())
-                .text(question.getText())
-                .safeForChildren(!question.getText().contains("sex"))
-                .build()
-            ).collect(Collectors.toList());
-        }
-
-        return QuestionsDTO.builder()
-                .questions(allQuestionsDTO)
-                .build();
-
+        return questionListAsDTOList(questionRepository.find(query));
     }
 
     public QuestionsDTO.QuestionDTO getQuestionById(QuestionId id){
@@ -67,7 +39,7 @@ public class QuestionFacade {
             return null;
         return QuestionsDTO.QuestionDTO.builder()
                 .text(question.getText())
-                .id(UUID.fromString(question.getId().asString()))
+                .id(question.getId())
                 .title(question.getTitle())
                 .build();
     }
@@ -79,10 +51,9 @@ public class QuestionFacade {
     private QuestionsDTO questionListAsDTOList(Collection<Question> qList) {
         return QuestionsDTO.builder()
             .questions(qList.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
-                .id(UUID.fromString(question.getId().asString()))
+                .id(question.getId())
                 .title(question.getTitle())
                 .text(question.getText())
-                .safeForChildren(!question.getText().contains("sex"))
                 .build()
             ).collect(Collectors.toList()))
         .build();

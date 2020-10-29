@@ -1,19 +1,21 @@
 package stackoverflow.domain.vote;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import stackoverflow.domain.IEntity;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
+import stackoverflow.domain.tag.Tag;
+import stackoverflow.domain.tag.TagId;
 
 @Getter
 @Setter
 @Builder(toBuilder = true)
 public class Vote implements IEntity<Vote, VoteId> {
+
     @Setter(AccessLevel.NONE)
-    private VoteId voteId;
+    @Builder.Default
+    private VoteId voteId = new VoteId();
+    @NonNull
     private PersonId personId;
 
     @Builder.Default
@@ -31,7 +33,7 @@ public class Vote implements IEntity<Vote, VoteId> {
         return this.toBuilder()
                 .voteId(new VoteId(voteId.asString()))
                 .personId(new PersonId(personId.asString()))
-                .questionId(new QuestionId(questionId.asString()))
                 .build();
     }
+
 }

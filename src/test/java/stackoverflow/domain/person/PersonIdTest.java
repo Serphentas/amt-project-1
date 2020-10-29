@@ -1,4 +1,4 @@
-package stackoverflow.domain;
+package stackoverflow.domain.person;
 
 import org.junit.jupiter.api.Test;
 import stackoverflow.domain.person.Person;
@@ -12,7 +12,7 @@ public class PersonIdTest {
     @Test
     void iCanUsePersonId(){
         PersonId id = new PersonId();
-        Person p = Person.builder()
+        Person person = Person.builder()
             .id(id)
             .username("Rabbit")
             .email("alice.wonderland@gmail.com")
@@ -21,7 +21,7 @@ public class PersonIdTest {
             .clearTextPassword("abcd")
             .build();
 
-        assertEquals(id,p.getId());
+        assertEquals(id, person.getId());
     }
 
     @Test

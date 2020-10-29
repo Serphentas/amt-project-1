@@ -20,14 +20,11 @@ public class QuestionsQuery {
     private UUID idUser = null;
 
     @Builder.Default
-    private String author = "No author";
+    private String author = null;
 
     @Builder.Default
-    private String title = "No title";
+    private String title = null;
 
     @Builder.Default
-    private String text = "No text";
-
-    @Builder.Default
-    private boolean safeForChildren = true;
+    private String text = null;
 }

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name="SubmitQuestionCmdServlet", urlPatterns = "/submitQuestion.do")
+@WebServlet(name="SubmitQuestionCommandServlet", urlPatterns = "/submitQuestion.do")
 public class ProposeQuestionCmdServlet extends HttpServlet {
 
     @Inject
@@ -27,13 +27,12 @@ public class ProposeQuestionCmdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
         ProposeQuestionCmd command = ProposeQuestionCmd.builder()
-                .idUser(currentUser.getId())
+                .userId(currentUser.getId())
                 .title(req.getParameter("title"))
                 .text(req.getParameter("text"))
                 .id(new QuestionId())
-                .tags(new ArrayList<Tag>())//todo à mettre les vrai tags
                 .build();
-        // questionFacade.proposeQuestion(command);
+        serviceReg.getQuestionFacade().proposeQuestion(command);
         resp.sendRedirect("/questions");
     }
 }
