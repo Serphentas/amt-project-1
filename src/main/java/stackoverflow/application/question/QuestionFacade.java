@@ -67,7 +67,7 @@ public class QuestionFacade {
             return null;
         return QuestionsDTO.QuestionDTO.builder()
                 .text(question.getText())
-                .id(UUID.fromString(question.getId().asString()))
+                .id(question.getId())
                 .title(question.getTitle())
                 .build();
     }
@@ -79,10 +79,9 @@ public class QuestionFacade {
     private QuestionsDTO questionListAsDTOList(Collection<Question> qList) {
         return QuestionsDTO.builder()
             .questions(qList.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
-                .id(UUID.fromString(question.getId().asString()))
+                .id(question.getId())
                 .title(question.getTitle())
                 .text(question.getText())
-                .safeForChildren(!question.getText().contains("sex"))
                 .build()
             ).collect(Collectors.toList()))
         .build();

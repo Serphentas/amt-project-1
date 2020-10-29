@@ -7,7 +7,6 @@ import stackoverflow.domain.answer.IAnswerRepo;
 import stackoverflow.domain.person.IPersonRepo;
 import stackoverflow.domain.question.IQuestionRepo;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;

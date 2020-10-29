@@ -1,4 +1,4 @@
-package stackoverflow.infrastructure;
+package stackoverflow.infrastructure.persistence.memory;
 
 import stackoverflow.domain.person.Person;
 import stackoverflow.infrastructure.persistence.exception.IntegrityConstraintViolationException;

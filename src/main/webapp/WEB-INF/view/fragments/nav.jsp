@@ -22,7 +22,7 @@
                         <a href="<c:url value="/submitQuestion"/>" class="dropdown-item">
                             <i class="material-icons">layers</i> Ask your questions
                         </a>
-                        <a href="<c:url value="/questionsList"/>" class="dropdown-item">
+                        <a href="<c:url value="/questions"/>" class="dropdown-item">
                             <i class="material-icons">article</i> View questions list
                         </a>
                         <a href="<c:url value="/profil"/>" class="dropdown-item">

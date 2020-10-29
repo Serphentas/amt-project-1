@@ -1,4 +1,4 @@
-package stackoverflow.infrastructure;
+package stackoverflow.infrastructure.persistence.memory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
