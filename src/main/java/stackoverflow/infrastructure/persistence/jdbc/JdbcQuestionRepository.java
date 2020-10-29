@@ -38,7 +38,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
         try {
             PreparedStatement statement = getStatement(
                     "INSERT INTO codemad.Question (idQuestion, idUser, title, text) VALUES (?, ?, ?, ?)");
-            statement.setString(1, UUID.randomUUID().toString());
+            statement.setString(1, entity.getId().toString());
             statement.setString(2, entity.getUserId().asString());
             statement.setString(3, entity.getTitle());
             statement.setString(4, entity.getText());

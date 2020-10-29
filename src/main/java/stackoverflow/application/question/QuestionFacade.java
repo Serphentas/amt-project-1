@@ -21,6 +21,7 @@ public class QuestionFacade {
     public void proposeQuestion(ProposeQuestionCmd command){
         questionRepository.save(Question.builder()
             .id(command.getId())
+            .author(command.getAuthor())
             .title(command.getTitle())
             .text(command.getText())
             .userId(command.getUserId())
