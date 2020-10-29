@@ -17,12 +17,14 @@
 <body>
 
 <h1>Titre : ${question.title}</h1>
-<p> Contenu : ${question.content}</p>
-<p> Votes : ${votes}</p>
+<p> Contenu : ${question.text}</p>
+<p> Votes : ${votes} </p>
 
-<c:forEach var="answer" items="${answers}">
+<c:forEach var="answer" items="${answers.answers}">
     <div>${answer.text}</div>
 </c:forEach>
+
+
 
 </body>
 </html>
