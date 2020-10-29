@@ -17,7 +17,7 @@ import java.security.spec.KeySpec;
 public class Person implements IEntity<Person, PersonId>{
 
     @Setter(AccessLevel.NONE)
-    private PersonId id = new PersonId();
+    private PersonId id;
 
     private String username;
     private String email;
