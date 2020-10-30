@@ -19,7 +19,9 @@
             <div class="row">
                 <div class="col-md-8 ml-auto mr-auto">
                     <div class="brand text-center text-light">
-                        <h1 class="description text-center text-light text-capitalize">Question</h1>
+                        <h1 class="description text-center text-light text-capitalize">
+                            Question
+                        </h1>
                     </div>
                 </div>
             </div>
@@ -29,17 +31,19 @@
         <div class="container">
             <div class="section">
                 <div class="alert alert-secondary" role="alert">
-                    <a class="nav-link" role="tab" data-toggle="tab">
-                    <h3 class="description text-left text-uppercase font-weight-bold text-dark">${question.title}</h3>
-                    <p class="description text-left text-dark"><i class="fas fa-comment-dots"></i> ${question.text}</p><br>
+                    <h3 class="description text-left text-uppercase font-weight-bold text-dark">
+                        <i class="fas fa-question"></i>
+                        ${question.title}
+                    </h3>
+                    <p class="description text-left text-dark">${question.text}</p><br>
                     <p class="description text-left text-dark">
                         <i class="fas fa-signal"></i> Votes: ${votes}
                         <c:choose>
                             <c:when test="${currentUser != null}">
-                                <a href="/submitVote.do?id=${question.id.asString()}&entity=question" type="button" class="btn btn-primary btn-sm" type="submit">
+                                <a href="/submitVote.do?id=${question.id.asString()}&entity=question&qId=${question.id.asString()}" type="button" class="btn btn-primary btn-sm" type="submit">
                                     <c:choose>
                                         <c:when test="${hasVoted == true}">
-                                            Downvote
+                                            Undo vote
                                         </c:when>
                                         <c:otherwise>
                                             Upvote
@@ -53,25 +57,6 @@
                         </c:choose>
                     </p>
 
-                    <h3><u>Comments</u></h3>
-                    <c:choose>
-                        <c:when test="${comments.comments.size() > 0}">
-                            <c:forEach var="comment" items="${comments.comments}">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="description text-left text-dark ">
-                                            <i class="fas fa-comment-alt"></i> <i>${comment.author}</i> - ${comment.text}
-                                        </p>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-                            <h3><b>None yet</b></h3>
-                        </c:otherwise>
-                    </c:choose>
-
-
                     <h3><u>Answers</u></h3>
                     <c:choose>
                         <c:when test="${answers.answers.size() > 0}">
@@ -79,7 +64,11 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="description text-left text-dark ">
-                                            <i class="fas fa-hand-pointer"></i> <i>${answer.author}</i> - ${answer.text}
+                                            <i class="fas fa-info"></i> <i>${answer.author}</i> - ${answer.text} - ${answer.votes}
+                                            <a href="/submitVote.do?id=${answer.id.asString()}&entity=answer&qId=${question.id.asString()}" type="button" class="btn btn-primary btn-sm" type="submit">
+                                                <i class="fas fa-hand-point-up"></i>
+                                                <i class="fas fa-hand-point-down"></i>
+                                            </a>
                                         </p>
                                     </div>
                                 </div>
@@ -90,6 +79,27 @@
                         </c:otherwise>
                     </c:choose>
 
+                    <h3><u>Comments</u></h3>
+                    <c:choose>
+                        <c:when test="${comments.comments.size() > 0}">
+                            <c:forEach var="comment" items="${comments.comments}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="description text-left text-dark ">
+                                            <i class="fas fa-comment-alt"></i> <i>${comment.author}</i> - ${comment.text} - ${comment.votes}
+                                            <a href="/submitVote.do?id=${comment.id.asString()}&entity=comment&qId=${question.id.asString()}" type="button" class="btn btn-primary btn-sm" type="submit">
+                                                <i class="fas fa-hand-point-up"></i>
+                                                <i class="fas fa-hand-point-down"></i>
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <h3><b>None yet</b></h3>
+                        </c:otherwise>
+                    </c:choose>
 
                     <div class="row">
                         <div class="col-md-12">

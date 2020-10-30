@@ -6,12 +6,15 @@ import java.util.stream.Collectors;
 import stackoverflow.domain.comment.Comment;
 import stackoverflow.domain.comment.CommentId;
 import stackoverflow.domain.comment.ICommentRepo;
+import stackoverflow.domain.vote.IVoteRepo;
 
 public class CommentFacade {
     private ICommentRepo commentRepo;
+    private IVoteRepo voteRepo;
 
-    public CommentFacade(ICommentRepo commentRepo) {
+    public CommentFacade(ICommentRepo commentRepo, IVoteRepo voteRepo) {
         this.commentRepo = commentRepo;
+        this.voteRepo = voteRepo;
     }
 
     public void proposeComment(ProposeCommentCmd cmd) {
@@ -42,6 +45,7 @@ public class CommentFacade {
                 .personId(c.getPersonId())
                 .text(c.getText())
                 .author(c.getAuthor())
+                .votes(voteRepo.nbrVoteComment(c.getId()))
                 .build()
             ).collect(Collectors.toList()))
         .build();

@@ -16,19 +16,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
 
-@WebServlet(name="SubmitVoteCmdServlet", urlPatterns = "/submitVote.do")
-public class ProposeVoteCmdServlet extends HttpServlet {
+@WebServlet(name="SubmitVoteServlet", urlPatterns = "/submitVote.do")
+public class SubmitVoteServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String idParam = req.getParameter("id");
+        String id = req.getParameter("id");
+        String qId = req.getParameter("qId");
+        String entity = req.getParameter("entity");
 
         // if ID malformed or not given, redirect to homepage
         try {
-            UUID.fromString(idParam);
+            UUID.fromString(id);
         } catch (IllegalArgumentException | NullPointerException ex) {
             resp.sendRedirect("/");
             return;
@@ -36,11 +38,8 @@ public class ProposeVoteCmdServlet extends HttpServlet {
 
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
 
-        QuestionId questionId = null;
-        CommentId commentId = null;
-
-        if(req.getParameter("entity").equals("question")) {
-            questionId = new QuestionId(req.getParameter("id"));
+        if(entity.equals("question")) {
+            QuestionId questionId = new QuestionId(id);
 
             if (serviceReg.getVoteFacade().hasVotedQuestion(questionId, currentUser.getId())) {
                 serviceReg.getVoteFacade().unvoteForQuestion(questionId, currentUser.getId());
@@ -51,9 +50,8 @@ public class ProposeVoteCmdServlet extends HttpServlet {
                     .build()
                 );
             }
-        }
-        else {
-            commentId = new CommentId(req.getParameter("id"));
+        } else if (entity.equals("comment")) {
+            CommentId commentId = new CommentId(id);
 
             if (serviceReg.getVoteFacade().hasVotedComment(commentId, currentUser.getId())) {
                 serviceReg.getVoteFacade().unvoteForComment(commentId, currentUser.getId());
@@ -64,8 +62,20 @@ public class ProposeVoteCmdServlet extends HttpServlet {
                     .build()
                 );
             }
+        } else if (entity.equals("answer")) {
+            AnswerId answerId = new AnswerId(id);
+
+            if (serviceReg.getVoteFacade().hasVotedAnswer(answerId, currentUser.getId())) {
+                serviceReg.getVoteFacade().unvoteForAnswer(answerId, currentUser.getId());
+            } else {
+                serviceReg.getVoteFacade().proposeVote(ProposeVoteCmd.builder()
+                    .answerId(answerId)
+                    .personId(currentUser.getId())
+                    .build()
+                );
+            }
         }
 
-        resp.sendRedirect("/question?id=" + questionId.asString());
+        resp.sendRedirect("/question?id=" + qId);
     }
 }

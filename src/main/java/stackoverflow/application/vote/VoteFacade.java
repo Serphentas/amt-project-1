@@ -1,5 +1,6 @@
 package stackoverflow.application.vote;
 
+import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.comment.CommentId;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
@@ -17,10 +18,18 @@ public class VoteFacade {
     public void proposeVote(ProposeVoteCmd proposeVoteCmd){
         Vote vote = Vote.builder()
                 .personId(proposeVoteCmd.getPersonId())
+                .answerId(proposeVoteCmd.getAnswerId())
                 .questionId(proposeVoteCmd.getQuestionId())
                 .commentId(proposeVoteCmd.getCommentId())
                 .build();
         voteRepo.toggle(vote);
+    }
+
+    public boolean hasVotedAnswer(AnswerId answerId, PersonId currentUser){
+        return voteRepo.hasVotedAnswer(answerId, currentUser);
+    }
+    public int nbrVoteAnswer(AnswerId answerId){
+        return voteRepo.nbrVoteAnswer(answerId);
     }
 
     public boolean hasVotedQuestion(QuestionId questionId, PersonId currentUser){
@@ -36,6 +45,10 @@ public class VoteFacade {
 
     public int nbrVoteComment(CommentId commentId){
         return voteRepo.nbrVoteComment(commentId);
+    }
+
+    public void unvoteForAnswer(AnswerId answerId, PersonId personId) {
+        voteRepo.unvoteForAnswer(answerId, personId);
     }
 
     public void unvoteForQuestion(QuestionId questionId, PersonId personId) {

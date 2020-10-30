@@ -27,6 +27,7 @@ public class QuestionsDTO {
         private String author;
         private String title;
         private String text;
+        private int votes;
     }
 
     @Singular

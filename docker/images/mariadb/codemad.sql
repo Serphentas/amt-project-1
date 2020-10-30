@@ -113,16 +113,23 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `codemad`.`Vote` (
   `idVote` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
+  `idAnswer` VARCHAR(36) NULL,
   `idQuestion` VARCHAR(36) NULL,
   `idComment` VARCHAR(36) NULL,
   `vote` TINYINT NULL,
   PRIMARY KEY (`idVote`, `idUser`),
   INDEX `fk_Vote_User1_idx` (`idUser` ASC) VISIBLE,
+  INDEX `fk_Vote_Answer1_idx` (`idAnswer` ASC) VISIBLE,
   INDEX `fk_Vote_Question1_idx` (`idQuestion` ASC) VISIBLE,
   INDEX `fk_Vote_Comment1_idx` (`idComment` ASC) VISIBLE,
   CONSTRAINT `fk_Vote_User1`
     FOREIGN KEY (`idUser`)
     REFERENCES `codemad`.`User` (`idUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Vote_Answer1_idx`
+    FOREIGN KEY (`idAnswer`)
+    REFERENCES `codemad`.`Answer` (`idAnswer`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Vote_Question1`

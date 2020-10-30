@@ -28,6 +28,7 @@ public class CommentsDTO {
         @NonNull
         private String text;
         private String author;
+        private int votes;
     }
 
     @Singular

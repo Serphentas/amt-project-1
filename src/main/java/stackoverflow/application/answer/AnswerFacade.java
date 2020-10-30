@@ -5,6 +5,7 @@ import stackoverflow.domain.answer.Answer;
 import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.answer.IAnswerRepo;
 import stackoverflow.domain.question.Question;
+import stackoverflow.domain.vote.IVoteRepo;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,8 +14,12 @@ import java.util.stream.Collectors;
 public class AnswerFacade {
 
     private IAnswerRepo answerRepo;
+    private IVoteRepo voteRepo;
 
-    public AnswerFacade(IAnswerRepo answerRepo){ this.answerRepo = answerRepo; }
+    public AnswerFacade(IAnswerRepo answerRepo, IVoteRepo voteRepo){
+        this.answerRepo = answerRepo;
+        this.voteRepo = voteRepo;
+    }
 
     public void proposeAnswer(ProposeAnswerCmd command) {
         Answer submittedAnswer = Answer.builder()
@@ -40,8 +45,10 @@ public class AnswerFacade {
         Collection<Answer> allAnswers = answerRepo.find(query);
 
         List<AnswersDTO.AnswerDTO> allAnswersDTO = allAnswers.stream().map( answer -> AnswersDTO.AnswerDTO.builder()
+            .id(answer.getId())
             .text(answer.getText())
             .author(answer.getAuthor())
+            .votes(voteRepo.nbrVoteAnswer(answer.getId()))
         .build()
         ).collect(Collectors.toList());
 

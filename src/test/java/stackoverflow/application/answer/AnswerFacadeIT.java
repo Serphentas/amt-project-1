@@ -9,6 +9,7 @@ import stackoverflow.domain.person.Person;
 import stackoverflow.domain.question.Question;
 import stackoverflow.infrastructure.persistence.helper.DataSourceProvider;
 import stackoverflow.infrastructure.persistence.jdbc.JdbcAnswerRepository;
+import stackoverflow.infrastructure.persistence.jdbc.JdbcVoteRepository;
 
 import javax.security.enterprise.credential.CallerOnlyCredential;
 import javax.sql.DataSource;
@@ -74,7 +75,7 @@ public class AnswerFacadeIT {
         statement.setString(2, author.getId().asString());
         statement.execute();
 
-        answerFacade = new AnswerFacade( new JdbcAnswerRepository(ds));
+        answerFacade = new AnswerFacade( new JdbcAnswerRepository(ds), new JdbcVoteRepository(ds));
     }
 
     @AfterAll

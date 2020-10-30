@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Singular;
+import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.comment.CommentId;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
@@ -21,6 +22,7 @@ public class VotesDTO {
     public static class VoteDTO{
         private boolean vote;
         private PersonId personId;
+        private AnswerId answerId;
         private QuestionId questionId;
         private CommentId commentId;
     }

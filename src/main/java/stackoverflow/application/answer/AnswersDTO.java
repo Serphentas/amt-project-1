@@ -21,6 +21,7 @@ public class AnswersDTO {
         private AnswerId id;
         private String text;
         private String author;
+        private int votes;
     }
 
     @Singular

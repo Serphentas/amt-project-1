@@ -41,7 +41,7 @@ public class ServiceReg {
     }
 
     public AnswerFacade getAnswerFacade() {
-        return new AnswerFacade(answerRepo);
+        return new AnswerFacade(answerRepo, voteRepo);
     }
 
     public VoteFacade getVoteFacade() {
@@ -49,6 +49,6 @@ public class ServiceReg {
     }
 
     public CommentFacade getCommentFacade() {
-        return new CommentFacade(commentRepo);
+        return new CommentFacade(commentRepo, voteRepo);
     }
 }

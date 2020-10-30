@@ -9,6 +9,7 @@ import stackoverflow.domain.person.Person;
 import stackoverflow.domain.question.Question;
 import stackoverflow.infrastructure.persistence.helper.DataSourceProvider;
 import stackoverflow.infrastructure.persistence.jdbc.JdbcCommentRepository;
+import stackoverflow.infrastructure.persistence.jdbc.JdbcVoteRepository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -86,7 +87,7 @@ public class CommentfacadeIT {
         statement.setString(3, question.getId().asString());
         statement.execute();
 
-        commentFacade = new CommentFacade( new JdbcCommentRepository(ds));
+        commentFacade = new CommentFacade(new JdbcCommentRepository(ds), new JdbcVoteRepository(ds));
     }
 
     @AfterAll

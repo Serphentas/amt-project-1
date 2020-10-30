@@ -1,5 +1,6 @@
 package stackoverflow.infrastructure.persistence.jdbc;
 
+import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.comment.CommentId;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
@@ -47,6 +48,12 @@ public class JdbcVoteRepository implements IVoteRepo {
             } else {
                 unvoteForComment(entity.getCommentId(), entity.getPersonId());
             }
+        } else if (entity.getAnswerId() != null) {
+            if (!hasVotedAnswer(entity.getAnswerId(), entity.getPersonId())) {
+                voteForAnswer(entity.getAnswerId(), entity.getPersonId());
+            } else {
+                unvoteForAnswer(entity.getAnswerId(), entity.getPersonId());
+            }
         }
     }
 
@@ -75,6 +82,72 @@ public class JdbcVoteRepository implements IVoteRepo {
 
     }
 
+    private void voteForAnswer(AnswerId answerId, PersonId personId){
+        try {
+
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "INSERT INTO `codemad`.`Vote`(idVote, idUser, idAnswer) VALUES (?, ?, ?)");
+            statement.setString(1, new VoteId().asString());
+            statement.setString(2, personId.asString());
+            statement.setString(3, answerId.asString());
+            statement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public boolean hasVotedAnswer(AnswerId answerId, PersonId currentUser){
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "SELECT * FROM codemad.Vote WHERE idUser=? AND idAnswer=?");
+            statement.setString(1, currentUser.asString());
+            statement.setString(2, answerId.asString());
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()){
+                return true;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public int nbrVoteAnswer(AnswerId answerId){
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "SELECT COUNT(Vote.idVote) AS nbrVote FROM codemad.Vote GROUP BY Vote.idAnswer HAVING idAnswer=?");
+            statement.setString(1, answerId.asString());
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()){
+                return rs.getInt("nbrVote");
+            }
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void unvoteForAnswer(AnswerId answerId, PersonId personId){
+        try {
+
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "DELETE FROM `codemad`.`Vote` WHERE idUser=? AND idAnswer=?");
+            statement.setString(1, personId.asString());
+            statement.setString(2, answerId.asString());
+            statement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     private void voteForQuestion(QuestionId questionId, PersonId personId){
         try {
