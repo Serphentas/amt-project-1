@@ -77,6 +77,16 @@ and access the website at [http://localhost:9080](http://localhost:9080).
 
 Unstable/development code belongs in [devs](https://github.com/AMT-Long-Du-Zboub/amt-project-1/tree/devs) while stable code is in [master](https://github.com/AMT-Long-Du-Zboub/amt-project-1/tree/master).
 
+## Rajouter
+
+- Vote : Rajout des votes pour les parties manquantes
+
+## Bug restant et à faire
+
+- JMeter à faire : 2 plan de test + rapport des tests
+- e2e bug : Les e2e qui n'arrivent pas à détecter les boutons et fail les tests
+- e2e à faire : Finir de tester
+
 ## Authors
 
 * Bouyiatiotis Stéphane
