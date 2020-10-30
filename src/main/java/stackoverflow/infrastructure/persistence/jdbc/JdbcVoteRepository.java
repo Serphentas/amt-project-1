@@ -70,6 +70,11 @@ public class JdbcVoteRepository implements IVoteRepo {
         return null;
     }
 
+    @Override
+    public void update(Vote entity) {
+
+    }
+
 
     private void voteForQuestion(QuestionId questionId, PersonId personId){
         try {
