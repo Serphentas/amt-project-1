@@ -70,4 +70,9 @@ public class JdbcTagRepository implements ITagRepo {
 
         return tags;
     }
+
+    @Override
+    public void update(Tag entity) {
+
+    }
 }

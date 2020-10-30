@@ -67,6 +67,22 @@ public class JdbcUserRepository implements IPersonRepo {
     }
 
     @Override
+    public void update(Person entity) {
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "UPDATE codemad.Question SET firstname=?, lastname=?, email=? WHERE idUser=?");
+            statement.setString(1, entity.getFirstName());
+            statement.setString(2, entity.getLastName());
+            statement.setString(3, entity.getEmail());
+            statement.setString(4, entity.getId().asString());
+
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
     public Optional<Person> findByUsername(String username) {
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(

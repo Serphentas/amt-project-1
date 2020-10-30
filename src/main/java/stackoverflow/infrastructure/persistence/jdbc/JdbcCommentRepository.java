@@ -104,6 +104,20 @@ public class JdbcCommentRepository implements ICommentRepo {
     }
 
     @Override
+    public void update(Comment entity) {
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "UPDATE codemad.Comment SET text=? WHERE idComment=?");
+            statement.setString(1, entity.getText());
+            statement.setString(2, entity.getId().asString());
+
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
     public Collection<Comment> findByQuestion(CommentQuery query) {
         try {
             PreparedStatement statement = getStatement(

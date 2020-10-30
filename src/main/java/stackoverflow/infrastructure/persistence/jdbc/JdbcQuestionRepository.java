@@ -135,6 +135,21 @@ public class JdbcQuestionRepository implements IQuestionRepo {
     }
 
     @Override
+    public void update(Question entity) {
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "UPDATE codemad.Question SET title=?, text=? WHERE idQuestion=?");
+            statement.setString(1, entity.getTitle());
+            statement.setString(2, entity.getText());
+            statement.setString(3, entity.getId().asString());
+
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
     public Collection<Question> find(QuestionsQuery query) {
         try {
             PreparedStatement statement = getStatement(String.format(
