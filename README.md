@@ -53,6 +53,24 @@ Simply run this from the repository root:
 mvn liberty:dev
 ```
 
+### Run the Tests
+
+Simply run this from the repository root, to use the coverage test from Intellij
+This script allow to develop too.
+
+```
+./run-integration.sh
+```
+
+For the e2e tes,You will need to install Codecept first, in the e2e folder
+```
+npm install codeceptjs puppeteer --save-dev
+```
+then you can use this command in the e2e folder
+```
+npx codeceptjs run --steps
+```
+
 and access the website at [http://localhost:9080](http://localhost:9080).
 
 ## Repository structure
@@ -86,6 +104,7 @@ Unstable/development code belongs in [devs](https://github.com/AMT-Long-Du-Zboub
 - JMeter à faire : 2 plan de test + rapport des tests
 - e2e bug : Les e2e qui n'arrivent pas à détecter les boutons et fail les tests
 - e2e à faire : Finir de tester
+- test JUnit à compléter
 
 ## Authors
 
