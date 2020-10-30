@@ -119,9 +119,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <jsp:include page="fragments/errors.jsp" flush="true"/>
+            <div class="row">
+                <jsp:include page="fragments/errors.jsp" flush="true"/>
+            </div>
         </div>
     </div>
 </t:base>
