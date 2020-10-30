@@ -7,15 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:forEach var="error" items="${errors}">
 
-<div class="card">
-    <div class="card-header card-header-danger">
-        <h4 class="card-title">Error</h4>
-        <p class="category">Authentication error</p>
+    <div class="card">
+        <div class="card-header card-header-danger">
+            <h4 class="card-title">Error</h4>
+            <p class="category">Authentication error</p>
+        </div>
+        <div class="card-body">
+                <div>${error}</div>
+        </div>
     </div>
-    <div class="card-body">
-        <c:forEach var="error" items="${errors}">
-            <div>${error}</div>
-        </c:forEach>
-    </div>
-</div>
+</c:forEach>
