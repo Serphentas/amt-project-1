@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet(name="SubmitCommentCmdServlet", urlPatterns = "/submitComment.do")
 public class ProposeCommentCmdServlet extends HttpServlet {
@@ -23,6 +24,15 @@ public class ProposeCommentCmdServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String idParam = req.getParameter("id");
+
+        // if ID malformed or not given, redirect to homepage
+        try {
+            UUID.fromString(idParam);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            resp.sendRedirect("/");
+            return;
+        }
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
 
         QuestionId questionId = null;
