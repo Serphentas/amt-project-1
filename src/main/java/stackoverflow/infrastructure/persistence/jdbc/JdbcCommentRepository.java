@@ -45,7 +45,7 @@ public class JdbcCommentRepository implements ICommentRepo {
                     entity.getQuestionId(): entity.getAnswerId()
                 ).asString()
             );
-            statement.setString(5, entity.getText());
+            statement.setString(4, entity.getText());
             statement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

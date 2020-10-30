@@ -14,12 +14,12 @@ public class CommentFacade {
         this.commentRepo = commentRepo;
     }
 
-    public void comment(WriteCommentCmd cmd) {
+    public void proposeComment(ProposeCommentCmd cmd) {
         commentRepo.save(Comment.builder()
             .id(new CommentId())
-            .personId(cmd.getIdUser())
-            .answerId(cmd.getIdAnswer())
-            .questionId(cmd.getIdQuestion())
+            .personId(cmd.getPersonId())
+            .answerId(cmd.getAnswerId())
+            .questionId(cmd.getQuestionId())
             .text(cmd.getText())
             .build()
         );
