@@ -62,7 +62,7 @@ This script allow to develop too.
 ./run-integration.sh
 ```
 
-For the e2e tes,You will need to install Codecept first, in the e2e folder
+For the e2e tests, you will need to install Codecept first, in the e2e folder
 ```
 npm install codeceptjs puppeteer --save-dev
 ```
