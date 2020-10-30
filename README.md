@@ -98,6 +98,7 @@ Unstable/development code belongs in [devs](https://github.com/AMT-Long-Du-Zboub
 ## Rajouter
 
 - Vote : Rajout des votes pour les parties manquantes
+- ajout de tests d'intégration pour la classe JdbcCommentRepository
 
 ## Bug restant et à faire
 
@@ -105,6 +106,7 @@ Unstable/development code belongs in [devs](https://github.com/AMT-Long-Du-Zboub
 - e2e bug : Les e2e qui n'arrivent pas à détecter les boutons et fail les tests
 - e2e à faire : Finir de tester
 - test JUnit à compléter
+- utilisation de Mockups pour les tests unitaires simples
 
 ## Authors
 
