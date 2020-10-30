@@ -38,7 +38,7 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Question`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Question` (
-  `idQuestion` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idQuestion` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
   `title` VARCHAR(60) NULL,
   `text` LONGTEXT NULL,
@@ -56,9 +56,9 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Answer`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Answer` (
-  `idAnswer` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idAnswer` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
-  `idQuestion` INT UNSIGNED NOT NULL,
+  `idQuestion` VARCHAR(36) NOT NULL,
   `text` LONGTEXT NULL,
   PRIMARY KEY (`idAnswer`),
   INDEX `fk_Answer_User1_idx` (`idUser` ASC) VISIBLE,
@@ -77,29 +77,29 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `codemad`.`Commentary`
+-- Table `codemad`.`Comment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codemad`.`Commentary` (
-  `idCommentary` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `codemad`.`Comment` (
+  `idComment` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
-  `idAnswer` INT UNSIGNED NOT NULL,
-  `idQuestion` INT UNSIGNED NOT NULL,
+  `idAnswer` VARCHAR(36) NULL,
+  `idQuestion` VARCHAR(36) NULL,
   `text` LONGTEXT NULL,
-  PRIMARY KEY (`idCommentary`, `idUser`),
-  INDEX `fk_Commentary_User1_idx` (`idUser` ASC) VISIBLE,
-  INDEX `fk_Commentary_Answer1_idx` (`idAnswer` ASC) VISIBLE,
-  INDEX `fk_Commentary_Question1_idx` (`idQuestion` ASC) VISIBLE,
-  CONSTRAINT `fk_Commentary_User1`
+  PRIMARY KEY (`idComment`, `idUser`),
+  INDEX `fk_Comment_User1_idx` (`idUser` ASC) VISIBLE,
+  INDEX `fk_Comment_Answer1_idx` (`idAnswer` ASC) VISIBLE,
+  INDEX `fk_Comment_Question1_idx` (`idQuestion` ASC) VISIBLE,
+  CONSTRAINT `fk_Comment_User1`
     FOREIGN KEY (`idUser`)
     REFERENCES `codemad`.`User` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Commentary_Answer1`
+  CONSTRAINT `fk_Comment_Answer1`
     FOREIGN KEY (`idAnswer`)
     REFERENCES `codemad`.`Answer` (`idAnswer`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Commentary_Question1`
+  CONSTRAINT `fk_Comment_Question1`
     FOREIGN KEY (`idQuestion`)
     REFERENCES `codemad`.`Question` (`idQuestion`)
     ON DELETE NO ACTION
@@ -111,15 +111,15 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Vote`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Vote` (
-  `idVote` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idVote` VARCHAR(36) NOT NULL,
   `idUser` VARCHAR(36) NOT NULL,
-  `idQuestion` INT UNSIGNED NOT NULL,
-  `idCommentary` INT UNSIGNED NOT NULL,
+  `idQuestion` VARCHAR(36) NULL,
+  `idComment` VARCHAR(36) NULL,
   `vote` TINYINT NULL,
   PRIMARY KEY (`idVote`, `idUser`),
   INDEX `fk_Vote_User1_idx` (`idUser` ASC) VISIBLE,
   INDEX `fk_Vote_Question1_idx` (`idQuestion` ASC) VISIBLE,
-  INDEX `fk_Vote_Commentary1_idx` (`idCommentary` ASC) VISIBLE,
+  INDEX `fk_Vote_Comment1_idx` (`idComment` ASC) VISIBLE,
   CONSTRAINT `fk_Vote_User1`
     FOREIGN KEY (`idUser`)
     REFERENCES `codemad`.`User` (`idUser`)
@@ -130,9 +130,9 @@ CREATE TABLE IF NOT EXISTS `codemad`.`Vote` (
     REFERENCES `codemad`.`Question` (`idQuestion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Vote_Commentary1`
-    FOREIGN KEY (`idCommentary`)
-    REFERENCES `codemad`.`Commentary` (`idCommentary`)
+  CONSTRAINT `fk_Vote_Comment1`
+    FOREIGN KEY (`idComment`)
+    REFERENCES `codemad`.`Comment` (`idComment`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -142,9 +142,10 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Tag`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Tag` (
-  `idTag` INT UNSIGNED NOT NULL,
-  `tag` VARCHAR(45) NULL,
-  PRIMARY KEY (`idTag`))
+  `idTag` VARCHAR(36) NOT NULL,
+  `tag` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idTag`),
+  UNIQUE INDEX `tag_UNIQUE` (`tag` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -152,8 +153,8 @@ ENGINE = InnoDB;
 -- Table `codemad`.`Question_Tag`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `codemad`.`Question_Tag` (
-  `idQuestion` INT UNSIGNED NOT NULL,
-  `idTag` INT UNSIGNED NOT NULL,
+  `idQuestion` VARCHAR(36) NOT NULL,
+  `idTag` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`idQuestion`, `idTag`),
   INDEX `fk_Question_has_Tag_Tag1_idx` (`idTag` ASC) VISIBLE,
   INDEX `fk_Question_has_Tag_Question1_idx` (`idQuestion` ASC) VISIBLE,
@@ -173,3 +174,10 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'C');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'C++');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'Java');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'Python');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'SCALA');
+INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'JavaScript');

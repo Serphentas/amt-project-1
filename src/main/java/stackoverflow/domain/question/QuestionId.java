@@ -1,7 +1,6 @@
 package stackoverflow.domain.question;
 
 import stackoverflow.domain.Id;
-
 import java.util.UUID;
 
 public class QuestionId extends Id {

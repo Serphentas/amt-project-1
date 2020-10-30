@@ -1,13 +1,12 @@
 package stackoverflow.application.identitymngmt;
 
-import stackoverflow.application.identitymngmt.authenticate.AuthenticateCmd;
+import stackoverflow.application.identitymngmt.authenticate.ProposeAuthenticateCmd;
 import stackoverflow.application.identitymngmt.authenticate.AuthenticateFailedException;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
-import stackoverflow.application.identitymngmt.login.RegisterCmd;
+import stackoverflow.application.identitymngmt.login.ProposeRegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
 import stackoverflow.domain.person.IPersonRepo;
 import stackoverflow.domain.person.Person;
-import stackoverflow.infrastructure.persistence.jdbc.JdbcUserRepository;
 
 public class IdentityMngmtFacade {
     private IPersonRepo personRepo;
@@ -16,11 +15,33 @@ public class IdentityMngmtFacade {
         this.personRepo = personRepo;
     }
 
-    public void register(RegisterCmd cmd) throws RegistrationFailedException {
+    private boolean isStrongPassword(String clearTextPassword){
+        boolean result = clearTextPassword.matches(".*[0-9].*");
+        result &= clearTextPassword.matches(".*[A-Z].*");
+        result &= clearTextPassword.matches(".*[a-z].*");
+        result &= clearTextPassword.matches(".*^[a-z|A-Z|0-9].*");
+
+        return result && clearTextPassword.length()>7;
+    }
+
+    public void register(ProposeRegisterCmd cmd) throws RegistrationFailedException {
         Person yetExistingPerson = personRepo.findByUsername(cmd.getUsername()).orElse(null);
 
         if( yetExistingPerson != null){
             throw new RegistrationFailedException("Username is already used");
+        }
+
+        if( ! cmd.getConfirmPassword().equals(cmd.getClearTextPassword()) ){
+            throw new RegistrationFailedException("confirm password field don't match the password field");
+        }
+
+        if( ! isStrongPassword(cmd.getClearTextPassword()) ){
+            throw new RegistrationFailedException("password should respect the following rules:\n" +
+                " at least a majuscule\n" +
+                " at least a miniscule\n" +
+                " at least a digit\n" +
+                " at least a special character\n" +
+                " have minimum 8 characters");
         }
 
         try {
@@ -37,7 +58,7 @@ public class IdentityMngmtFacade {
         }
     }
 
-    public CurrentUserDTO authenticate(AuthenticateCmd cmd) throws AuthenticateFailedException {
+    public CurrentUserDTO authenticate(ProposeAuthenticateCmd cmd) throws AuthenticateFailedException {
         Person person = personRepo.findByUsername(cmd.getUsername())
             .orElseThrow(() -> new AuthenticateFailedException("User not found"));
 
@@ -47,6 +68,7 @@ public class IdentityMngmtFacade {
         }
 
         return CurrentUserDTO.builder()
+            .id(person.getId())
             .username(person.getUsername())
             .email(person.getEmail())
             .firstName(person.getFirstName())
@@ -54,4 +76,27 @@ public class IdentityMngmtFacade {
             .build();
     }
 
+    public void updateProfil(UpdateProfilCmd cmd, CurrentUserDTO currentUser){
+        if(cmd.getFirstName().isEmpty() || cmd.getFirstName() == null){
+            cmd.setFirstName(currentUser.getFirstName());
+        }
+
+        if(cmd.getLastName().isEmpty() || cmd.getLastName() == null){
+            cmd.setLastName(currentUser.getLastName());
+        }
+
+        if(cmd.getEmail().isEmpty() || cmd.getEmail() == null){
+            cmd.setEmail(currentUser.getEmail());
+        }
+
+        Person updatePerson = Person.builder()
+                .id(cmd.getPersonId())
+                .username(cmd.getUsername())
+                .firstName(cmd.getFirstName())
+                .lastName(cmd.getLastName())
+                .email(cmd.getEmail())
+                .encryptedPassword("nothing")
+                .build();
+        personRepo.update(updatePerson);
+    }
 }

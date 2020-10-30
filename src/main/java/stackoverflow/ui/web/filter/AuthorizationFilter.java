@@ -38,11 +38,19 @@ public class AuthorizationFilter implements Filter {
     }
 
     boolean isPublicResource(String URI){
-        if(URI.startsWith("/")){
+        if(URI.equals("/")){
             return true;
         }
 
         if(URI.startsWith("/login")){
+            return true;
+        }
+
+        if(URI.startsWith("/search")){
+            return true;
+        }
+
+        if(URI.startsWith("/assets")){
             return true;
         }
 
@@ -54,6 +62,16 @@ public class AuthorizationFilter implements Filter {
             return true;
         }
 
+        if(URI.startsWith("/questionsList")){
+            return true;
+        }
+        if(URI.startsWith("/questions")){
+            return true;
+        }
+
+        if(URI.startsWith("/question")){
+            return true;
+        }
         return false;
     }
 }

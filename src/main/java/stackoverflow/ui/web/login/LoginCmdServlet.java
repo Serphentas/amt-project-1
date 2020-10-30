@@ -1,8 +1,7 @@
 package stackoverflow.ui.web.login;
 
 import stackoverflow.application.ServiceReg;
-import stackoverflow.application.identitymngmt.IdentityMngmtFacade;
-import stackoverflow.application.identitymngmt.authenticate.AuthenticateCmd;
+import stackoverflow.application.identitymngmt.authenticate.ProposeAuthenticateCmd;
 import stackoverflow.application.identitymngmt.authenticate.AuthenticateFailedException;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 
@@ -26,13 +25,13 @@ public class LoginCmdServlet extends HttpServlet {
         req.getSession().removeAttribute("errors");
         CurrentUserDTO currentUser = null;
 
-        AuthenticateCmd authenticateCmd = AuthenticateCmd.builder()
+        ProposeAuthenticateCmd proposeAuthenticateCmd = ProposeAuthenticateCmd.builder()
                 .username(req.getParameter("username"))
                 .clearTextPassword(req.getParameter("password"))
                 .build();
 
         try {
-            currentUser = serviceReg.getIdentityMngmtFacade().authenticate(authenticateCmd);
+            currentUser = serviceReg.getIdentityMngmtFacade().authenticate(proposeAuthenticateCmd);
             req.getSession().setAttribute("currentUser", currentUser);
             String targetUrl = (String)req.getSession().getAttribute("targetUrl");
             targetUrl = (targetUrl != null) ? targetUrl : "/";

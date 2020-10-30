@@ -2,53 +2,37 @@ package stackoverflow.domain.question;
 
 import lombok.*;
 import stackoverflow.domain.IEntity;
-import stackoverflow.domain.person.Person;
 import stackoverflow.domain.person.PersonId;
+import stackoverflow.domain.tag.Tag;
 
-@Data
+import java.util.Collection;
+
 @Getter
+@Setter
+@EqualsAndHashCode
 @Builder(toBuilder = true)
 public class Question implements IEntity<Question, QuestionId> {
 
-    @Setter(AccessLevel.NONE)
+    @Builder.Default
     private QuestionId id = new QuestionId();
+    @NonNull
+    private PersonId userId;
 
-    private String author;
+    @Builder.Default
+    private String author = null;
 
+    @NonNull
+    private String title;
+    @NonNull
     private String text;
 
-    @Setter(AccessLevel.NONE)
-    private QuestionType questionType;
-
-    public void categorizeAs(QuestionType questionType){ this.questionType = questionType; }
+    @Builder.Default
+    private Collection<Tag> tags = null;
 
     @Override
     public Question deepClone() {
         return this.toBuilder()
             .id(new QuestionId(id.asString()))
             .build();
-    }
-
-    public static class QuestionBuilder {
-
-        public Question build(){
-            if(id == null) {
-                id = new QuestionId();
-            }
-
-            if(text==null) {
-                text ="";
-            }
-
-            if(questionType == null){
-                questionType = QuestionType.UNCLASSIFIED;
-            }
-
-            if(text.contains("sex")){
-                questionType = QuestionType.ADULT;
-            }
-
-            return new Question(id, author, text, questionType);
-        }
     }
 }

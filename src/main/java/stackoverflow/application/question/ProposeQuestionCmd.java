@@ -1,18 +1,26 @@
 package stackoverflow.application.question;
 
+import lombok.*;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import stackoverflow.domain.person.PersonId;
+import stackoverflow.domain.tag.Tag;
+
+import java.util.Collection;
 
 @Builder
 @Getter
+@Setter
 @EqualsAndHashCode
 public class ProposeQuestionCmd {
+    @NonNull
+    private PersonId userId;
+
+    @NonNull
+    private String title;
+    @NonNull
+    private String text;
 
     @Builder.Default
-    private String author = "Anonymous";
+    private Collection<Tag> tags = null;
 
-    @Builder.Default
-    private String text = "No content";
 }

@@ -1,8 +1,7 @@
 package stackoverflow.ui.web.login;
 
 import stackoverflow.application.ServiceReg;
-import stackoverflow.application.identitymngmt.IdentityMngmtFacade;
-import stackoverflow.application.identitymngmt.login.RegisterCmd;
+import stackoverflow.application.identitymngmt.login.ProposeRegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
 
 import javax.inject.Inject;
@@ -24,16 +23,17 @@ public class RegisterCmdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().getAttribute("errors");
 
-        RegisterCmd registerCmd = RegisterCmd.builder()
-                .username(req.getParameter("username"))
-                .email(req.getParameter("email"))
-                .firstName(req.getParameter("firstName"))
-                .lastName(req.getParameter("lastName"))
-                .clearTextPassword(req.getParameter("password"))
-                .build();
+        ProposeRegisterCmd proposeRegisterCmd = ProposeRegisterCmd.builder()
+            .username(req.getParameter("username"))
+            .email(req.getParameter("email"))
+            .firstName(req.getParameter("firstName"))
+            .lastName(req.getParameter("lastName"))
+            .clearTextPassword(req.getParameter("password"))
+            .confirmPassword(req.getParameter("confirmPassword"))
+            .build();
 
         try {
-            serviceReg.getIdentityMngmtFacade().register(registerCmd);
+            serviceReg.getIdentityMngmtFacade().register(proposeRegisterCmd);
             req.getRequestDispatcher("/login.do").forward(req, resp);
             return;
         } catch(RegistrationFailedException e) {

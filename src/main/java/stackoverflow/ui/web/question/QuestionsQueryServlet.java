@@ -13,20 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "QuestionsPageHandler", urlPatterns = "/questions")
+@WebServlet(name="QuestionsQueryServlet", urlPatterns="/questions")
 public class QuestionsQueryServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;
 
-    private QuestionFacade questionFacade = serviceReg.getQuestionFacade();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        QuestionsDTO questionsDTO = questionFacade.getQuestions(QuestionsQuery.builder()
-                .safeForChildren(false)
-                .build());
+        QuestionsDTO questionsDTO = serviceReg.getQuestionFacade().getAllQuestions();
         req.setAttribute("questions", questionsDTO);
-        req.getRequestDispatcher("/WEB-INF/view/questions.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/view/questionsList.jsp").forward(req, resp);
     }
 }
