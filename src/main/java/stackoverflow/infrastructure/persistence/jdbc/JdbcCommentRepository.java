@@ -81,7 +81,7 @@ public class JdbcCommentRepository implements ICommentRepo {
                     .personId(new PersonId(rs.getString("idUser")))
                     .answerId(new AnswerId(rs.getString("idAnswer")))
                     .questionId(new QuestionId(rs.getString("idQuestion")))
-                    .author(rs.getString("author"))
+                    .author(rs.getString("username"))
                     .text(rs.getString("text"))
                     .build()
                 );
@@ -124,7 +124,7 @@ public class JdbcCommentRepository implements ICommentRepo {
                 "SELECT Comment.idComment, Comment.idUser, Comment.idQuestion, Comment.text, User.username " +
                 "FROM codemad.Comment JOIN codemad.User ON User.idUser = Comment.idUser WHERE idQuestion = ?"
             );
-            statement.setString(1, query.getIdQuestion().toString());
+            statement.setString(1, query.getIdQuestion().asString());
 
             return resultSetAsList(statement.executeQuery(), true);
         } catch (SQLException throwables) {
@@ -140,7 +140,7 @@ public class JdbcCommentRepository implements ICommentRepo {
                 "SELECT Comment.idComment, Comment.idUser, Comment.idAnswer, Comment.text, User.username " +
                 "FROM codemad.Comment JOIN codemad.User ON User.idUser = Comment.idUser WHERE idAnswer = ?"
             );
-            statement.setString(1, query.getIdAnswer().toString());
+            statement.setString(1, query.getIdAnswer().asString());
 
             return resultSetAsList(statement.executeQuery(), false);
         } catch (SQLException throwables) {

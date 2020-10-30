@@ -11,8 +11,8 @@ import stackoverflow.domain.question.QuestionId;
 @Builder(toBuilder = true)
 public class Comment implements IEntity<Comment, CommentId> {
 
-    @Builder.Default
     @Setter(AccessLevel.NONE)
+    @Builder.Default
     private CommentId id = new CommentId();
 
     @NonNull
@@ -28,7 +28,8 @@ public class Comment implements IEntity<Comment, CommentId> {
     @NonNull
     private String text;
 
-    private String author;
+    @Builder.Default
+    private String author = null;
 
     @Override
     public Comment deepClone() {

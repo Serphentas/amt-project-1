@@ -35,7 +35,7 @@ public class JdbcQuestionRepositoryIT {
                 .build();
 
         DataSource ds = DataSourceProvider.getDataSource();
-        con = ds.getConnection();
+        con = DataSourceProvider.getConnection();
         
         con.prepareStatement("DELETE FROM Question;").execute();
         con.prepareStatement("DELETE FROM User;").execute();
