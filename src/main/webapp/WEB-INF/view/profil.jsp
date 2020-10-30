@@ -19,7 +19,7 @@
                             <div class="name">
                                 <h3 class="title">${currentUser.username}</h3>
 
-                                <form class="form" method="post" action="register.do">
+                                <form class="form" method="post" action="profil.do">
 
                                     <h4> First name : ${currentUser.firstName}</h4>
                                     <div class="input-group">

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="UpdateProfilServlet", urlPatterns = "/profil")
+@WebServlet(name="UpdateProfilServlet", urlPatterns = "/profil.do")
 public class UpdateProfilServlet extends HttpServlet {
 
     @Inject
