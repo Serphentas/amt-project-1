@@ -38,4 +38,12 @@ public class VoteFacade {
         return voteRepo.nbrVoteComment(commentId);
     }
 
+    public void unvoteForQuestion(QuestionId questionId, PersonId personId) {
+        voteRepo.unvoteForQuestion(questionId, personId);
+    }
+
+    public void unvoteForComment(CommentId commentId, PersonId personId) {
+        voteRepo.unvoteForComment(commentId, personId);
+    }
+
 }

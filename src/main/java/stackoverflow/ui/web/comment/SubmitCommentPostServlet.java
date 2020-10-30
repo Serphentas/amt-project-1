@@ -1,11 +1,10 @@
-package stackoverflow.ui.web.answer;
+package stackoverflow.ui.web.comment;
 
 import stackoverflow.application.ServiceReg;
-import stackoverflow.application.answer.ProposeAnswerCmd;
+import stackoverflow.application.comment.ProposeCommentCmd;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
-import stackoverflow.application.question.QuestionsDTO;
+
 import stackoverflow.domain.answer.AnswerId;
-import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
 
 import javax.inject.Inject;
@@ -17,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
 
-@WebServlet(name="SubmitAnswerCmdServlet", urlPatterns = "/submitAnswer.do")
-public class ProposeAnswerCmdServlet extends HttpServlet {
+@WebServlet(name="SubmitCommentCmdServlet", urlPatterns = "/submitComment.do")
+public class SubmitCommentPostServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;
@@ -35,13 +34,24 @@ public class ProposeAnswerCmdServlet extends HttpServlet {
             return;
         }
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
-        QuestionId questionId = new QuestionId(req.getParameter("id"));
-        ProposeAnswerCmd command = ProposeAnswerCmd.builder()
+
+        QuestionId questionId = null;
+        AnswerId answerId = null;
+
+        if(req.getParameter("entity").equals("question")) {
+            questionId = new QuestionId(req.getParameter("id"));
+        }
+        else {
+            answerId = new AnswerId(req.getParameter("id"));
+        }
+
+        ProposeCommentCmd command = ProposeCommentCmd.builder()
                 .personId(currentUser.getId())
                 .questionId(questionId)
+                .answerId(answerId)
                 .text(req.getParameter("text"))
                 .build();
-        serviceReg.getAnswerFacade().proposeAnswer(command);
-        resp.sendRedirect("/questions");
+        serviceReg.getCommentFacade().proposeComment(command);
+        resp.sendRedirect("/question?id=" + questionId.asString());
     }
 }

@@ -153,7 +153,8 @@ public class JdbcQuestionRepository implements IQuestionRepo {
     public Collection<Question> find(QuestionsQuery query) {
         try {
             PreparedStatement statement = getStatement(String.format(
-                "SELECT * FROM codemad.Question WHERE title LIKE 'POURCENT%sPOURCENT'",
+                "SELECT Question.idQuestion, Question.idUser, Question.title, Question.text, User.username " +
+                    " FROM codemad.Question JOIN codemad.User ON Question.idUser = User.idUser WHERE title LIKE 'POURCENT%sPOURCENT'",
                     query.getTitle()
                 ).replaceAll("POURCENT", "%")
             );
@@ -171,7 +172,8 @@ public class JdbcQuestionRepository implements IQuestionRepo {
         while (rs.next()) {
             res.add(Question.builder()
                 .id(new QuestionId(rs.getString("idQuestion")))
-                .author(rs.getString("idUser"))
+                .userId(new PersonId(rs.getString("idUser")))
+                .author(rs.getString("username"))
                 .title(rs.getString("title"))
                 .text(rs.getString("text"))
                 .build()
