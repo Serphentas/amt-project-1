@@ -3,14 +3,36 @@ package stackoverflow.infrastructure.persistence.helper;
 import javax.sql.DataSource;
 import com.mysql.cj.jdbc.MysqlDataSource;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 public class DataSourceProvider {
 
+    static DataSourceProvider instance = new DataSourceProvider();
 
-    public static DataSource getDataSource(){
+    private DataSource ds;
+    private Connection con;
+
+    private DataSourceProvider() {
         MysqlDataSource datasource = new MysqlDataSource();
         datasource.setUrl("jdbc:mysql://localhost:3306/codemad");
         datasource.setUser("root");
         datasource.setPassword("codemad");
-        return datasource;
+
+        ds = datasource;
+
+        try {
+            con = datasource.getConnection();
+        } catch (SQLException throwables) { }
+
+        instance = this;
+    }
+
+    public static DataSource getDataSource(){
+        return instance.ds;
+    }
+
+    public static Connection getConnection(){
+        return instance.con;
     }
 }
