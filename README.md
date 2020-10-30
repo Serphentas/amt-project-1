@@ -102,7 +102,6 @@ Unstable/development code belongs in [devs](https://github.com/AMT-Long-Du-Zboub
 
 ## Bug restant et à faire
 
-- JMeter à faire : 2 plan de test + rapport des tests
 - e2e bug : Les e2e qui n'arrivent pas à détecter les boutons et fail les tests
 - e2e à faire : Finir de tester
 - test JUnit à compléter
