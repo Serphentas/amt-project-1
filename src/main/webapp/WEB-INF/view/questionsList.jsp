@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="column">
                                     <div>
-                                        <a href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary">Comment</a>
+                                        <a href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary" id="commentBtn">Comment</a>
                                     </div>
                                 </div>
                                 <div class="column">
