@@ -21,7 +21,7 @@
     <dataSource jndiName="jdbc/StackOverFlowDS">
         <jdbcDriver libraryRef="MySqlLib"/>
         <properties databaseName="codemad"
-                    serverName="codemad_db" portNumber="3306"
-                    user="root" password="codemad"/>
+                    serverName="localhost" portNumber="3306"
+                    user="root" password="amt"/>
     </dataSource>
 </server>
