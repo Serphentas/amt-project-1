@@ -53,7 +53,7 @@ Simply run this from the repository root:
 mvn liberty:dev
 ```
 
-### Run the Tests
+### Run the tests
 
 Simply run this from the repository root, to use the coverage test from Intellij
 This script allow to develop too.
@@ -71,7 +71,7 @@ then you can use this command in the e2e folder
 npx codeceptjs run --steps
 ```
 
-and access the website at [http://localhost:9080](http://localhost:9080).
+Remember to have the website running at [http://localhost:9080](http://localhost:9080).
 
 ## Repository structure
 
@@ -100,6 +100,7 @@ Unstable/development code belongs in [devs](https://github.com/AMT-Long-Du-Zboub
 
 - Vote: can vote on comments and answers
 - Added integration tests for JdbcCommentRepository
+- e2e: initial tests work again
 
 ## Remaining bits
 
