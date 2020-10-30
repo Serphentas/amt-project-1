@@ -74,7 +74,7 @@ public class JdbcVoteRepository implements IVoteRepo {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
                     "INSERT INTO `codemad`.`Vote`(idVote, idUser, idQuestion) VALUES (?, ?, ?)");
-            statement.setString(1, UUID.randomUUID().toString());
+            statement.setString(1, new VoteId().asString());
             statement.setString(2, personId.asString());
             statement.setString(3, questionId.asString());
             statement.execute();

@@ -3,6 +3,8 @@ package stackoverflow.domain.answer;
 import org.junit.jupiter.api.Test;
 import stackoverflow.domain.answer.Answer;
 import stackoverflow.domain.answer.AnswerId;
+import stackoverflow.domain.person.PersonId;
+import stackoverflow.domain.question.QuestionId;
 
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,6 +15,8 @@ public class AnswerIdTest {
         AnswerId id = new AnswerId();
         Answer answer = Answer.builder()
                 .id(id)
+                .questionId(new QuestionId())
+                .personId(new PersonId())
                 .text("google it!")
                 .build();
 

@@ -1,34 +1,61 @@
 package stackoverflow.application.question;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
+import stackoverflow.domain.person.Person;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
+import stackoverflow.infrastructure.persistence.helper.DataSourceProvider;
+import stackoverflow.infrastructure.persistence.jdbc.JdbcQuestionRepository;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class QuestionFacadeIT {
-/*
-    private QuestionFacade questionFacade;
-    private QuestionId id;
-    private ProposeQuestionCmd cmd;
 
-    @BeforeEach
-    void setupQuestionFacade() {
-        this.questionFacade = new QuestionFacade( new MemoryQuestionRepo());
-        id = new QuestionId("1c40316e-163d-11eb-adc1-0242ac120002");
+    static ProposeQuestionCmd cmd;
+
+    static QuestionFacade questionFacade;
+
+    @BeforeAll
+    public static void setupFacade() throws SQLException {
+        Person author = Person.builder()
+                .username("Rabbit")
+                .email("alice.wonderland@gmail.com")
+                .firstName("alice")
+                .lastName("Wonderland")
+                .clearTextPassword("Pa$$w0rd")
+                .build();
+
+        cmd = ProposeQuestionCmd.builder()
+                .userId( author.getId())
+                .title("test")
+                .text("Bla bla bla")
+                .build();
+
+        questionFacade = new QuestionFacade(new JdbcQuestionRepository(DataSourceProvider.getDataSource()));
+
+        DataSourceProvider.getDataSource().getConnection().prepareStatement("DELETE FROM Question;").execute();
+        DataSourceProvider.getDataSource().getConnection().prepareStatement("DELETE FROM User;").execute();
+
+        PreparedStatement statement = DataSourceProvider.getDataSource().getConnection().prepareStatement(
+                "INSERT INTO codemad.User VALUES (?, 'Rabbit', 'alice', 'Wonderland', 'alice.wonderland@gmail.com', 'Pa$$w0rd')");
+        statement.setString(1, author.getId().asString());
+
+        statement.execute();
+    }
+
+
+    @AfterAll
+    public static void cleanDBB() throws SQLException {
+        DataSourceProvider.getDataSource().getConnection().prepareStatement("DELETE FROM Question").execute();
+        DataSourceProvider.getDataSource().getConnection().prepareStatement("DELETE FROM User").execute();
     }
 
     @Test
     void iCanUseProposeQuestion() {
-        cmd = ProposeQuestionCmd.builder()
-            .id( id)
-            .userId( new PersonId())
-            .title("test")
-            .text("Bla bla bla")
-            .build();
-
         assertDoesNotThrow( () -> {
             questionFacade.proposeQuestion(cmd);
         });
@@ -36,8 +63,6 @@ public class QuestionFacadeIT {
 
     @Test
     void iCanUseGetAllQuestions() {
-        iCanUseProposeQuestion();
-
         QuestionsDTO questions = questionFacade.getAllQuestions();
 
         assertNotNull(questions);
@@ -47,7 +72,7 @@ public class QuestionFacadeIT {
 
     @Test
     void iCanUseGetQuestionById() {
-        iCanUseProposeQuestion();
+        QuestionId id = questionFacade.getAllQuestions().getQuestions().get(0).getId();
         QuestionsDTO.QuestionDTO question = questionFacade.getQuestionById( id);
 
         assertNotNull(question);
@@ -56,8 +81,7 @@ public class QuestionFacadeIT {
 
     @Test
     void iCanUseGetQuestions() {
-        iCanUseProposeQuestion();
         //todo
     }
- */
+
 }

@@ -1,31 +1,31 @@
 package stackoverflow.application.identitymngmt;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import stackoverflow.application.identitymngmt.authenticate.ProposeAuthenticateCmd;
 import stackoverflow.application.identitymngmt.authenticate.AuthenticateFailedException;
 import stackoverflow.application.identitymngmt.login.ProposeRegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
+import stackoverflow.infrastructure.persistence.helper.DataSourceProvider;
+import stackoverflow.infrastructure.persistence.jdbc.JdbcUserRepository;
+
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class IdentityMngmtFacadeTest {
-/*
-    static SeContainerInitializer initializer;
+public class IdentityMngmtFacadeIT {
+
+    static IdentityMngmtFacade facade;
 
     @BeforeAll
-    public static void setupCdi() {
-        initializer = SeContainerInitializer.newInstance();
+    public static void setupFacade(){
+        facade = new IdentityMngmtFacade(new JdbcUserRepository(DataSourceProvider.getDataSource()));
     }
 
-    //todo comment utiliser cette stratégie avec un datasource?
-*/
-/*
-    private IdentityMngmtFacade identityMngmtFacade;
-
-    @BeforeEach
-    public void setupIdentityMngmtFacade(){
-        identityMngmtFacade = new IdentityMngmtFacade(new MemoryPersonRepo());
+    @AfterEach
+    public void cleanDBB() throws SQLException {
+        DataSourceProvider.getDataSource().getConnection().prepareStatement("DELETE FROM User").execute();
     }
 
     @Test
@@ -39,8 +39,9 @@ public class IdentityMngmtFacadeTest {
                 .confirmPassword("Pa$$w0rd")
                 .build();
         assertDoesNotThrow(() -> {
-            identityMngmtFacade.register(cmd);
+            facade.register(cmd);
         });
+
     }
 
     @Test
@@ -56,7 +57,7 @@ public class IdentityMngmtFacadeTest {
                 .build();
 
         assertThrows(RegistrationFailedException.class, () -> {
-            identityMngmtFacade.register(cmd);
+            facade.register(cmd);
         });
     }
 
@@ -72,7 +73,7 @@ public class IdentityMngmtFacadeTest {
                 .build();
 
         assertThrows(RegistrationFailedException.class, () -> {
-            identityMngmtFacade.register(cmd);
+            facade.register(cmd);
         });
     }
 
@@ -85,7 +86,7 @@ public class IdentityMngmtFacadeTest {
                 .build();
 
         assertDoesNotThrow(() -> {
-            identityMngmtFacade.authenticate(cmd);
+            facade.authenticate(cmd);
         });
     }
 
@@ -98,7 +99,7 @@ public class IdentityMngmtFacadeTest {
                 .build();
 
         assertThrows(AuthenticateFailedException.class, () -> {
-            identityMngmtFacade.authenticate(cmd);
+            facade.authenticate(cmd);
         });
-    }*/
+    }
 }
