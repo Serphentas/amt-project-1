@@ -8,9 +8,9 @@ import stackoverflow.domain.person.PersonId;
 @Setter
 @EqualsAndHashCode
 public class UpdateProfilCmd {
-    @Setter(AccessLevel.NONE)
     private PersonId personId;
 
+    private String username;
     private String firstName;
     private String lastName;
     private String email;

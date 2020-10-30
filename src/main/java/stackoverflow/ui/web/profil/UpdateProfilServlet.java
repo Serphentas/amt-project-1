@@ -22,14 +22,13 @@ public class UpdateProfilServlet extends HttpServlet {
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
         UpdateProfilCmd updateProfilCmd = UpdateProfilCmd.builder()
                 .personId(currentUser.getId())
-                .firstName("FirstName")
-                .lastName("LastName")
-                .email("email")
+                .username(currentUser.getUsername())
+                .firstName(req.getParameter("FirstName"))
+                .lastName(req.getParameter("LastName"))
+                .email(req.getParameter("email"))
                 .build();
 
         serviceReg.getIdentityMngmtFacade().updateProfil(updateProfilCmd, currentUser);
-        req.getSession().removeAttribute("currentUser");
-        req.getSession().setAttribute("currentUser",currentUser);
-        resp.sendRedirect("/profil");
+        resp.sendRedirect("/logout.do");
     }
 }

@@ -91,9 +91,11 @@ public class IdentityMngmtFacade {
 
         Person updatePerson = Person.builder()
                 .id(cmd.getPersonId())
+                .username(cmd.getUsername())
                 .firstName(cmd.getFirstName())
                 .lastName(cmd.getLastName())
                 .email(cmd.getEmail())
+                .encryptedPassword("nothing")
                 .build();
         personRepo.update(updatePerson);
     }

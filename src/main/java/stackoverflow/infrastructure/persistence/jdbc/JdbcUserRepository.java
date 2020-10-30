@@ -70,7 +70,7 @@ public class JdbcUserRepository implements IPersonRepo {
     public void update(Person entity) {
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "UPDATE codemad.Question SET firstname=?, lastname=?, email=? WHERE idUser=?");
+                    "UPDATE codemad.User SET firstname=?, lastname=?, email=? WHERE idUser=?");
             statement.setString(1, entity.getFirstName());
             statement.setString(2, entity.getLastName());
             statement.setString(3, entity.getEmail());
