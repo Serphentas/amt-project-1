@@ -37,12 +37,12 @@ public class JdbcCommentRepository implements ICommentRepo {
         try {
             PreparedStatement statement = getStatement(String.format(
                 "INSERT INTO codemad.Comment (idComment, idUser, %s, text) VALUES (?, ?, ?, ?)",
-                entity.getIdQuestion() != null ? "idQuestion" : "idAnswer"
+                entity.getQuestionId() != null ? "idQuestion" : "idAnswer"
             ));
             statement.setString(1, new CommentId().asString());
-            statement.setString(2, entity.getIdUser().asString());
-            statement.setString(3, (entity.getIdQuestion() != null ?
-                    entity.getIdQuestion(): entity.getIdAnswer()
+            statement.setString(2, entity.getPersonId().asString());
+            statement.setString(3, (entity.getQuestionId() != null ?
+                    entity.getQuestionId(): entity.getAnswerId()
                 ).asString()
             );
             statement.setString(5, entity.getText());
@@ -78,9 +78,9 @@ public class JdbcCommentRepository implements ICommentRepo {
             while (rs.next()) {
                 comments.add(Comment.builder()
                     .id(new CommentId(rs.getString("idComment")))
-                    .idUser(new PersonId(rs.getString("idUser")))
-                    .idAnswer(new AnswerId(rs.getString("idAnswer")))
-                    .idQuestion(new QuestionId(rs.getString("idQuestion")))
+                    .personId(new PersonId(rs.getString("idUser")))
+                    .answerId(new AnswerId(rs.getString("idAnswer")))
+                    .questionId(new QuestionId(rs.getString("idQuestion")))
                     .author(rs.getString("author"))
                     .text(rs.getString("text"))
                     .build()
@@ -145,9 +145,9 @@ public class JdbcCommentRepository implements ICommentRepo {
         while (rs.next()) {
             res.add(Comment.builder()
                 .id(new CommentId(rs.getString("idComment")))
-                .idAnswer(new AnswerId(rs.getString("idAnswer")))
-                .idQuestion(new QuestionId(rs.getString("idQuestion")))
-                .idUser(new PersonId(rs.getString("idUser")))
+                .answerId(new AnswerId(rs.getString("idAnswer")))
+                .questionId(new QuestionId(rs.getString("idQuestion")))
+                .personId(new PersonId(rs.getString("idUser")))
                 .author(rs.getString("author"))
                 .text(rs.getString("text"))
                 .build()

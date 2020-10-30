@@ -2,11 +2,7 @@ package stackoverflow.application.comment;
 
 import java.util.List;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Singular;
+import lombok.*;
 import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.comment.CommentId;
 import stackoverflow.domain.person.PersonId;
@@ -22,12 +18,15 @@ public class CommentsDTO {
     @Setter
     @EqualsAndHashCode
     public static class CommentDTO {
+        @NonNull
         private CommentId id;
-        private PersonId idUser;
-        private AnswerId idAnswer;
-        private QuestionId idQuestion;
+        @NonNull
+        private PersonId personId;
+
+        private AnswerId answerId;
+        private QuestionId questionId;
+        @NonNull
         private String text;
-        private String author;
     }
 
     @Singular

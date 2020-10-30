@@ -2,10 +2,7 @@ package stackoverflow.domain.question;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import stackoverflow.domain.person.Person;
 import stackoverflow.domain.person.PersonId;
-import stackoverflow.domain.question.Question;
-import stackoverflow.domain.question.QuestionType;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

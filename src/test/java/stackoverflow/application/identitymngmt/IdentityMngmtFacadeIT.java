@@ -10,6 +10,7 @@ import stackoverflow.application.identitymngmt.login.RegistrationFailedException
 import stackoverflow.infrastructure.persistence.helper.DataSourceProvider;
 import stackoverflow.infrastructure.persistence.jdbc.JdbcUserRepository;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,15 +18,19 @@ import static org.junit.jupiter.api.Assertions.*;
 public class IdentityMngmtFacadeIT {
 
     static IdentityMngmtFacade facade;
+    static Connection con;
 
     @BeforeAll
-    public static void setupFacade(){
+    public static void setupFacade() throws SQLException {
         facade = new IdentityMngmtFacade(new JdbcUserRepository(DataSourceProvider.getDataSource()));
+
+        con = DataSourceProvider.getDataSource().getConnection();
+        con.prepareStatement("DELETE FROM User").execute();
     }
 
     @AfterEach
     public void cleanDBB() throws SQLException {
-        DataSourceProvider.getDataSource().getConnection().prepareStatement("DELETE FROM User").execute();
+        con.prepareStatement("DELETE FROM User").execute();
     }
 
     @Test

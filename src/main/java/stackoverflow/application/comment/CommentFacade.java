@@ -17,9 +17,9 @@ public class CommentFacade {
     public void comment(WriteCommentCmd cmd) {
         commentRepo.save(Comment.builder()
             .id(new CommentId())
-            .idUser(cmd.getIdUser())
-            .idAnswer(cmd.getIdAnswer())
-            .idQuestion(cmd.getIdQuestion())
+            .personId(cmd.getIdUser())
+            .answerId(cmd.getIdAnswer())
+            .questionId(cmd.getIdQuestion())
             .text(cmd.getText())
             .build()
         );
@@ -37,11 +37,10 @@ public class CommentFacade {
         return CommentsDTO.builder()
             .comments(list.stream().map(c -> CommentsDTO.CommentDTO.builder()
                 .id(c.getId())
-                .idAnswer(c.getIdAnswer())
-                .idQuestion(c.getIdQuestion())
-                .idUser(c.getIdUser())
+                .answerId(c.getAnswerId())
+                .questionId(c.getQuestionId())
+                .personId(c.getPersonId())
                 .text(c.getText())
-                .author(c.getAuthor())
                 .build()
             ).collect(Collectors.toList()))
         .build();

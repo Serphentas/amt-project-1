@@ -2,9 +2,7 @@ package stackoverflow.application.question;
 
 import lombok.*;
 
-import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 import stackoverflow.domain.person.PersonId;
-import stackoverflow.domain.question.QuestionId;
 import stackoverflow.domain.tag.Tag;
 
 import java.util.Collection;

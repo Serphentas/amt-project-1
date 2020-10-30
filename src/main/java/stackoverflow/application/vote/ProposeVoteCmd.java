@@ -4,9 +4,9 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
+import stackoverflow.domain.comment.CommentId;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
-import stackoverflow.domain.vote.VoteId;
 
 @Builder
 @Getter
@@ -18,6 +18,6 @@ public class ProposeVoteCmd {
     @Builder.Default
     private QuestionId questionId = null;
 
-    //@Builder.Default
-    //private CommentId commentId = null;
+    @Builder.Default
+    private CommentId commentId = null;
 }

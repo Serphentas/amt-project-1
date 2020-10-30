@@ -12,6 +12,7 @@ import stackoverflow.domain.tag.Tag;
 import stackoverflow.infrastructure.persistence.helper.DataSourceProvider;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JdbcQuestionRepositoryIT {
     static JdbcQuestionRepository repo;
     static Person author;
+    static Connection con;
 
     @BeforeAll
     public static void setup() throws SQLException {
@@ -33,11 +35,12 @@ public class JdbcQuestionRepositoryIT {
                 .build();
 
         DataSource ds = DataSourceProvider.getDataSource();
+        con = ds.getConnection();
+        
+        con.prepareStatement("DELETE FROM Question;").execute();
+        con.prepareStatement("DELETE FROM User;").execute();
 
-        ds.getConnection().prepareStatement("DELETE FROM Question;").execute();
-        ds.getConnection().prepareStatement("DELETE FROM User;").execute();
-
-        PreparedStatement statement = ds.getConnection().prepareStatement(
+        PreparedStatement statement = con.prepareStatement(
             "INSERT INTO codemad.User VALUES (?, 'Rabbit', 'alice', 'Wonderland', 'alice.wonderland@gmail.com', 'Pa$$w0rd')");
         statement.setString(1, author.getId().asString());
         statement.execute();
@@ -47,8 +50,8 @@ public class JdbcQuestionRepositoryIT {
 
     @AfterAll
     public static void cleanBDD() throws SQLException {
-        DataSourceProvider.getDataSource().getConnection().prepareStatement("DELETE FROM Question;").execute();
-        DataSourceProvider.getDataSource().getConnection().prepareStatement("DELETE FROM User").execute();
+        con.prepareStatement("DELETE FROM Question;").execute();
+        con.prepareStatement("DELETE FROM User").execute();
     }
 
     @Test

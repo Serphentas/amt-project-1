@@ -2,6 +2,7 @@ package stackoverflow.domain.vote;
 
 import lombok.*;
 import stackoverflow.domain.IEntity;
+import stackoverflow.domain.comment.CommentId;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
 import stackoverflow.domain.tag.Tag;
@@ -20,8 +21,8 @@ public class Vote implements IEntity<Vote, VoteId> {
 
     @Builder.Default
     private QuestionId questionId=null;
-    //@Builder.Default
-    //private CommentId commentId=null;
+    @Builder.Default
+    private CommentId commentId=null;
 
     @Override
     public VoteId getId() {

@@ -4,23 +4,27 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import stackoverflow.domain.comment.Comment;
 import stackoverflow.domain.person.Person;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.vote.Vote;
 import stackoverflow.infrastructure.persistence.helper.DataSourceProvider;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 public class JdbcVoteRepositoryIT {
     static JdbcVoteRepository repo;
     static Person person1;
     static Person person2;
     static Question question;
-    //static Comment comment;
+    static Comment comment;
+    static Connection con;
 
     @BeforeAll
     public static void setupRepoAndBDD() throws SQLException {
@@ -47,26 +51,42 @@ public class JdbcVoteRepositoryIT {
                 .userId(person1.getId())
                 .build();
 
+        comment = Comment.builder()
+                .personId(person1.getId())
+                .questionId(question.getId())
+                .text("commentaire de rageux")
+                .build();
+
+
         DataSource ds = DataSourceProvider.getDataSource();
+        con = ds.getConnection();
 
-        ds.getConnection().prepareStatement("DELETE FROM Vote").execute();
-        ds.getConnection().prepareStatement("DELETE FROM Question").execute();
-        ds.getConnection().prepareStatement("DELETE FROM User").execute();
+        con.prepareStatement("DELETE FROM Vote").execute();
+        con.prepareStatement("DELETE FROM Comment").execute();
+        con.prepareStatement("DELETE FROM Question").execute();
+        con.prepareStatement("DELETE FROM User").execute();
 
-        PreparedStatement statement = ds.getConnection().prepareStatement(
+        PreparedStatement statement = con.prepareStatement(
                 "INSERT INTO codemad.User VALUES (?, 'Rabbit', 'alice', 'Wonderland', 'alice.wonderland@gmail.com', 'Pa$$w0rd')");
         statement.setString(1, person1.getId().asString());
         statement.execute();
 
-        statement = ds.getConnection().prepareStatement(
+        statement = con.prepareStatement(
                 "INSERT INTO codemad.User VALUES (?, 'bob', 'bob', 'bob', 'bob.bob@gmail.com', 'Pa$$w0rd')");
         statement.setString(1, person2.getId().asString());
         statement.execute();
 
-        statement = ds.getConnection().prepareStatement(
+        statement = con.prepareStatement(
                 "INSERT INTO codemad.Question VALUES (?, ?, 'question', 'why')");
         statement.setString(1, question.getId().asString());
         statement.setString(2, person1.getId().asString());
+        statement.execute();
+
+        statement = con.prepareStatement(
+                "INSERT INTO codemad.Comment (idComment,idUser,idQuestion,text) VALUES (?,?,?, 'commentaire de rageux')");
+        statement.setString(1, comment.getId().asString());
+        statement.setString(2, person1.getId().asString());
+        statement.setString(3, question.getId().asString());
         statement.execute();
 
         repo = new JdbcVoteRepository(ds);
@@ -74,14 +94,14 @@ public class JdbcVoteRepositoryIT {
 
     @AfterEach
     public void cleanVoteBDD() throws SQLException {
-        DataSourceProvider.getDataSource().getConnection().prepareStatement("DELETE FROM Vote").execute();
+        con.prepareStatement("DELETE FROM Vote").execute();
     }
 
     @AfterAll
     public static void cleanBDD() throws SQLException {
-
-        DataSourceProvider.getDataSource().getConnection().prepareStatement("DELETE FROM Question").execute();
-        DataSourceProvider.getDataSource().getConnection().prepareStatement("DELETE FROM User").execute();
+        con.prepareStatement("DELETE FROM Comment").execute();
+        con.prepareStatement("DELETE FROM Question").execute();
+        con.prepareStatement("DELETE FROM User").execute();
     }
 
     @Test
@@ -146,8 +166,6 @@ public class JdbcVoteRepositoryIT {
 
         assertEquals( 2, repo.nbrVoteQuestion(question.getId()));
     }
-/*
-//todo uncomment
 
     @Test
     public void toggleDeleteCommentIfVoteExist(){
@@ -192,7 +210,7 @@ public class JdbcVoteRepositoryIT {
 
     @Test
     public void nbrVoteCommentShouldReturn0IfZeroVoteFound(){
-        assertTrue( 0, repo.nbrVoteComment(comment.getId()));
+        assertEquals( 0, repo.nbrVoteComment(comment.getId()));
     }
 
     @Test
@@ -209,7 +227,7 @@ public class JdbcVoteRepositoryIT {
                 .build()
         );
 
-        assertTrue( 2, repo.nbrVoteQuestion(comment.getId()));
+        assertEquals( 2, repo.nbrVoteComment(comment.getId()));
     }
-*/
+
 }

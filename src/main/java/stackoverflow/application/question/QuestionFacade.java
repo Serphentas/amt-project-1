@@ -2,13 +2,9 @@ package stackoverflow.application.question;
 
 import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.domain.question.Question;
-import stackoverflow.domain.question.QuestionType;
 import stackoverflow.domain.question.QuestionId;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class QuestionFacade {
