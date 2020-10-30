@@ -124,7 +124,7 @@ public class JdbcVoteRepository implements IVoteRepo {
         return 0;
     }
 
-    private void unvoteForQuestion(QuestionId questionId, PersonId personId){
+    public void unvoteForQuestion(QuestionId questionId, PersonId personId){
         try {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
@@ -138,7 +138,7 @@ public class JdbcVoteRepository implements IVoteRepo {
         }
     }
 
-    private void voteForComment(CommentId commentId, PersonId personId){
+    public void voteForComment(CommentId commentId, PersonId personId){
         try {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
@@ -191,7 +191,7 @@ public class JdbcVoteRepository implements IVoteRepo {
         return 0;
     }
 
-    private void unvoteForComment(CommentId commentId, PersonId personId){
+    public void unvoteForComment(CommentId commentId, PersonId personId){
         try {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(

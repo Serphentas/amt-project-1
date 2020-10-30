@@ -95,6 +95,7 @@
                                     </span>
                                     </div>
                                     <input id="fPassword" name="password" type="password" class="form-control" placeholder="Password...">
+                                    <small>Your password must be 8 characters long, in which there must be one small and uppercase letter, a digit, a special character (like $).</small>
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">

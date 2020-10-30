@@ -23,7 +23,7 @@ public class ProposeVoteCmdServlet extends HttpServlet {
     ServiceReg serviceReg;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idParam = req.getParameter("id");
 
         // if ID malformed or not given, redirect to homepage
@@ -41,17 +41,31 @@ public class ProposeVoteCmdServlet extends HttpServlet {
 
         if(req.getParameter("entity").equals("question")) {
             questionId = new QuestionId(req.getParameter("id"));
+
+            if (serviceReg.getVoteFacade().hasVotedQuestion(questionId, currentUser.getId())) {
+                serviceReg.getVoteFacade().unvoteForQuestion(questionId, currentUser.getId());
+            } else {
+                serviceReg.getVoteFacade().proposeVote(ProposeVoteCmd.builder()
+                    .questionId(questionId)
+                    .personId(currentUser.getId())
+                    .build()
+                );
+            }
         }
         else {
             commentId = new CommentId(req.getParameter("id"));
+
+            if (serviceReg.getVoteFacade().hasVotedComment(commentId, currentUser.getId())) {
+                serviceReg.getVoteFacade().unvoteForComment(commentId, currentUser.getId());
+            } else {
+                serviceReg.getVoteFacade().proposeVote(ProposeVoteCmd.builder()
+                    .commentId(commentId)
+                    .personId(currentUser.getId())
+                    .build()
+                );
+            }
         }
 
-        ProposeVoteCmd command = ProposeVoteCmd.builder()
-                .personId(currentUser.getId())
-                .questionId(questionId)
-                .commentId(commentId)
-                .build();
-        serviceReg.getVoteFacade().proposeVote(command);
-        resp.sendRedirect("/questionsList");
+        resp.sendRedirect("/question?id=" + questionId.asString());
     }
 }

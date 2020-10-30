@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-8 ml-auto mr-auto">
                     <div class="brand text-center text-light">
-                        <h1 class="description text-center text-light text-capitalize" >Question</h1>
+                        <h1 class="description text-center text-light text-capitalize">Question</h1>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,26 @@
                     <a class="nav-link" role="tab" data-toggle="tab">
                     <h3 class="description text-left text-uppercase font-weight-bold text-dark">${question.title}</h3>
                     <p class="description text-left text-dark"><i class="fas fa-comment-dots"></i> ${question.text}</p><br>
-                    <p class="description text-left text-dark"><i class="fas fa-signal"></i> Votes: ${votes} </p><br>
+                    <p class="description text-left text-dark">
+                        <i class="fas fa-signal"></i> Votes: ${votes}
+                        <c:choose>
+                            <c:when test="${currentUser != null}">
+                                <a href="/submitVote.do?id=${question.id.asString()}&entity=question" type="button" class="btn btn-primary btn-sm" type="submit">
+                                    <c:choose>
+                                        <c:when test="${hasVoted == true}">
+                                            Downvote
+                                        </c:when>
+                                        <c:otherwise>
+                                            Upvote
+                                        </c:otherwise>
+                                    </c:choose>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="/login" class="btn btn-primary btn-sm">Log in to vote</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </p>
 
                     <h3><u>Comments</u></h3>
                     <c:choose>
