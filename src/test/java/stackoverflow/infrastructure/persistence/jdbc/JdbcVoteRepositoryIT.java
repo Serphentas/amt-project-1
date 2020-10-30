@@ -59,7 +59,7 @@ public class JdbcVoteRepositoryIT {
 
 
         DataSource ds = DataSourceProvider.getDataSource();
-        con = ds.getConnection();
+        con = DataSourceProvider.getConnection();
 
         con.prepareStatement("DELETE FROM Vote").execute();
         con.prepareStatement("DELETE FROM Comment").execute();

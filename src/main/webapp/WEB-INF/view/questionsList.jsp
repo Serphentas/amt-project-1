@@ -39,7 +39,7 @@
                                     <p class="description text-left text-dark ">${question.text}</p>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <a href="/question?id=${question.id.asString()}" class="btn btn-outline-secondary">Go to question</a>
+                                            <a id="questionButton" href="/question?id=${question.id.asString()}" class="btn btn-outline-secondary">Go to question</a>
                                         </div>
                                     </div>
                                 </a>

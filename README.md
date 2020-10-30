@@ -53,7 +53,25 @@ Simply run this from the repository root:
 mvn liberty:dev
 ```
 
-and access the website at [http://localhost:9080](http://localhost:9080).
+### Run the tests
+
+Simply run this from the repository root, to use the coverage test from Intellij
+This script allow to develop too.
+
+```
+./run-integration.sh
+```
+
+For the e2e tests, you will need to install Codecept first, in the e2e folder
+```
+npm install codeceptjs puppeteer --save-dev
+```
+then you can use this command in the e2e folder
+```
+npx codeceptjs run --steps
+```
+
+Remember to have the website running at [http://localhost:9080](http://localhost:9080).
 
 ## Repository structure
 
@@ -62,6 +80,7 @@ and access the website at [http://localhost:9080](http://localhost:9080).
   - `images` - service-specific Dockerfiles and dependencies
   - `topologies` - stable and unstable docker-compose YAML files
 - `e2e` - UI tests (CodeceptJS)
+- `load-tests` - load tests (JMeter)
 - `src` - application sources
   - `main`
     - `java/stackoverflow`
@@ -76,6 +95,18 @@ and access the website at [http://localhost:9080](http://localhost:9080).
 ## Workflow
 
 Unstable/development code belongs in [devs](https://github.com/AMT-Long-Du-Zboub/amt-project-1/tree/devs) while stable code is in [master](https://github.com/AMT-Long-Du-Zboub/amt-project-1/tree/master).
+
+## Added features
+
+- Vote: can vote on comments and answers
+- Added integration tests for JdbcCommentRepository
+- e2e: initial tests work again
+
+## Remaining bits
+
+- Cove more use cases with CodeceptJS
+- Complete JUnit tests
+- Use Mockups for simple unit testing
 
 ## Authors
 

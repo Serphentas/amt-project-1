@@ -120,3 +120,5 @@ amt-project-1.ipr
 .settings/org.eclipse.m2e.core.prefs
 .vscode
 .factorypath
+
+e2e/output/

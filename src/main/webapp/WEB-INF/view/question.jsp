@@ -93,9 +93,9 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="/submitAnswer?id=${question.id.asString()}" class="btn btn-outline-secondary">Answer</a>
-                            <a href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary">Comment</a>
-                            <a href="/questions" class="btn btn-outline-secondary">Back to question list</a>
+                            <a id="answerButton" href="/submitAnswer?id=${question.id.asString()}" class="btn btn-outline-secondary">Answer</a>
+                            <a id="commentButton" href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary">Comment</a>
+                            <a id="backButton" href="/questions" class="btn btn-outline-secondary">Back to question list</a>
                         </div>
                     </div>
                 </div>
