@@ -45,10 +45,8 @@
                         <c:when test="${currentUser != null}">
                             <div>
                                     ${currentUser.firstName} ${currentUser.lastName}
+                                    <a href="/logout.do" class="btn btn-primary btn-sm">Logout</a>
                             </div>
-                            <form method="post" action="logout.do">
-                                <button role="submit" >Logout</button>
-                            </form>
                         </c:when>
                         <c:otherwise>
                             <div>
