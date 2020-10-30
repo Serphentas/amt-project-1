@@ -52,6 +52,6 @@ public class SubmitCommentPostServlet extends HttpServlet {
                 .text(req.getParameter("text"))
                 .build();
         serviceReg.getCommentFacade().proposeComment(command);
-        resp.sendRedirect("/questions");
+        resp.sendRedirect("/question?id=" + questionId.asString());
     }
 }

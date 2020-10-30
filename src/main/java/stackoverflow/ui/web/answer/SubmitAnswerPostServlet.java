@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @WebServlet(name="SubmitAnswerCmdServlet", urlPatterns = "/submitAnswer.do")
-public class ProposeAnswerCmdServlet extends HttpServlet {
+public class SubmitAnswerPostServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;
@@ -42,6 +42,6 @@ public class ProposeAnswerCmdServlet extends HttpServlet {
                 .text(req.getParameter("text"))
                 .build();
         serviceReg.getAnswerFacade().proposeAnswer(command);
-        resp.sendRedirect("/questions");
+        resp.sendRedirect("/question?id=" + questionId.asString());
     }
 }
