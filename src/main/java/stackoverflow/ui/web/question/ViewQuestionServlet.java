@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import stackoverflow.application.ServiceReg;
 import stackoverflow.application.answer.AnswersDTO;
 import stackoverflow.application.answer.AnswersQuery;
+import stackoverflow.application.comment.CommentQuery;
+import stackoverflow.application.comment.CommentsDTO;
 import stackoverflow.application.question.QuestionsDTO.QuestionDTO;
 import stackoverflow.domain.question.QuestionId;
 
@@ -40,9 +42,14 @@ public class ViewQuestionServlet extends HttpServlet {
             .id(idQuestion)
             .build()
         );
+        CommentsDTO comments = serviceReg.getCommentFacade().getQuestionComments(CommentQuery.builder()
+                .id(UUID.fromString(idQuestion.asString()))
+                .build()
+        );
         req.setAttribute("question", question);
         req.setAttribute("answers", answers);
         req.setAttribute("votes", serviceReg.getVoteFacade().nbrVoteQuestion(idQuestion));
+        req.setAttribute("comments", comments);
         req.getRequestDispatcher("/WEB-INF/view/question.jsp").forward(req, resp);
     }
 }
