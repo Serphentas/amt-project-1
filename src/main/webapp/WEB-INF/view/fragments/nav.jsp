@@ -4,7 +4,7 @@
     <div class="container">
         <div class="navbar-translate">
             <a class="navbar-brand" href="../">
-                Our StackOverflow </a>
+                Codemad </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="navbar-toggler-icon"></span>
@@ -19,15 +19,25 @@
                         <i class="material-icons">apps</i> Menu
                     </a>
                     <div class="dropdown-menu dropdown-with-icons">
-                        <a href="<c:url value="/submitQuestion"/>" class="dropdown-item">
-                            <i class="material-icons">layers</i> Ask your questions
-                        </a>
+                        <c:choose>
+                            <c:when test="${currentUser != null}">
+                                <a href="<c:url value="/submitQuestion"/>" class="dropdown-item">
+                                    <i class="material-icons">layers</i> Ask your questions
+                                </a>
+                            </c:when>
+                        </c:choose>
+
                         <a href="<c:url value="/questions"/>" class="dropdown-item">
                             <i class="material-icons">article</i> View questions list
                         </a>
-                        <a href="<c:url value="/profil"/>" class="dropdown-item">
-                            <i class="material-icons">content_paste</i> Your profil
-                        </a>
+
+                        <c:choose>
+                            <c:when test="${currentUser != null}">
+                                <a href="<c:url value="/profil"/>" class="dropdown-item">
+                                <i class="material-icons">content_paste</i> Your profil
+                            </a>
+                                </c:when>
+                        </c:choose>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -35,15 +45,13 @@
                         <c:when test="${currentUser != null}">
                             <div>
                                     ${currentUser.firstName} ${currentUser.lastName}
+                                    <a href="/logout.do" class="btn btn-primary btn-sm">Logout</a>
                             </div>
-                            <form method="post" action="logout.do">
-                                <button role="submit" >Logout</button>
-                            </form>
                         </c:when>
                         <c:otherwise>
                             <div>
                                 <a class="nav-link" href="<c:url value="/login"/>">
-                                    Sign up/in
+                                    Sign in
                                 </a>
                             </div>
                         </c:otherwise>
@@ -61,4 +69,3 @@
         </div>
     </div>
 </nav>
-

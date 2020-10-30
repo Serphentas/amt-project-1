@@ -32,7 +32,7 @@
                                   <i class="material-icons">description</i>
                                 </span>
                             </div>
-                            <textarea class="form-control" id ="tfText" name="text" form="newQuestion" rows="4" placeholder="Content..."></textarea>
+                            <textarea class="form-control" id="tfText" name="text" form="newQuestion" rows="1" placeholder="Content..."></textarea>
                         </div>
                     </div>
                     <div class="footer text-center">
@@ -43,4 +43,3 @@
         </div>
     </div>
 </t:base>
-

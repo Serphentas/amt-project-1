@@ -9,16 +9,16 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:base>
-    <div class="page-header header-filter" style="background-image: url('/assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+    <div class="page-header header-filter" style="background-image: url('/assets/img/bg7.jpg'); background-size: cover; background-position: top center; height: 100vh;">
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="card card-login">
                         <form class="form" method="post" action="login.do">
                             <div class="card-header card-header-primary text-center">
-                                <h4 class="card-title">Sign up</h4>
+                                <h4 class="card-title">Sign in</h4>
                             </div>
-                            <p class="description text-center">Sign in :D </p>
+                            <p class="description text-center">Log in to access the community</p>
                             <div class="card-body">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -52,14 +52,14 @@
                     <div class="card card-login">
                         <form class="form" method="post" action="register.do">
                             <div class="card-header card-header-primary text-center">
-                                <h4 class="card-title">Sign in</h4>
+                                <h4 class="card-title">Sign up</h4>
                             </div>
-                            <p class="description text-center">Nice to meet you :D </p>
+                            <p class="description text-center">Create your account to access our service</p>
                             <div class="card-body">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                      <i class="material-icons">face</i>
+                                      <i class="fas fa-grin-alt"></i>
                                     </span>
                                     </div>
                                     <input id="fUsername" name="username" type="text" class="form-control" placeholder="Username...">
@@ -67,7 +67,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                      <i class="material-icons">mail</i>
+                                        <i class="fas fa-envelope"></i>
                                     </span>
                                     </div>
                                     <input id="fEmail" name="email" type="text" class="form-control" placeholder="Email...">
@@ -95,6 +95,7 @@
                                     </span>
                                     </div>
                                     <input id="fPassword" name="password" type="password" class="form-control" placeholder="Password...">
+                                    <small>Your password must be 8 characters long, in which there must be one small and uppercase letter, a digit, a special character (like $).</small>
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -118,8 +119,9 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <jsp:include page="fragments/errors.jsp" flush="true"/>
+            </div>
         </div>
-
-        <jsp:include page="fragments/errors.jsp" flush="true"/>
     </div>
 </t:base>

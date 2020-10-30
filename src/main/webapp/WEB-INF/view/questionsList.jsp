@@ -11,6 +11,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean scope="request" id="questions" type="stackoverflow.application.question.QuestionsDTO"/>
 
 <t:base>
@@ -28,34 +29,27 @@
     </div>
     <div class="main main-raised bg-dark">
         <div class="container">
-            <div class="section">
-                <c:forEach var="question" items="${questions.questions}">
-                    <div class="alert alert-secondary" role="alert">
-                        <a class="nav-link" role="tab" data-toggle="tab">
-                            <i class="material-icons">camera</i>
-                            <h3 class="description text-left text-uppercase font-weight-bold text-dark">${question.title}</h3>
-                            <p class="description text-left text-dark ">${question.text}</p><br>
-                            <div class="row">
-                                <div class="column">
-                                    <div>
-                                        <a href="/submitAnswer?id=${question.id.asString()}" class="btn btn-outline-secondary">Answer</a>
-
+            <div class="section col-md-6 offset-md-3">
+                <c:choose>
+                    <c:when test="${questions.questions.size() > 0}">
+                        <c:forEach var="question" items="${questions.questions}">
+                            <div class="alert alert-secondary" role="alert">
+                                <a class="nav-link" role="tab" data-toggle="tab">
+                                    <h3 class="description text-left text-uppercase font-weight-bold text-dark"><i>${question.title}</i></h3>
+                                    <p class="description text-left text-dark ">${question.text}</p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a href="/question?id=${question.id.asString()}" class="btn btn-outline-secondary">Go to question</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="column">
-                                    <div>
-                                        <a href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary">Comment</a>
-                                    </div>
-                                </div>
-                                <div class="column">
-                                    <div>
-                                        <a href="/question?id=${question.id.asString()}" class="btn btn-outline-secondary">Go to question</a>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                </c:forEach>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <h2 style="color: white"><b>No such questions yet</b></h2>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

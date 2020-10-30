@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="footer text-center">
-                        <button id="bSubmitAnswer" type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Submit Comment</button>
+                        <button id="bSubmitComment" type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Submit Comment</button>
                     </div>
                 </form>
             </div>

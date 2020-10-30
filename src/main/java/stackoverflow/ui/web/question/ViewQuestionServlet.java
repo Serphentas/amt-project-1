@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import stackoverflow.application.ServiceReg;
 import stackoverflow.application.answer.AnswersDTO;
 import stackoverflow.application.answer.AnswersQuery;
+import stackoverflow.application.comment.CommentQuery;
+import stackoverflow.application.comment.CommentsDTO;
+import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 import stackoverflow.application.question.QuestionsDTO.QuestionDTO;
 import stackoverflow.domain.question.QuestionId;
 
@@ -25,6 +28,8 @@ public class ViewQuestionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idParam = req.getParameter("id");
+
+        CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
 
         // if ID malformed or not given, redirect to homepage
         try {
@@ -40,9 +45,17 @@ public class ViewQuestionServlet extends HttpServlet {
             .id(idQuestion)
             .build()
         );
+        CommentsDTO comments = serviceReg.getCommentFacade().getQuestionComments(CommentQuery.builder()
+                .idQuestion(UUID.fromString(idQuestion.asString()))
+                .build()
+        );
         req.setAttribute("question", question);
         req.setAttribute("answers", answers);
         req.setAttribute("votes", serviceReg.getVoteFacade().nbrVoteQuestion(idQuestion));
+        if (currentUser != null) {
+            req.setAttribute("hasVoted", serviceReg.getVoteFacade().hasVotedQuestion(idQuestion, currentUser.getId()));
+        }
+        req.setAttribute("comments", comments);
         req.getRequestDispatcher("/WEB-INF/view/question.jsp").forward(req, resp);
     }
 }

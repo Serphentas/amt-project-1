@@ -13,4 +13,7 @@ public interface IVoteRepo extends IRepo<Vote, VoteId> {
 
     boolean hasVotedComment(CommentId commentId, PersonId currentUser);
     int nbrVoteComment(CommentId commentId);
+
+    void unvoteForQuestion(QuestionId commentId, PersonId currentUser);
+    void unvoteForComment(CommentId commentId, PersonId currentUser);
 }
