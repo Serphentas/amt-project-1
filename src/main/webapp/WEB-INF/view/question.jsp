@@ -35,26 +35,42 @@
                     <p class="description text-left text-dark"><i class="fas fa-signal"></i> Votes: ${votes} </p><br>
 
                     <h3><u>Comments</u></h3>
-                    <c:forEach var="comment" items="${comments.comments}">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="description text-left text-dark ">
-                                    <i class="fas fa-comment-alt"></i> <i>${comment.author}</i> - ${comment.text}
-                                </p>
-                            </div>
-                        </div>
-                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${comments.comments.size() > 0}">
+                            <c:forEach var="comment" items="${comments.comments}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="description text-left text-dark ">
+                                            <i class="fas fa-comment-alt"></i> <i>${comment.author}</i> - ${comment.text}
+                                        </p>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <h3><b>None yet</b></h3>
+                        </c:otherwise>
+                    </c:choose>
+
 
                     <h3><u>Answers</u></h3>
-                    <c:forEach var="answer" items="${answers.answers}">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="description text-left text-dark ">
-                                    <i class="fas fa-hand-pointer"></i> <i>${answer.author}</i> - ${answer.text}
-                                </p>
-                            </div>
-                        </div>
-                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${answers.answers.size() > 0}">
+                            <c:forEach var="answer" items="${answers.answers}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="description text-left text-dark ">
+                                            <i class="fas fa-hand-pointer"></i> <i>${answer.author}</i> - ${answer.text}
+                                        </p>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <h3><b>None yet</b></h3>
+                        </c:otherwise>
+                    </c:choose>
+
 
                     <div class="row">
                         <div class="col-md-12">
