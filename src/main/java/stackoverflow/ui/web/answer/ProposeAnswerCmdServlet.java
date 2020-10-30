@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet(name="SubmitAnswerCmdServlet", urlPatterns = "/submitAnswer.do")
 public class ProposeAnswerCmdServlet extends HttpServlet {
@@ -24,15 +25,23 @@ public class ProposeAnswerCmdServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String idParam = req.getParameter("id");
+
+        // if ID malformed or not given, redirect to homepage
+        try {
+            UUID.fromString(idParam);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            resp.sendRedirect("/");
+            return;
+        }
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
         QuestionId questionId = new QuestionId(req.getParameter("id"));
         ProposeAnswerCmd command = ProposeAnswerCmd.builder()
-                .id(new AnswerId())
                 .personId(currentUser.getId())
                 .questionId(questionId)
                 .text(req.getParameter("text"))
                 .build();
         serviceReg.getAnswerFacade().proposeAnswer(command);
-        resp.sendRedirect("/questionsList");
+        resp.sendRedirect("/questions");
     }
 }

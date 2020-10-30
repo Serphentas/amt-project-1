@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Singular;
+import stackoverflow.domain.answer.Answer;
+import stackoverflow.domain.answer.AnswerId;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class AnswersDTO {
     @Getter
     @EqualsAndHashCode
     public static class AnswerDTO{
+        private AnswerId id;
         private String text;
         private String author;
     }

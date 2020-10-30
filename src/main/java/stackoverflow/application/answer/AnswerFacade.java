@@ -1,7 +1,10 @@
 package stackoverflow.application.answer;
 
+import stackoverflow.application.question.QuestionsDTO;
 import stackoverflow.domain.answer.Answer;
+import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.answer.IAnswerRepo;
+import stackoverflow.domain.question.Question;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,12 +18,22 @@ public class AnswerFacade {
 
     public void proposeAnswer(ProposeAnswerCmd command) {
         Answer submittedAnswer = Answer.builder()
-                .id(command.getId())
                 .personId(command.getPersonId())
                 .questionId(command.getQuestionId())
                 .text(command.getText())
                 .build();
         answerRepo.save(submittedAnswer);
+    }
+
+    public AnswersDTO.AnswerDTO getAnswerById(AnswerId id){
+        Answer answer = answerRepo.findById(id).orElse(null);
+        if( answer == null)
+            return null;
+        return AnswersDTO.AnswerDTO.builder()
+                .text(answer.getText())
+                .author(answer.getAuthor())
+                .id(answer.getId())
+                .build();
     }
 
     public AnswersDTO getAnswers(AnswersQuery query) {

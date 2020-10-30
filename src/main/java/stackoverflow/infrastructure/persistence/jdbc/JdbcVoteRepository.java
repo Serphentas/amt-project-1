@@ -1,5 +1,6 @@
 package stackoverflow.infrastructure.persistence.jdbc;
 
+import stackoverflow.domain.comment.CommentId;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
 import stackoverflow.domain.vote.IVoteRepo;
@@ -33,17 +34,18 @@ public class JdbcVoteRepository implements IVoteRepo {
 
     @Override
     public void toggle(Vote entity) {
-        if(!hasVotedQuestion(entity.getQuestionId(), entity.getPersonId())) {
-            if (entity.getQuestionId() != null) {
+        if (entity.getQuestionId() != null) {
+            if (!hasVotedQuestion(entity.getQuestionId(), entity.getPersonId())) {
                 voteForQuestion(entity.getQuestionId(), entity.getPersonId());
             } else {
-                //voteForComment(entity.getQuestionId(), entity.getPersonId());
-            }
-        } else {
-            if (entity.getQuestionId() != null) {
                 unvoteForQuestion(entity.getQuestionId(), entity.getPersonId());
+
+            }
+        } else if (entity.getCommentId() != null){
+            if (!hasVotedComment(entity.getCommentId(), entity.getPersonId())) {
+                voteForComment(entity.getCommentId(), entity.getPersonId());
             } else {
-                //unvoteForComment(entity.getQuestionId(), entity.getPersonId());
+                unvoteForComment(entity.getCommentId(), entity.getPersonId());
             }
         }
     }
@@ -74,7 +76,7 @@ public class JdbcVoteRepository implements IVoteRepo {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
                     "INSERT INTO `codemad`.`Vote`(idVote, idUser, idQuestion) VALUES (?, ?, ?)");
-            statement.setString(1, UUID.randomUUID().toString());
+            statement.setString(1, new VoteId().asString());
             statement.setString(2, personId.asString());
             statement.setString(3, questionId.asString());
             statement.execute();
@@ -85,7 +87,6 @@ public class JdbcVoteRepository implements IVoteRepo {
     }
 
     public boolean hasVotedQuestion(QuestionId questionId, PersonId currentUser){
-
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
                     "SELECT * FROM codemad.Vote WHERE idUser=? AND idQuestion=?");
@@ -137,16 +138,14 @@ public class JdbcVoteRepository implements IVoteRepo {
         }
     }
 
-
-    /*
     private void voteForComment(CommentId commentId, PersonId personId){
         try {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "INSERT INTO `codemad`.`Vote`(idVote, idUser, idCommentary) VALUES (?, ?, ?)");
-            statement.setString(1, UUID.randomUUID().toString());
+                    "INSERT INTO `codemad`.`Vote`(idVote, idUser, idComment) VALUES (?, ?, ?)");
+            statement.setString(1, new VoteId().asString());
             statement.setString(2, personId.asString());
-            statement.setString(3, commentaryId.asString());
+            statement.setString(3, commentId.asString());
             statement.execute();
 
         } catch (SQLException throwables) {
@@ -154,11 +153,10 @@ public class JdbcVoteRepository implements IVoteRepo {
         }
     }
 
-    @Override
     public boolean hasVotedComment(CommentId commentId, PersonId currentUser){
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "SELECT * FROM codemad.Vote WHERE idUser=? AND idCommentary=?");
+                    "SELECT * FROM codemad.Vote WHERE idUser=? AND idComment=?");
             statement.setString(1, currentUser.asString());
             statement.setString(2, commentId.asString());
             ResultSet rs = statement.executeQuery();
@@ -177,7 +175,7 @@ public class JdbcVoteRepository implements IVoteRepo {
     public int nbrVoteComment(CommentId commentId){
         try {
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "SELECT COUNT(Vote.idVote) AS nbrVote FROM codemad.Vote GROUP BY Vote.idCommentary HAVING idCommentary=?");
+                    "SELECT COUNT(Vote.idVote) AS nbrVote FROM codemad.Vote GROUP BY Vote.idComment HAVING idComment=?");
             statement.setString(1, commentId.asString());
 
             ResultSet rs = statement.executeQuery();
@@ -197,7 +195,7 @@ public class JdbcVoteRepository implements IVoteRepo {
         try {
 
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
-                    "DELETE FROM `codemad`.`Vote` WHERE idUser=? AND idCommentary=?");
+                    "DELETE FROM `codemad`.`Vote` WHERE idUser=? AND idComment=?");
             statement.setString(1, personId.asString());
             statement.setString(2, commentId.asString());
             statement.execute();
@@ -206,5 +204,4 @@ public class JdbcVoteRepository implements IVoteRepo {
             throwables.printStackTrace();
         }
     }
-    */
 }

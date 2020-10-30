@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import stackoverflow.domain.person.PersonId;
+import stackoverflow.domain.question.QuestionId;
 
 @Builder
 @Getter
@@ -14,20 +16,17 @@ import lombok.Setter;
 public class QuestionsQuery {
 
     @Builder.Default
-    private UUID id = null;
+    private QuestionId id = null;
 
     @Builder.Default
-    private UUID idUser = null;
+    private PersonId idUser = null;
 
     @Builder.Default
-    private String author = "No author";
+    private String author = null;
 
     @Builder.Default
-    private String title = "No title";
+    private String title = null;
 
     @Builder.Default
-    private String text = "No text";
-
-    @Builder.Default
-    private boolean safeForChildren = true;
+    private String text = null;
 }

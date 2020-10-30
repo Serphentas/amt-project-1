@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Singular;
+import stackoverflow.domain.comment.CommentId;
 import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
 
@@ -21,10 +22,9 @@ public class VotesDTO {
         private boolean vote;
         private PersonId personId;
         private QuestionId questionId;
-        //todo à décomenter quand commentary est là
-        //private CommentId commentId;
+        private CommentId commentId;
     }
 
     @Singular
-    private List<stackoverflow.application.answer.AnswersDTO.AnswerDTO> votes;
+    private List<VotesDTO.VoteDTO> votes;
 }

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet(name = "SubmitAnswerPageServlet", urlPatterns = "/submitAnswer")
 public class SubmitAnswerPageServlet extends HttpServlet {
@@ -26,6 +27,16 @@ public class SubmitAnswerPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String idParam = req.getParameter("id");
+
+        // if ID malformed or not given, redirect to homepage
+        try {
+            UUID.fromString(idParam);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            resp.sendRedirect("/");
+            return;
+        }
+
         QuestionsDTO.QuestionDTO question = serviceReg.getQuestionFacade().getQuestionById( new QuestionId( req.getParameter("id")));
         req.setAttribute("page", "Answer");
         req.setAttribute("question", question);

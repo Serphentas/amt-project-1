@@ -38,18 +38,20 @@ public class JdbcQuestionRepository implements IQuestionRepo {
         try {
             PreparedStatement statement = getStatement(
                     "INSERT INTO codemad.Question (idQuestion, idUser, title, text) VALUES (?, ?, ?, ?)");
-            statement.setString(1, UUID.randomUUID().toString());
-            statement.setString(2, entity.getIdUser().asString());
+            statement.setString(1, entity.getId().asString());
+            statement.setString(2, entity.getUserId().asString());
             statement.setString(3, entity.getTitle());
             statement.setString(4, entity.getText());
             statement.execute();
 
-            for(Tag tag : entity.getTags()) {
-                statement = dataSource.getConnection().prepareStatement(
-                        "INSERT INTO codemad.Question_Tag (idQuestion, idTag) VALUES (?, ?)");
-                statement.setString(1, entity.getId().asString());
-                statement.setString(2, tag.getId().asString());
-                statement.execute();
+            if( entity.getTags() != null) {
+                for (Tag tag : entity.getTags()) {
+                    statement = dataSource.getConnection().prepareStatement(
+                            "INSERT INTO codemad.Question_Tag (idQuestion, idTag) VALUES (?, ?)");
+                    statement.setString(1, entity.getId().asString());
+                    statement.setString(2, tag.getId().asString());
+                    statement.execute();
+                }
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -83,7 +85,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
                         .author(rs.getString("username"))
                         .title(rs.getString("title"))
                         .text(rs.getString("text"))
-                        .idUser(new PersonId(rs.getString("idUser")))
+                        .userId(new PersonId(rs.getString("idUser")))
                         .tags(tags)
                         .build();
                 question.add(questionSearch);
@@ -119,7 +121,7 @@ public class JdbcQuestionRepository implements IQuestionRepo {
                         .author(rs.getString("username"))
                         .title(rs.getString("title"))
                         .text(rs.getString("text"))
-                        .idUser(new PersonId(rs.getString("idUser")))
+                        .userId(new PersonId(rs.getString("idUser")))
                         .tags(tags)
                         .build();
                 allQuestions.add(question);
@@ -150,12 +152,11 @@ public class JdbcQuestionRepository implements IQuestionRepo {
     @Override
     public Collection<Question> find(QuestionsQuery query) {
         try {
-            PreparedStatement statement = getStatement(query.isSafeForChildren() ?
-                "SELECT * FROM codemad.Question WHERE title LIKE '%?%' AND text NOT LIKE '%?%'" :
-                "SELECT * FROM codemad.Question WHERE title LIKE '%?%' AND text LIKE '%?%'"
+            PreparedStatement statement = getStatement(String.format(
+                "SELECT * FROM codemad.Question WHERE title LIKE 'POURCENT%sPOURCENT'",
+                    query.getTitle()
+                ).replaceAll("POURCENT", "%")
             );
-            statement.setString(1, query.getTitle());
-            statement.setString(2, query.isSafeForChildren() ? "sex" : query.getText());
 
             return resultSetAsList(statement.executeQuery());
         } catch (SQLException throwables) {

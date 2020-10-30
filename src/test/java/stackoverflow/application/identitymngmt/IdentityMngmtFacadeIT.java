@@ -1,216 +1,110 @@
 package stackoverflow.application.identitymngmt;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import stackoverflow.application.identitymngmt.IdentityMngmtFacade;
-import stackoverflow.application.identitymngmt.authenticate.AuthenticateCmd;
+import stackoverflow.application.identitymngmt.authenticate.ProposeAuthenticateCmd;
 import stackoverflow.application.identitymngmt.authenticate.AuthenticateFailedException;
-import stackoverflow.application.identitymngmt.login.RegisterCmd;
+import stackoverflow.application.identitymngmt.login.ProposeRegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
-import stackoverflow.domain.person.IPersonRepo;
-import stackoverflow.domain.person.Person;
-import stackoverflow.infrastructure.persistence.memory.MemoryPersonRepo;
+import stackoverflow.infrastructure.persistence.helper.DataSourceProvider;
+import stackoverflow.infrastructure.persistence.jdbc.JdbcUserRepository;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class IdentityMngmtFacadeIT {
 
-    private IdentityMngmtFacade identityMngmtFacade;
+    static IdentityMngmtFacade facade;
+    static Connection con;
 
-    @BeforeEach
-    void setupIdentityMngmtFacade(){
-        IPersonRepo personRepo = new MemoryPersonRepo();
-        this.identityMngmtFacade = new IdentityMngmtFacade(personRepo);
+    @BeforeAll
+    public static void setupFacade() throws SQLException {
+        facade = new IdentityMngmtFacade(new JdbcUserRepository(DataSourceProvider.getDataSource()));
+
+        con = DataSourceProvider.getDataSource().getConnection();
+        con.prepareStatement("DELETE FROM User").execute();
     }
 
-    void setup1Register(){
-        RegisterCmd cmd = RegisterCmd.builder()
-            .username("Rabbit")
-            .email("alice.wonderland@gmail.com")
-            .firstName("alice")
-            .lastName("Wonderland")
-            .clearTextPassword("abcd")
-            .build();
-        try {
-            identityMngmtFacade.register(cmd);
-        } catch (RegistrationFailedException e) {}
+    @AfterEach
+    public void cleanDBB() throws SQLException {
+        con.prepareStatement("DELETE FROM User").execute();
     }
 
     @Test
-    void iCanRegister(){
-        RegisterCmd cmd = RegisterCmd.builder()
+    public void iCanRegister(){
+        ProposeRegisterCmd cmd = ProposeRegisterCmd.builder()
                 .username("Rabbit")
                 .email("alice.wonderland@gmail.com")
                 .firstName("alice")
                 .lastName("Wonderland")
-                .clearTextPassword("abcd")
+                .clearTextPassword("Pa$$w0rd")
+                .confirmPassword("Pa$$w0rd")
                 .build();
-        try {
-            identityMngmtFacade.register(cmd);
-        } catch (RegistrationFailedException e){
-            fail();
-        }
+        assertDoesNotThrow(() -> {
+            facade.register(cmd);
+        });
+
     }
 
     @Test
     void registerThrowIfUsernameExist(){
-        setup1Register();
-
-        boolean hasException = false;
-        RegisterCmd cmd = RegisterCmd.builder()
+        iCanRegister();
+        ProposeRegisterCmd cmd = ProposeRegisterCmd.builder()
                 .username("Rabbit")
                 .email("alice.wonderland@gmail.com")
                 .firstName("alice")
                 .lastName("Wonderland")
-                .clearTextPassword("abcd")
+                .clearTextPassword("Pa$$w0rd")
+                .confirmPassword("Pa$$w0rd")
                 .build();
 
-        try {
-
-            identityMngmtFacade.register(cmd);
-        } catch (RegistrationFailedException e){
-            hasException = true;
-        }
-
-        assertTrue(hasException);
+        assertThrows(RegistrationFailedException.class, () -> {
+            facade.register(cmd);
+        });
     }
 
     @Test
-    void usernameIsMandatoryInRegister(){
-        boolean hasException = false;
-        RegisterCmd cmd = RegisterCmd.builder()
-            .email("alice.wonderland@gmail.com")
-            .firstName("alice")
-            .lastName("Wonderland")
-            .clearTextPassword("abcd")
-            .build();
-        try {
-            identityMngmtFacade.register(cmd);
-        } catch (RegistrationFailedException e){
-            hasException = true;
-        }
-
-        assertTrue(hasException);
-    }
-
-    @Test
-    void emailIsMandatoryInRegister(){
-        boolean hasException = false;
-        RegisterCmd cmd = RegisterCmd.builder()
-                .username("Rabbit")
-                .firstName("alice")
-                .lastName("Wonderland")
-                .clearTextPassword("abcd")
-                .build();
-        try {
-            identityMngmtFacade.register(cmd);
-        } catch (RegistrationFailedException e){
-            hasException = true;
-        }
-
-        assertTrue(hasException);
-    }
-
-    @Test
-    void firstNameIsMandatoryInRegister(){
-        boolean hasException = false;
-        RegisterCmd cmd = RegisterCmd.builder()
-                .username("Rabbit")
-                .email("alice.wonderland@gmail.com")
-                .lastName("Wonderland")
-                .clearTextPassword("abcd")
-                .build();
-        try {
-            identityMngmtFacade.register(cmd);
-            fail();
-        } catch (RegistrationFailedException e){
-            hasException = true;
-        }
-
-        assertTrue(hasException);
-    }
-
-    @Test
-    void lastNameIsMandatoryInRegister(){
-        boolean hasException = false;
-        RegisterCmd cmd = RegisterCmd.builder()
-                .username("Rabbit")
-                .email("alice.wonderland@gmail.com")
-                .firstName("alice")
-                .clearTextPassword("abcd")
-                .build();
-        try {
-            identityMngmtFacade.register(cmd);
-        } catch (RegistrationFailedException e){
-            hasException = true;
-        }
-
-        assertTrue(hasException);
-    }
-
-    @Test
-    void passwordIsMandatoryInRegister(){
-        boolean hasException = false;
-        RegisterCmd cmd = RegisterCmd.builder()
-                .username("Rabbit")
+    void registerThrowIfclearTextPasswordNotEqualConfirmPassword(){
+        ProposeRegisterCmd cmd = ProposeRegisterCmd.builder()
+                .username("Rabbit2")
                 .email("alice.wonderland@gmail.com")
                 .firstName("alice")
                 .lastName("Wonderland")
+                .clearTextPassword("Pa$$w0rd1")
+                .confirmPassword("Pa$$w0rd2")
                 .build();
-        try {
-            identityMngmtFacade.register(cmd);
-        } catch (RegistrationFailedException e){
-            hasException = true;
-        }
 
-        assertTrue(hasException);
+        assertThrows(RegistrationFailedException.class, () -> {
+            facade.register(cmd);
+        });
     }
 
     @Test
     void iCanAuthenticate(){
-        setup1Register();
-        AuthenticateCmd cmd = AuthenticateCmd.builder()
+        iCanRegister();
+        ProposeAuthenticateCmd cmd = ProposeAuthenticateCmd.builder()
                 .username("Rabbit")
-                .clearTextPassword("abcd")
+                .clearTextPassword("Pa$$w0rd")
                 .build();
-        try {
-            identityMngmtFacade.authenticate(cmd);
-        } catch (AuthenticateFailedException e){
-            fail();
-        }
-    }
 
-    @Test
-    void usernameIsMandatoryInAuthenticate(){
-        setup1Register();
-        boolean hasException = false;
-        AuthenticateCmd cmd = AuthenticateCmd.builder()
-                .clearTextPassword("abcd")
-                .build();
-        try {
-            identityMngmtFacade.authenticate(cmd);
-        } catch (AuthenticateFailedException e){
-            hasException = true;
-        }
-
-        assertTrue(hasException);
+        assertDoesNotThrow(() -> {
+            facade.authenticate(cmd);
+        });
     }
 
     @Test
     void credentialsShouldBeCorrectToAuthenticate(){
-        setup1Register();
-        boolean hasException = false;
-        AuthenticateCmd cmd = AuthenticateCmd.builder()
+        iCanRegister();
+        ProposeAuthenticateCmd cmd = ProposeAuthenticateCmd.builder()
                 .username("Rabbit")
                 .clearTextPassword("blat")
                 .build();
-        try {
-            identityMngmtFacade.authenticate(cmd);
-        } catch (AuthenticateFailedException e){
-            hasException = true;
-        }
 
-        assertTrue(hasException);
+        assertThrows(AuthenticateFailedException.class, () -> {
+            facade.authenticate(cmd);
+        });
     }
 }

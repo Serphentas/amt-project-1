@@ -22,7 +22,7 @@
                         <a href="<c:url value="/submitQuestion"/>" class="dropdown-item">
                             <i class="material-icons">layers</i> Ask your questions
                         </a>
-                        <a href="<c:url value="/questionsList"/>" class="dropdown-item">
+                        <a href="<c:url value="/questions"/>" class="dropdown-item">
                             <i class="material-icons">article</i> View questions list
                         </a>
                         <a href="<c:url value="/profil"/>" class="dropdown-item">
@@ -50,9 +50,9 @@
                     </c:choose>
                 </li>
             </ul>
-            <form class="form-inline ml-auto">
+            <form class="form-inline ml-auto" action="/search" method="GET">
                 <div class="form-group no-border">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input id="title" name="title" type="text" class="form-control" placeholder="Search">
                 </div>
                 <button type="submit" class="btn btn-white btn-just-icon btn-round">
                     <i class="material-icons">search</i>

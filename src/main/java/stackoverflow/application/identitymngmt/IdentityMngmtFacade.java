@@ -1,13 +1,12 @@
 package stackoverflow.application.identitymngmt;
 
-import stackoverflow.application.identitymngmt.authenticate.AuthenticateCmd;
+import stackoverflow.application.identitymngmt.authenticate.ProposeAuthenticateCmd;
 import stackoverflow.application.identitymngmt.authenticate.AuthenticateFailedException;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
-import stackoverflow.application.identitymngmt.login.RegisterCmd;
+import stackoverflow.application.identitymngmt.login.ProposeRegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
 import stackoverflow.domain.person.IPersonRepo;
 import stackoverflow.domain.person.Person;
-import stackoverflow.infrastructure.persistence.jdbc.JdbcUserRepository;
 
 public class IdentityMngmtFacade {
     private IPersonRepo personRepo;
@@ -25,7 +24,7 @@ public class IdentityMngmtFacade {
         return result && clearTextPassword.length()>7;
     }
 
-    public void register(RegisterCmd cmd) throws RegistrationFailedException {
+    public void register(ProposeRegisterCmd cmd) throws RegistrationFailedException {
         Person yetExistingPerson = personRepo.findByUsername(cmd.getUsername()).orElse(null);
 
         if( yetExistingPerson != null){
@@ -59,7 +58,7 @@ public class IdentityMngmtFacade {
         }
     }
 
-    public CurrentUserDTO authenticate(AuthenticateCmd cmd) throws AuthenticateFailedException {
+    public CurrentUserDTO authenticate(ProposeAuthenticateCmd cmd) throws AuthenticateFailedException {
         Person person = personRepo.findByUsername(cmd.getUsername())
             .orElseThrow(() -> new AuthenticateFailedException("User not found"));
 

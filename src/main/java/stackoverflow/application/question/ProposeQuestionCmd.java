@@ -1,13 +1,8 @@
 package stackoverflow.application.question;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 import stackoverflow.domain.person.PersonId;
-import stackoverflow.domain.question.QuestionId;
 import stackoverflow.domain.tag.Tag;
 
 import java.util.Collection;
@@ -17,16 +12,15 @@ import java.util.Collection;
 @Setter
 @EqualsAndHashCode
 public class ProposeQuestionCmd {
+    @NonNull
+    private PersonId userId;
 
-    private PersonId idUser;
-
-    @Builder.Default
-    private String title = "No title";
-
-    private QuestionId id;
-    private Collection<Tag> tags;
-
+    @NonNull
+    private String title;
+    @NonNull
+    private String text;
 
     @Builder.Default
-    private String text = "No content";
+    private Collection<Tag> tags = null;
+
 }
