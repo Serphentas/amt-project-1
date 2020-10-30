@@ -43,7 +43,7 @@ public class ViewQuestionServlet extends HttpServlet {
             .build()
         );
         CommentsDTO comments = serviceReg.getCommentFacade().getQuestionComments(CommentQuery.builder()
-                .id(UUID.fromString(idQuestion.asString()))
+                .idQuestion(UUID.fromString(idQuestion.asString()))
                 .build()
         );
         req.setAttribute("question", question);

@@ -112,7 +112,7 @@ public class JdbcCommentRepository implements ICommentRepo {
             );
             statement.setString(1, query.getIdQuestion().toString());
 
-            return resultSetAsList(statement.executeQuery());
+            return resultSetAsList(statement.executeQuery(), true);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -128,7 +128,7 @@ public class JdbcCommentRepository implements ICommentRepo {
             );
             statement.setString(1, query.getIdAnswer().toString());
 
-            return resultSetAsList(statement.executeQuery());
+            return resultSetAsList(statement.executeQuery(), false);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -139,19 +139,29 @@ public class JdbcCommentRepository implements ICommentRepo {
         return dataSource.getConnection().prepareStatement(cmd);
     }
 
-    private ArrayList<Comment> resultSetAsList(ResultSet rs) throws SQLException {
+    private ArrayList<Comment> resultSetAsList(ResultSet rs, boolean useQuestionId) throws SQLException {
         ArrayList<Comment> res = new ArrayList<>();
 
         while (rs.next()) {
-            res.add(Comment.builder()
-                .id(new CommentId(rs.getString("idComment")))
-                .answerId(new AnswerId(rs.getString("idAnswer")))
-                .questionId(new QuestionId(rs.getString("idQuestion")))
-                .personId(new PersonId(rs.getString("idUser")))
-                .author(rs.getString("author"))
-                .text(rs.getString("text"))
-                .build()
-            );
+            if (useQuestionId) {
+                res.add(Comment.builder()
+                    .id(new CommentId(rs.getString("idComment")))
+                    .questionId(new QuestionId(rs.getString("idQuestion")))
+                    .personId(new PersonId(rs.getString("idUser")))
+                    .author(rs.getString("username"))
+                    .text(rs.getString("text"))
+                    .build()
+                );
+            } else {
+                res.add(Comment.builder()
+                    .id(new CommentId(rs.getString("idComment")))
+                    .answerId(new AnswerId(rs.getString("idAnswer")))
+                    .personId(new PersonId(rs.getString("idUser")))
+                    .author(rs.getString("username"))
+                    .text(rs.getString("text"))
+                    .build()
+                );
+            }
         }
 
         return res;

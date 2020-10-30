@@ -21,7 +21,6 @@ public class SearchQuestionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         String keyword = request.getParameter("title");
-        System.out.println(keyword);
 
         // if keyword isn't set, redirect to homepage
         if (keyword == null || keyword.length() == 0) {

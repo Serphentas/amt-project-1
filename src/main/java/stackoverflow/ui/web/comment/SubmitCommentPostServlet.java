@@ -1,4 +1,4 @@
-package stackoverflow.ui.web.Comment;
+package stackoverflow.ui.web.comment;
 
 import stackoverflow.application.ServiceReg;
 import stackoverflow.application.comment.ProposeCommentCmd;
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @WebServlet(name="SubmitCommentCmdServlet", urlPatterns = "/submitComment.do")
-public class ProposeCommentCmdServlet extends HttpServlet {
+public class SubmitCommentPostServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;
