@@ -32,25 +32,13 @@
                 <c:forEach var="question" items="${questions.questions}">
                     <div class="alert alert-secondary" role="alert">
                         <a class="nav-link" role="tab" data-toggle="tab">
-                            <i class="material-icons">camera</i>
-                            <h3 class="description text-left text-uppercase font-weight-bold text-dark">${question.title}</h3>
-                            <p class="description text-left text-dark ">${question.text}</p><br>
+                            <h3 class="description text-left text-uppercase font-weight-bold text-dark"><i>${question.title}</i></h3>
+                            <p class="description text-left text-dark ">${question.text}</p>
                             <div class="row">
-                                <div class="column">
-                                    <div>
-                                        <a href="/submitAnswer?id=${question.id.asString()}" class="btn btn-outline-secondary">Answer</a>
-
-                                    </div>
-                                </div>
-                                <div class="column">
-                                    <div>
-                                        <a href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary" id="commentBtn">Comment</a>
-                                    </div>
-                                </div>
-                                <div class="column">
-                                    <div>
-                                        <a href="/question?id=${question.id.asString()}" class="btn btn-outline-secondary">Go to question</a>
-                                    </div>
+                                <div class="col-md-12">
+                                    <a href="/submitAnswer?id=${question.id.asString()}" class="btn btn-outline-secondary">Answer</a>
+                                    <a href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary" id="commentBtn">Comment</a>
+                                    <a href="/question?id=${question.id.asString()}" class="btn btn-outline-secondary">Go to question</a>
                                 </div>
                             </div>
                         </a>

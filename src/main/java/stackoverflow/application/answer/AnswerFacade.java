@@ -41,7 +41,8 @@ public class AnswerFacade {
 
         List<AnswersDTO.AnswerDTO> allAnswersDTO = allAnswers.stream().map( answer -> AnswersDTO.AnswerDTO.builder()
             .text(answer.getText())
-            .build()
+            .author(answer.getAuthor())
+        .build()
         ).collect(Collectors.toList());
 
         return AnswersDTO.builder()

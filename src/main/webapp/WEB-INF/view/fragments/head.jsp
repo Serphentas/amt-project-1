@@ -11,7 +11,7 @@
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="<c:url value='/assets/css/fonts.css'/>" />
-    <link rel="stylesheet" href="<c:url value='/assets/vendor/font-awesome/css/fontawesome.min.css' />" />
+    <link rel="stylesheet" href="<c:url value='/assets/vendor/font-awesome/css/all.min.css' />" />
     <!-- CSS Files -->
     <link href="<c:url value='/assets/css/material-kit.css?v=2.0.7' />" rel="stylesheet"  />
     <!-- CSS Just for demo purpose, don't include it in your project -->

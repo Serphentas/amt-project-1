@@ -30,31 +30,39 @@
             <div class="section">
                 <div class="alert alert-secondary" role="alert">
                     <a class="nav-link" role="tab" data-toggle="tab">
-                    <i class="material-icons">camera</i>
                     <h3 class="description text-left text-uppercase font-weight-bold text-dark">${question.title}</h3>
-                    <p class="description text-left text-dark ">${question.text}</p><br>
-                    <p class="description text-left text-dark "> Votes : ${votes} </p><br>
-                    <p class="description text-left text-dark "> Comments :  </p><br>
+                    <p class="description text-left text-dark"><i class="fas fa-comment-dots"></i> ${question.text}</p><br>
+                    <p class="description text-left text-dark"><i class="fas fa-signal"></i> Votes: ${votes} </p><br>
+
+                    <h3><u>Comments</u></h3>
                     <c:forEach var="comment" items="${comments.comments}">
-                        <p class = "description text-left text-dark ">${comment.text}</p>
-                    </c:forEach>
-                    <div>
-                        <a href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary">Comment</a>
-                    </div>
-                     <c:forEach var="answer" items="${answers.answers}">
                         <div class="row">
-                            <p class = "description text-left text-dark ">${answer.text}</p>
-                            <div class="column">
-                                <div>
-                                    <a href="/submitAnswer?id=${question.id.asString()}" class="btn btn-outline-secondary">Answer</a>
-                                </div>
+                            <div class="col-md-12">
+                                <p class="description text-left text-dark ">
+                                    <i class="fas fa-comment-alt"></i> <i>${comment.author}</i> - ${comment.text}
+                                </p>
                             </div>
-                            <div class="column">
-                                <div>
-                                    <a href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary">Comment</a>
-                                </div>
-                            </div>
+                        </div>
                     </c:forEach>
+
+                    <h3><u>Answers</u></h3>
+                    <c:forEach var="answer" items="${answers.answers}">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="description text-left text-dark ">
+                                    <i class="fas fa-hand-pointer"></i> <i>${answer.author}</i> - ${answer.text}
+                                </p>
+                            </div>
+                        </div>
+                    </c:forEach>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="/submitAnswer?id=${question.id.asString()}" class="btn btn-outline-secondary">Answer</a>
+                            <a href="/submitComment?id=${question.id.asString()}" class="btn btn-outline-secondary">Comment</a>
+                            <a href="/questions" class="btn btn-outline-secondary">Back to question list</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
