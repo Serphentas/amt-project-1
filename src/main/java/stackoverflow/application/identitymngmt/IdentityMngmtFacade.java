@@ -76,4 +76,27 @@ public class IdentityMngmtFacade {
             .build();
     }
 
+    public void updateProfil(UpdateProfilCmd cmd, CurrentUserDTO currentUser){
+        if(cmd.getFirstName().isEmpty() || cmd.getFirstName() == null){
+            cmd.setFirstName(currentUser.getFirstName());
+        }
+
+        if(cmd.getLastName().isEmpty() || cmd.getLastName() == null){
+            cmd.setLastName(currentUser.getLastName());
+        }
+
+        if(cmd.getEmail().isEmpty() || cmd.getEmail() == null){
+            cmd.setEmail(currentUser.getEmail());
+        }
+
+        Person updatePerson = Person.builder()
+                .id(cmd.getPersonId())
+                .username(cmd.getUsername())
+                .firstName(cmd.getFirstName())
+                .lastName(cmd.getLastName())
+                .email(cmd.getEmail())
+                .encryptedPassword("nothing")
+                .build();
+        personRepo.update(updatePerson);
+    }
 }

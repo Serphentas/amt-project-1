@@ -1,4 +1,4 @@
-package stackoverflow.ui.web;
+package stackoverflow.ui.web.profil;
 
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 import stackoverflow.domain.question.QuestionId;
