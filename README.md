@@ -80,6 +80,7 @@ and access the website at [http://localhost:9080](http://localhost:9080).
   - `images` - service-specific Dockerfiles and dependencies
   - `topologies` - stable and unstable docker-compose YAML files
 - `e2e` - UI tests (CodeceptJS)
+- `load-tests` - load tests (JMeter)
 - `src` - application sources
   - `main`
     - `java/stackoverflow`
