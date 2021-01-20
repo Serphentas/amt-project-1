@@ -15,9 +15,24 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 ml-auto mr-auto">
-                        <div class="profile">
-                            <div class="name">
-                                Hello world
+                        <div>
+                            <div>
+                                <h3>Top 10 des utilisateurs :</h3>
+                                <c:forEach var = "user" items = "${top10}">
+                                    <p>${user}</p>
+                                </c:forEach>
+                            </div>
+                            <div>
+                                <h3>Nombre de commentaires : ${nbComment}</h3>
+                            </div>
+                            <div>
+                                <h3>Nombre de votes : ${nbVote}</h3>
+                            </div>
+                            <div>
+                                <h3>Nombre de réponses : ${nbAnswer}</h3>
+                            </div>
+                            <div>
+                                <h3>Nombre de questions : ${nbQuestion}</h3>
                             </div>
                         </div>
                     </div>

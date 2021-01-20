@@ -6,13 +6,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name="StatServlet", urlPatterns = "/stat")
 public class StatServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        // Initially, you simply forward the request to the correspond JSP.
-        request.getRequestDispatcher("/WEB-INF/view//stat.jsp").forward(request, response);
+
+        //todo récupérer top10 de API
+        ArrayList<String> top10 = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            top10.add("user"+i);
+        }
+
+        //todo récupérer les variable suivantes ds la db
+        int nbComment = 0;
+        int nbVote = 0;
+        int nbAnswer = 0;
+        int nbQuestion = 0;
+
+        req.setAttribute("top10", top10);
+        req.setAttribute("nbComment", nbComment);
+        req.setAttribute("nbVote", nbVote);
+        req.setAttribute("nbAnswer", nbAnswer);
+        req.setAttribute("nbQuestion", nbQuestion);
+
+        req.getRequestDispatcher("/WEB-INF/view/stat.jsp").forward(req, resp);
     }
 }

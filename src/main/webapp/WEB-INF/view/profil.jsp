@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:base>
     <div class="page-header header-filter" data-parallax="true" style="background-image: url('../assets/img/city-profile.jpg');"></div>
@@ -45,14 +46,14 @@
                     <div class="col-md-6 ml-auto mr-auto">
                         <div>
                             <div>
-                                <h3>Niveau : ${game.level}</h3>
-                                <p>pts nécessaires pour le prochain niveau ${game.nbExp}</p>
-                                <p>Exp : ${game.exp}</p>
+                                <h3>Niveau : ${level}</h3>
+                                <p>pts nécessaires pour le prochain niveau ${nbExp}</p>
+                                <p>Exp : ${exp}</p>
                             </div>
                             <div>
                                 <h3>vos Badges</h3>
-                                <c:forEach var = "i" begin = "1" end = "5">
-                                    <span>${i}</span>
+                                <c:forEach var = "badge" items = "${badges}">
+                                    <span>${badge}</span>
                                 </c:forEach>
                             </div>
 
