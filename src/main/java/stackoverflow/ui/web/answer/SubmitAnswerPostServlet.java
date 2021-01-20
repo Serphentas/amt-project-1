@@ -42,6 +42,34 @@ public class SubmitAnswerPostServlet extends HttpServlet {
                 .text(req.getParameter("text"))
                 .build();
         serviceReg.getAnswerFacade().proposeAnswer(command);
+
+        String type = null;
+        String timestamp = java.time.Clock.systemUTC().instant().toString();
+        String userId = currentUser.getId().asString();
+
+        String json = "{\"properties\": {},\"timestamp\": " + timestamp +",\"type\": postR,\"userId\": " + userId + " }";
+        //todo envoi event vers API
+
+        // todo récupérer nbAnswers
+        int nbAnswers = 0;
+        switch(nbAnswers) {
+            case 1:
+                type = "post1R";
+                break;
+
+            case 100:
+                type = "post100R";
+                break;
+
+            case 1000:
+                type = "post1000R";
+                break;
+        }
+        if( type != null) {
+            json = "{\"properties\": {},\"timestamp\": " + timestamp + ",\"type\": " + type + ",\"userId\": " + userId + " }";
+            // todo envoi event vers api
+        }
+
         resp.sendRedirect("/question?id=" + questionId.asString());
     }
 }

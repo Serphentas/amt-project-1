@@ -52,6 +52,17 @@ public class SubmitCommentPostServlet extends HttpServlet {
                 .text(req.getParameter("text"))
                 .build();
         serviceReg.getCommentFacade().proposeComment(command);
+
+        // todo il faut savoir si l'utilisateur a déja commenté/a recu le badge comment
+        boolean hasCommentBadge = false;
+        if(hasCommentBadge) {
+            String type = "comment";
+            String timestamp = java.time.Clock.systemUTC().instant().toString();
+            String userId = currentUser.getId().asString();
+            String json = "{\"properties\": {},\"timestamp\": " + timestamp + ",\"type\": " + type + ",\"userId\": " + userId + " }";
+            // todo envoi event vers api
+        }
+
         resp.sendRedirect("/question?id=" + questionId.asString());
     }
 }

@@ -50,6 +50,8 @@ public class ProposeVoteCmdServlet extends HttpServlet {
                     .personId(currentUser.getId())
                     .build()
                 );
+
+                trySendAPi(currentUser.getId().asString());
             }
         }
         else {
@@ -63,9 +65,22 @@ public class ProposeVoteCmdServlet extends HttpServlet {
                     .personId(currentUser.getId())
                     .build()
                 );
+
+                trySendAPi(currentUser.getId().asString());
             }
         }
 
         resp.sendRedirect("/question?id=" + questionId.asString());
+    }
+
+    private void trySendAPi( String userId) {
+        // todo il faut savoir si l'utilisateur a déja voté/a recu le badge vote
+        boolean hasVoteBadge = false;
+        if(hasVoteBadge) {
+            String type = "vote";
+            String timestamp = java.time.Clock.systemUTC().instant().toString();
+            String json = "{\"properties\": {},\"timestamp\": " + timestamp + ",\"type\": " + type + ",\"userId\": " + userId + " }";
+            // todo envoi event vers api
+        }
     }
 }

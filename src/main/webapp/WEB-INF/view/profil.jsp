@@ -40,6 +40,26 @@
                     </div>
                 </div>
             </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ml-auto mr-auto">
+                        <div>
+                            <div>
+                                <h3>Niveau : ${game.level}</h3>
+                                <p>pts nécessaires pour le prochain niveau ${game.nbExp}</p>
+                                <p>Exp : ${game.exp}</p>
+                            </div>
+                            <div>
+                                <h3>vos Badges</h3>
+                                <c:forEach var = "i" begin = "1" end = "5">
+                                    <span>${i}</span>
+                                </c:forEach>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </t:base>
