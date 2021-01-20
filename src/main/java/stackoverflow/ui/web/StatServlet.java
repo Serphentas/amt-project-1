@@ -15,6 +15,18 @@ public class StatServlet extends HttpServlet {
             throws ServletException, IOException {
 
         //todo récupérer top10 de API
+        /*
+        String jsonString = "{" +
+            "\"lists\": [" +
+                "{" +
+                    "\"level\": 0," +
+                    "\"nbrPoint\": 0," +
+                    "\"userId\": \"string\"" +
+                "}" +
+            "]" +
+        "}" +
+        JSONObject jsonObject = parser.parse(jsonString);
+         */
         ArrayList<String> top10 = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             top10.add("user"+i);
