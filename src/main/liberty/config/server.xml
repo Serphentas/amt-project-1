@@ -21,7 +21,16 @@
     <dataSource jndiName="jdbc/StackOverFlowDS">
         <jdbcDriver libraryRef="MySqlLib"/>
         <properties databaseName="codemad"
-                    serverName="codemad_db" portNumber="3306"
-                    user="root" password="codemad"/>
+                    serverName="10.113.102.154" portNumber="3306"
+                    user="codemad" password="codemad"/>
     </dataSource>
+
+    <jndiEntry jndiName="gamification/apikey" value="3a2e4701-9650-4a72-88ec-f515366ec646"/>
+    <jndiEntry jndiName="gamification/auth" value="http://localhost:8080/auth"/>
+    <jndiEntry jndiName="gamification/badges" value="http://localhost:8080/badges"/>
+    <jndiEntry jndiName="gamification/events" value="http://localhost:8080/events"/>
+    <jndiEntry jndiName="gamification/ladders" value="http://localhost:8080/ladders"/>
+    <jndiEntry jndiName="gamification/registrations" value="http://localhost:8080/registrations"/>
+    <jndiEntry jndiName="gamification/rules" value="http://localhost:8080/rules"/>
+    <jndiEntry jndiName="gamification/users" value="http://localhost:8080/users"/>
 </server>
