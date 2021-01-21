@@ -23,7 +23,7 @@ public class ConnectionAPI {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(URL))
-                    .setHeader("X-API-KEY", key)
+                    .setHeader("x-api-key", key)
                     .setHeader("Content-Type", "application/json")
                     .setHeader("Accept", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(String.format(jsonFormat,timestamp, type, userId)))
@@ -46,9 +46,10 @@ public class ConnectionAPI {
         try {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(URL))
+                    .uri(URI.create(URL + userId))
                     .setHeader("x-api-key", key)
                     .setHeader("Content-Type", "application/json")
+                    .setHeader("Accept", "application/json")
                     .GET()
                     .build();
 
@@ -71,6 +72,7 @@ public class ConnectionAPI {
                     .uri(URI.create(URL))
                     .setHeader("x-api-key", key)
                     .setHeader("Content-Type", "application/json")
+                    .setHeader("Accept", "application/json")
                     .GET()
                     .build();
 

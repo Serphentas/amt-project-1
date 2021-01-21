@@ -6,6 +6,7 @@ import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 import stackoverflow.application.vote.ProposeVoteCmd;
 import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.comment.CommentId;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
 
 import javax.annotation.Resource;
@@ -59,7 +60,7 @@ public class ProposeVoteCmdServlet extends HttpServlet {
                     .build()
                 );
 
-                trySendAPi(currentUser.getId().asString());
+                trySendAPi(currentUser.getId());
             }
         }
         else {
@@ -74,18 +75,17 @@ public class ProposeVoteCmdServlet extends HttpServlet {
                     .build()
                 );
 
-                trySendAPi(currentUser.getId().asString());
+                trySendAPi(currentUser.getId());
             }
         }
 
         resp.sendRedirect("/question?id=" + questionId.asString());
     }
 
-    private void trySendAPi( String userId) {
-        // todo il faut savoir si l'utilisateur a déja voté/a recu le badge vote
-        boolean hasVoteBadge = false;
-        if(hasVoteBadge) {
-            new ConnectionAPI().post("vote", userId, gamificationEventURL, gamificationKey);
+    private void trySendAPi( PersonId userId) {
+        int nbVotes = serviceReg.getVoteFacade().getCountVoteOfUser(userId).orElse(0);
+        if(nbVotes == 1) {
+            new ConnectionAPI().post("vote", userId.asString(), gamificationEventURL, gamificationKey);
         }
     }
 }

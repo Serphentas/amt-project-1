@@ -28,7 +28,7 @@
     <jndiEntry jndiName="gamification/apikey" value="95b01d61-4a0b-4990-98b6-17e6af59cc16"/>
     <jndiEntry jndiName="gamification/auth" value="http://localhost:8080/auth"/>
     <jndiEntry jndiName="gamification/badges" value="http://localhost:8080/badges"/>
-    <jndiEntry jndiName="gamification/events" value="http://localhost:8080/events"/>
+    <jndiEntry jndiName="gamification/events" value="http://localhost:8080/events/"/>
     <jndiEntry jndiName="gamification/ladders" value="http://localhost:8080/ladders"/>
     <jndiEntry jndiName="gamification/registrations" value="http://localhost:8080/registrations"/>
     <jndiEntry jndiName="gamification/rules" value="http://localhost:8080/rules"/>

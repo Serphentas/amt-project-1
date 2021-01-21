@@ -61,9 +61,8 @@ public class SubmitCommentPostServlet extends HttpServlet {
                 .build();
         serviceReg.getCommentFacade().proposeComment(command);
 
-        // todo il faut savoir si l'utilisateur a déja commenté/a recu le badge comment
-        boolean hasCommentBadge = false;
-        if(hasCommentBadge) {
+        int nbComment = serviceReg.getCommentFacade().getCountCommentOfUser(currentUser.getId()).orElse(0);
+        if(nbComment == 1) {
             String userId = currentUser.getId().asString();
             new ConnectionAPI().post("comment", userId, gamificationEventURL, gamificationKey);
         }

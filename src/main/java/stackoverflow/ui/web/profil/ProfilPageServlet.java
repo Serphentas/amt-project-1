@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//import org.json.simple.*;
+import org.json.*;
 
 @WebServlet(name="ProfilPageServlet", urlPatterns = "/profil")
 public class ProfilPageServlet extends HttpServlet {
@@ -30,30 +30,17 @@ public class ProfilPageServlet extends HttpServlet {
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
 
         String jsonString = new ConnectionAPI().getUser(currentUser.getId().asString(), gamificationUserURL, gamificationKey);
-/*
-        String json = "{" +
-          "\"LadderOfUser\": { " +
-            "\"level\": 0," +
-            "\"nbrPoint\": 0," +
-            "\"title\": \"string\"" +
-          "}," +
-          "\"badges\": [" +
-            "{" +
-              "\"description\": \"string\"," +
-              "\"name\": \"string\"" +
-            "}" +
-          "]," +
-          "\"nbrPointOfUser\": 0," +
-          "\"userId\": \"string\"" +
-        "}";
-        JSONObject jsonObject = parser.parse(json);
-*/
-        String level = "5";
-        String exp = "500";
-        String nbExp = "50";
+        JSONObject jsonObject = new JSONObject(jsonString);
+
+        JSONObject ladder = jsonObject.getJSONObject("LadderOfUser");
+        String level = ladder.getInt("level") + " " + ladder.getString("title");
+        int exp = jsonObject.getInt("nbrPointOfUser");
+        int nbExp = ladder.getInt("nbrPoint");
+
+        JSONArray jsonBadges = jsonObject.getJSONArray("badges");
         ArrayList<String> badges = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            badges.add( "badge"+i);
+        for (int i = 0; i < jsonBadges.length(); i++) {
+            badges.add( jsonBadges.getJSONObject(i).getString("name"));
         }
 
         req.setAttribute("currentUser", currentUser);

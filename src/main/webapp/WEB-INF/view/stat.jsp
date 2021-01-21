@@ -16,10 +16,11 @@
                 <div class="row">
                     <div class="col-md-6 ml-auto mr-auto">
                         <div>
+                            <h1>Statistiques Globales</h1>
                             <div>
                                 <h3>Top 10 des utilisateurs :</h3>
                                 <c:forEach var = "user" items = "${top10}">
-                                    <p>${user}</p>
+                                    <div class="card">${user}</div>
                                 </c:forEach>
                             </div>
                             <div>
@@ -38,6 +39,31 @@
                     </div>
                 </div>
             </div>
+            <c:choose>
+            <c:when test="${currentUser != null}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto">
+                            <div>
+                                <h1>Statistiques personnelles</h1>
+                                <div>
+                                    <h3>Nombre de vos commentaires : ${nbCommentOfUser}</h3>
+                                </div>
+                                <div>
+                                    <h3>Nombre de vos votes : ${nbVoteOfUser}</h3>
+                                </div>
+                                <div>
+                                    <h3>Nombre de vos réponses : ${nbAnswerOfUser}</h3>
+                                </div>
+                                <div>
+                                    <h3>Nombre de vos questions : ${nbQuestionOfUser}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:when>
+            </c:choose>
         </div>
     </div>
 </t:base>

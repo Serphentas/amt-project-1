@@ -54,8 +54,7 @@ public class SubmitAnswerPostServlet extends HttpServlet {
         String userId = currentUser.getId().asString();
         new ConnectionAPI().post("postR", userId, gamificationEventURL, gamificationKey);
 
-        // todo récupérer nbAnswers
-        int nbAnswers = 0;
+        int nbAnswers = serviceReg.getAnswerFacade().getCountAnswerOfUser(currentUser.getId()).orElse(0);
         switch(nbAnswers) {
             case 1:
                 new ConnectionAPI().post("post1R", userId, gamificationEventURL, gamificationKey);

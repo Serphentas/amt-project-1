@@ -53,7 +53,7 @@
                             <div>
                                 <h3>vos Badges</h3>
                                 <c:forEach var = "badge" items = "${badges}">
-                                    <span>${badge}</span>
+                                    <div class="card">${badge}</div>
                                 </c:forEach>
                             </div>
 
