@@ -6,6 +6,8 @@ import stackoverflow.domain.question.QuestionId;
 import stackoverflow.domain.vote.IVoteRepo;
 import stackoverflow.domain.vote.Vote;
 
+import java.util.Optional;
+
 
 public class VoteFacade {
     private IVoteRepo voteRepo;
@@ -46,4 +48,11 @@ public class VoteFacade {
         voteRepo.unvoteForComment(commentId, personId);
     }
 
+    public Optional<Integer> getCountVoteOfUser(PersonId id) {
+        return voteRepo.countAllOfUser(id);
+    }
+
+    public Optional<Integer> getCountVote() {
+        return voteRepo.countAll();
+    }
 }
