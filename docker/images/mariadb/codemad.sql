@@ -182,5 +182,5 @@ INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'Python');
 INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'SCALA');
 INSERT INTO `codemad`.`Tag`(idTag, tag) VALUES (UUID(), 'JavaScript');
 
-DROP DATABASE IF EXISTS 'amt2';
-CREATE DATABASE 'amt2';
+DROP DATABASE IF EXISTS `amt2`;
+CREATE DATABASE `amt2`;
