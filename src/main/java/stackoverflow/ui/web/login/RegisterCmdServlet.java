@@ -27,8 +27,6 @@ public class RegisterCmdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().getAttribute("errors");
 
-        System.out.println(gamificationURL);
-
         ProposeRegisterCmd proposeRegisterCmd = ProposeRegisterCmd.builder()
             .username(req.getParameter("username"))
             .email(req.getParameter("email"))

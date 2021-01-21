@@ -19,12 +19,11 @@ public class StatServlet extends HttpServlet {
 
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
         if (currentUser != null) {
-            String jsonUserString = ConnectionAPI.getUser(currentUser.getId().asString());
-            System.out.println(jsonUserString);
+            Object jsonUser = ConnectionAPI.getUser(currentUser.getId().asString());
+
         }
 
-        String jsonTopString = ConnectionAPI.getop10();
-        System.out.println(jsonUserString);
+        Object jsonTop = ConnectionAPI.getTop10();
         /*
         String jsonString = "{" +
             "\"lists\": [" +

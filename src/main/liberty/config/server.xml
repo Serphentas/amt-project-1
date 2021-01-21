@@ -22,10 +22,10 @@
         <jdbcDriver libraryRef="MySqlLib"/>
         <properties databaseName="codemad"
                     serverName="10.113.102.154" portNumber="3306"
-                    user="codemad" password="codemad"/>
+                    user="root" password="amt2"/>
     </dataSource>
 
-    <jndiEntry jndiName="gamification/apikey" value="3a2e4701-9650-4a72-88ec-f515366ec646"/>
+    <jndiEntry jndiName="gamification/apikey" value="86c91f9e-d4fb-4ee8-9c63-c6beb6fa0a3b"/>
     <jndiEntry jndiName="gamification/auth" value="http://localhost:8080/auth"/>
     <jndiEntry jndiName="gamification/badges" value="http://localhost:8080/badges"/>
     <jndiEntry jndiName="gamification/events" value="http://localhost:8080/events"/>

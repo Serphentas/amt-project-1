@@ -22,8 +22,7 @@ public class ProfilPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
 
-        String jsonString = ConnectionAPI.getUser(currentUser.getId().asString());
-        System.out.println(jsonString);
+        Object jsonString = ConnectionAPI.getUser(currentUser.getId().asString());
 /*
         String json = "{" +
           "\"LadderOfUser\": { " +

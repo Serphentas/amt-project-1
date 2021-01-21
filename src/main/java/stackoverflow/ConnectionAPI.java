@@ -10,22 +10,22 @@ import java.net.URL;
 
 public class ConnectionAPI {
     @Resource(lookup = "gamification/event")
-    static String gamificationEventURL;
+    static String gamificationEventURL = "http://localhost:8080/events";
 
     @Resource(lookup = "gamification/users/")
-    static String gamificationUsersURL;
+    static String gamificationUsersURL = "http://localhost:8080/users";
 
     @Resource(lookup = "gamification/apikey")
-    static String gamificationAPIKey;
+    static String gamificationAPIKey = "86c91f9e-d4fb-4ee8-9c63-c6beb6fa0a3b";
 
     public static void post(String type, String userId) {
         try {
             URL url = new URL(gamificationEventURL);
             String jsonFormat = "{" +
                 "\"properties\": {}," +
-                "\"timestamp\": %s," +
-                "\"type\": %s," +
-                "\"userId\": %s" +
+                "\"timestamp\": \"%s\"," +
+                "\"type\": \"%s\"," +
+                "\"userId\": \"%s\"" +
             " }";
             String timestamp = java.time.Clock.systemUTC().instant().toString();
 
@@ -61,7 +61,9 @@ public class ConnectionAPI {
             getConnection.setRequestProperty("Content-Type", "application/json");
             getConnection.setDoOutput(true);
 
-            return getConnection.getContent();
+            Object ob =  getConnection.getContent();
+            System.out.println(ob);
+            return ob;
         }
         catch (ProtocolException e) {
             e.printStackTrace();
@@ -85,7 +87,9 @@ public class ConnectionAPI {
             getConnection.setRequestProperty("Content-Type", "application/json");
             getConnection.setDoOutput(true);
 
-            return getConnection.getContent();
+            Object ob = getConnection.getContent();
+            System.out.println(ob);
+            return ob;
         }
         catch (ProtocolException e) {
             e.printStackTrace();
