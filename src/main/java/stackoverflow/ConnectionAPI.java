@@ -18,11 +18,12 @@ public class ConnectionAPI {
                 "\"userId\": \"%s\"\n" +
             "}";
             String timestamp = java.time.Clock.systemUTC().instant().toString();
+            System.out.println(String.format(jsonFormat,timestamp, type, userId));
 
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(URL))
-                    .setHeader("x-api-key", key)
+                    .setHeader("X-API-KEY", key)
                     .setHeader("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(String.format(jsonFormat,timestamp, type, userId)))
                     .build();
