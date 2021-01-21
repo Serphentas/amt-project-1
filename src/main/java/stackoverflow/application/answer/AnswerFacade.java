@@ -4,10 +4,12 @@ import stackoverflow.application.question.QuestionsDTO;
 import stackoverflow.domain.answer.Answer;
 import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.answer.IAnswerRepo;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.Question;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AnswerFacade {
@@ -48,5 +50,13 @@ public class AnswerFacade {
         return AnswersDTO.builder()
             .answers(allAnswersDTO)
             .build();
+    }
+    
+    public Optional<Integer> getCountAnswerOfUser(PersonId id) {
+        return answerRepo.countAllOfUser(id);
+    }
+
+    public Optional<Integer> getCountAnswer() {
+        return answerRepo.countAll();
     }
 }

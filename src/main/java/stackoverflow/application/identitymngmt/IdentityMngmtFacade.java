@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Optional;
 
 public class IdentityMngmtFacade {
     private IPersonRepo personRepo;
@@ -104,5 +105,9 @@ public class IdentityMngmtFacade {
                 .encryptedPassword("nothing")
                 .build();
         personRepo.update(updatePerson);
+    }
+
+    public Optional<Integer> getCountComment() {
+        return personRepo.countAll();
     }
 }

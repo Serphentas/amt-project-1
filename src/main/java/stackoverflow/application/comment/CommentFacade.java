@@ -1,11 +1,13 @@
 package stackoverflow.application.comment;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import stackoverflow.domain.comment.Comment;
 import stackoverflow.domain.comment.CommentId;
 import stackoverflow.domain.comment.ICommentRepo;
+import stackoverflow.domain.person.PersonId;
 
 public class CommentFacade {
     private ICommentRepo commentRepo;
@@ -45,5 +47,13 @@ public class CommentFacade {
                 .build()
             ).collect(Collectors.toList()))
         .build();
+    }
+
+    public Optional<Integer> getCountCommentOfUser(PersonId id) {
+        return commentRepo.countAllOfUser(id);
+    }
+
+    public Optional<Integer> getCountComment() {
+        return commentRepo.countAll();
     }
 }
