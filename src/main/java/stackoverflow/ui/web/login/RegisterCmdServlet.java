@@ -4,7 +4,6 @@ import stackoverflow.application.ServiceReg;
 import stackoverflow.application.identitymngmt.login.ProposeRegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,9 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 @WebServlet(name = "RegisterCmdServlet", urlPatterns = "/register.do")

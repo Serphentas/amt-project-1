@@ -9,11 +9,7 @@ import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.sql.DataSource;
-import javax.xml.registry.infomodel.User;
 
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,6 +23,12 @@ import java.util.UUID;
 public class JdbcUserRepository implements IPersonRepo {
     @Resource(lookup = "jdbc/StackOverFlowDS")
     DataSource dataSource;
+
+    @Resource(lookup = "gamification/events")
+    String gamificationEventURL;
+
+    @Resource(lookup = "gamification/apikey")
+    String gamificationKey;
 
     public JdbcUserRepository() {}
 
@@ -50,7 +52,7 @@ public class JdbcUserRepository implements IPersonRepo {
 
             statement.execute();
 
-            ConnectionAPI.post("registration", userId);
+            new ConnectionAPI().post("registration", userId, gamificationEventURL, gamificationKey);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

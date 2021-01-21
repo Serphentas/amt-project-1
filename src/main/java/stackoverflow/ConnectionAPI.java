@@ -1,26 +1,22 @@
 package stackoverflow;
 
 import javax.annotation.Resource;
+
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 public class ConnectionAPI {
-    @Resource(lookup = "gamification/event")
-    static String gamificationEventURL;
-
-    @Resource(lookup = "gamification/users")
-    static String gamificationUsersURL;
-
-    @Resource(lookup = "gamification/apikey")
-    static String gamificationAPIKey;
-
-    public static void post(String type, String userId) {
+    public void post(String type, String userId, String URL, String key) {
         try {
-            URL url = new URL(gamificationEventURL);
+
+            URL url = new URL(URL);
             String jsonFormat = "{" +
                 "\"properties\": {}," +
                 "\"timestamp\": \"%s\"," +
@@ -29,17 +25,19 @@ public class ConnectionAPI {
             " }";
             String timestamp = java.time.Clock.systemUTC().instant().toString();
 
-            HttpURLConnection postConnection = (HttpURLConnection) url.openConnection();
-            postConnection.setRequestMethod("POST");
-            postConnection.setRequestProperty("x-api-key", gamificationAPIKey);
-            postConnection.setRequestProperty("Content-Type", "application/json");
-            postConnection.setDoOutput(true);
-            postConnection.
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(URL))
+                    .POST(HttpRequest.BodyPublishers.ofString(String.format(jsonFormat,timestamp, type, userId)))
+                    .build();
 
-            OutputStream os = postConnection.getOutputStream();
-            os.write(String.format(jsonFormat, type,timestamp, userId).getBytes());
-            os.flush();
-            os.close();
+            HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+
+            System.out.println(response.body());
+
+            // postConnection.setRequestProperty("x-api-key", key);
+            // postConnection.setRequestProperty("Content-Type", "application/json");
         }
         catch (ProtocolException e) {
             e.printStackTrace();
@@ -50,15 +48,18 @@ public class ConnectionAPI {
         catch (IOException e) {
             e.printStackTrace();
         }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public static Object getUser(String userId) {
+    public static Object getUser(String userId, String URL, String key) {
         try {
-            URL url = new URL(gamificationUsersURL + userId);
+            URL url = new URL(URL + userId);
 
             HttpURLConnection getConnection = (HttpURLConnection) url.openConnection();
             getConnection.setRequestMethod("GET");
-            getConnection.setRequestProperty("x-api-key", gamificationAPIKey);
+            getConnection.setRequestProperty("x-api-key", key);
             getConnection.setRequestProperty("Content-Type", "application/json");
             getConnection.setDoOutput(true);
 
@@ -78,13 +79,13 @@ public class ConnectionAPI {
         return null;
     }
 
-    public static Object getTop10() {
+    public static Object getTop10(String URL, String key) {
         try {
-            URL url = new URL(gamificationUsersURL + "top10bypoint");
+            URL url = new URL(URL + "top10bypoint");
 
             HttpURLConnection getConnection = (HttpURLConnection) url.openConnection();
             getConnection.setRequestMethod("GET");
-            getConnection.setRequestProperty("x-api-key", gamificationAPIKey);
+            getConnection.setRequestProperty("x-api-key", key);
             getConnection.setRequestProperty("Content-Type", "application/json");
             getConnection.setDoOutput(true);
 
