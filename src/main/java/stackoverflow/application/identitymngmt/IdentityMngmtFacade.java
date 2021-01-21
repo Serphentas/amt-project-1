@@ -107,7 +107,7 @@ public class IdentityMngmtFacade {
         personRepo.update(updatePerson);
     }
 
-    public Optional<Integer> getCountComment() {
+    public Optional<Integer> getCountUser() {
         return personRepo.countAll();
     }
 }
