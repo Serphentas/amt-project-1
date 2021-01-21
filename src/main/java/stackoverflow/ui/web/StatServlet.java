@@ -1,5 +1,8 @@
 package stackoverflow.ui.web;
 
+import stackoverflow.ConnectionAPI;
+import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +17,14 @@ public class StatServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        //todo récupérer top10 de API
+        CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
+        if (currentUser != null) {
+            String jsonUserString = ConnectionAPI.getUser(currentUser.getId().asString());
+            System.out.println(jsonUserString);
+        }
+
+        String jsonTopString = ConnectionAPI.getop10();
+        System.out.println(jsonUserString);
         /*
         String jsonString = "{" +
             "\"lists\": [" +
@@ -33,16 +43,18 @@ public class StatServlet extends HttpServlet {
         }
 
         //todo récupérer les variable suivantes ds la db
+        int nbUser = 0;
         int nbComment = 0;
-        int nbVote = 0;
         int nbAnswer = 0;
         int nbQuestion = 0;
 
         req.setAttribute("top10", top10);
+        req.setAttribute("nbUser", nbUser);
         req.setAttribute("nbComment", nbComment);
-        req.setAttribute("nbVote", nbVote);
         req.setAttribute("nbAnswer", nbAnswer);
         req.setAttribute("nbQuestion", nbQuestion);
+
+
 
         req.getRequestDispatcher("/WEB-INF/view/stat.jsp").forward(req, resp);
     }

@@ -1,5 +1,6 @@
 package stackoverflow.ui.web.vote;
 
+import stackoverflow.ConnectionAPI;
 import stackoverflow.application.ServiceReg;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 import stackoverflow.application.vote.ProposeVoteCmd;
@@ -77,10 +78,7 @@ public class ProposeVoteCmdServlet extends HttpServlet {
         // todo il faut savoir si l'utilisateur a déja voté/a recu le badge vote
         boolean hasVoteBadge = false;
         if(hasVoteBadge) {
-            String type = "vote";
-            String timestamp = java.time.Clock.systemUTC().instant().toString();
-            String json = "{\"properties\": {},\"timestamp\": " + timestamp + ",\"type\": " + type + ",\"userId\": " + userId + " }";
-            // todo envoi event vers api
+            ConnectionAPI.post("vote", userId);
         }
     }
 }

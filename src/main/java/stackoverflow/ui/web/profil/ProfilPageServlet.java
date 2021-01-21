@@ -1,5 +1,6 @@
 package stackoverflow.ui.web.profil;
 
+import stackoverflow.ConnectionAPI;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 
 
@@ -21,7 +22,8 @@ public class ProfilPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
 
-        // todo récupération du user de l'API
+        String jsonString = ConnectionAPI.getUser(currentUser.getId().asString());
+        System.out.println(jsonString);
 /*
         String json = "{" +
           "\"LadderOfUser\": { " +

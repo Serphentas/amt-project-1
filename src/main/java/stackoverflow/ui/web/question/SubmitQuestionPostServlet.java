@@ -1,5 +1,6 @@
 package stackoverflow.ui.web.question;
 
+import stackoverflow.ConnectionAPI;
 import stackoverflow.application.ServiceReg;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 import stackoverflow.application.question.ProposeQuestionCmd;
@@ -28,31 +29,24 @@ public class SubmitQuestionPostServlet extends HttpServlet {
                 .build();
         serviceReg.getQuestionFacade().proposeQuestion(command);
 
-        String type = null;
-        String timestamp = java.time.Clock.systemUTC().instant().toString();
-        String userId = currentUser.getId().asString();
 
-        String json = "{\"properties\": {},\"timestamp\": " + timestamp + ",\"type\": postQ,\"userId\": " + userId + " }";
-        //todo envoi event vers API
+        String userId = currentUser.getId().asString();
+        ConnectionAPI.post("postQ", userId);
 
         // todo récupérer nbAnswers
         int nbAnswers = 0;
         switch(nbAnswers) {
             case 1:
-                type = "post1Q";
+                ConnectionAPI.post("post1Q", userId);
                 break;
 
             case 100:
-                type = "post100Q";
+                ConnectionAPI.post("post100Q", userId);
                 break;
 
             case 1000:
-                type = "post1000Q";
+                ConnectionAPI.post("post1000Q", userId);
                 break;
-        }
-        if(type != null) {
-            json = "{\"properties\": {},\"timestamp\": " + timestamp + ",\"type\": " + type + ",\"userId\": " + userId + " }";
-            // todo envoi event vers api
         }
 
         resp.sendRedirect("/questions");

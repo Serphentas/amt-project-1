@@ -23,11 +23,6 @@ public class RegisterCmdServlet extends HttpServlet {
     @Inject
     ServiceReg serviceReg;
 
-    @Resource(lookup = "gamification/badges")
-    String gamificationURL;
-    @Resource(lookup = "gamification/apikey")
-    String gamificationAPIKey;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().getAttribute("errors");
@@ -45,23 +40,6 @@ public class RegisterCmdServlet extends HttpServlet {
 
         try {
             serviceReg.getIdentityMngmtFacade().register(proposeRegisterCmd);
-
-            URL url = new URL(gamificationURL);
-            String data = String.format(
-                "{" +
-                    "\"%s\": \"%s\"" +
-                "}",
-                "asd", "123"
-            );
-            HttpURLConnection postConnection = (HttpURLConnection) url.openConnection();
-            postConnection.setRequestMethod("POST");
-            postConnection.setRequestProperty("x-api-key", gamificationAPIKey);
-            postConnection.setRequestProperty("Content-Type", "application/json");
-            postConnection.setDoOutput(true);
-            OutputStream os = postConnection.getOutputStream();
-            os.write(data.getBytes());
-            os.flush();
-            os.close();
 
             req.getRequestDispatcher("/login.do").forward(req, resp);
             return;

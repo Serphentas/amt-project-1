@@ -8,6 +8,11 @@ import stackoverflow.application.identitymngmt.login.RegistrationFailedException
 import stackoverflow.domain.person.IPersonRepo;
 import stackoverflow.domain.person.Person;
 
+import javax.annotation.Resource;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class IdentityMngmtFacade {
     private IPersonRepo personRepo;
 
@@ -53,6 +58,7 @@ public class IdentityMngmtFacade {
                 .clearTextPassword(cmd.getClearTextPassword())
                 .build();
             personRepo.save(newPerson);
+
         } catch (Exception e) {
             throw new RegistrationFailedException(e.getMessage());
         }

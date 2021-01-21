@@ -1,5 +1,6 @@
 package stackoverflow.ui.web.comment;
 
+import stackoverflow.ConnectionAPI;
 import stackoverflow.application.ServiceReg;
 import stackoverflow.application.comment.ProposeCommentCmd;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
@@ -56,11 +57,8 @@ public class SubmitCommentPostServlet extends HttpServlet {
         // todo il faut savoir si l'utilisateur a déja commenté/a recu le badge comment
         boolean hasCommentBadge = false;
         if(hasCommentBadge) {
-            String type = "comment";
-            String timestamp = java.time.Clock.systemUTC().instant().toString();
             String userId = currentUser.getId().asString();
-            String json = "{\"properties\": {},\"timestamp\": " + timestamp + ",\"type\": " + type + ",\"userId\": " + userId + " }";
-            // todo envoi event vers api
+            ConnectionAPI.post("comment", userId);
         }
 
         resp.sendRedirect("/question?id=" + questionId.asString());
