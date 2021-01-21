@@ -8,6 +8,7 @@ import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.comment.CommentId;
 import stackoverflow.domain.question.QuestionId;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,12 @@ public class ProposeVoteCmdServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;
+
+    @Resource(lookup = "gamification/events")
+    String gamificationEventURL;
+
+    @Resource(lookup = "gamification/apikey")
+    String gamificationKey;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -78,7 +85,7 @@ public class ProposeVoteCmdServlet extends HttpServlet {
         // todo il faut savoir si l'utilisateur a déja voté/a recu le badge vote
         boolean hasVoteBadge = false;
         if(hasVoteBadge) {
-            ConnectionAPI.post("vote", userId);
+            new ConnectionAPI().post("vote", userId, gamificationEventURL, gamificationKey);
         }
     }
 }

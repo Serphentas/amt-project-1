@@ -3,6 +3,7 @@ package stackoverflow.ui.web;
 import stackoverflow.ConnectionAPI;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,17 +14,24 @@ import java.util.ArrayList;
 
 @WebServlet(name="StatServlet", urlPatterns = "/stat")
 public class StatServlet extends HttpServlet {
+
+    @Resource(lookup = "gamification/users")
+    String gamificationUsersURL;
+
+    @Resource(lookup = "gamification/apikey")
+    String gamificationKey;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
         if (currentUser != null) {
-            Object jsonUser = ConnectionAPI.getUser(currentUser.getId().asString());
+            String jsonUser = new ConnectionAPI().getUser(currentUser.getId().asString(), gamificationUsersURL, gamificationKey);
 
         }
 
-        Object jsonTop = ConnectionAPI.getTop10();
+        String jsonTop = new ConnectionAPI().getTop10(gamificationUsersURL + "top10bypoint", gamificationKey);
         /*
         String jsonString = "{" +
             "\"lists\": [" +

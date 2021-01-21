@@ -8,6 +8,7 @@ import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.question.QuestionId;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,12 @@ public class SubmitCommentPostServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;
+
+    @Resource(lookup = "gamification/events")
+    String gamificationEventURL;
+
+    @Resource(lookup = "gamification/apikey")
+    String gamificationKey;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -58,7 +65,7 @@ public class SubmitCommentPostServlet extends HttpServlet {
         boolean hasCommentBadge = false;
         if(hasCommentBadge) {
             String userId = currentUser.getId().asString();
-            ConnectionAPI.post("comment", userId);
+            new ConnectionAPI().post("comment", userId, gamificationEventURL, gamificationKey);
         }
 
         resp.sendRedirect("/question?id=" + questionId.asString());

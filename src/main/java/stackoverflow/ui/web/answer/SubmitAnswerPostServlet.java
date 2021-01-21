@@ -9,6 +9,7 @@ import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,12 @@ public class SubmitAnswerPostServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;
+
+    @Resource(lookup = "gamification/events")
+    String gamificationEventURL;
+
+    @Resource(lookup = "gamification/apikey")
+    String gamificationKey;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,21 +52,21 @@ public class SubmitAnswerPostServlet extends HttpServlet {
         serviceReg.getAnswerFacade().proposeAnswer(command);
 
         String userId = currentUser.getId().asString();
-        ConnectionAPI.post("postR", userId);
+        new ConnectionAPI().post("postR", userId, gamificationEventURL, gamificationKey);
 
         // todo récupérer nbAnswers
         int nbAnswers = 0;
         switch(nbAnswers) {
             case 1:
-                ConnectionAPI.post("post1R", userId);
+                new ConnectionAPI().post("post1R", userId, gamificationEventURL, gamificationKey);
                 break;
 
             case 100:
-                ConnectionAPI.post("post100R", userId);
+                new ConnectionAPI().post("post100R", userId, gamificationEventURL, gamificationKey);
                 break;
 
             case 1000:
-                ConnectionAPI.post("post1000R", userId);
+                new ConnectionAPI().post("post1000R", userId, gamificationEventURL, gamificationKey);
                 break;
         }
 

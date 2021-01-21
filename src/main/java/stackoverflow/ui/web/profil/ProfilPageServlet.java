@@ -4,6 +4,7 @@ import stackoverflow.ConnectionAPI;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,11 +19,17 @@ import java.util.ArrayList;
 @WebServlet(name="ProfilPageServlet", urlPatterns = "/profil")
 public class ProfilPageServlet extends HttpServlet {
 
+    @Resource(lookup = "gamification/users")
+    String gamificationUserURL;
+
+    @Resource(lookup = "gamification/apikey")
+    String gamificationKey;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CurrentUserDTO currentUser = (CurrentUserDTO) req.getSession().getAttribute("currentUser");
 
-        Object jsonString = ConnectionAPI.getUser(currentUser.getId().asString());
+        String jsonString = new ConnectionAPI().getUser(currentUser.getId().asString(), gamificationUserURL, gamificationKey);
 /*
         String json = "{" +
           "\"LadderOfUser\": { " +
