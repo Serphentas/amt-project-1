@@ -149,6 +149,60 @@ public class JdbcCommentRepository implements ICommentRepo {
         return new ArrayList<Comment>();
     }
 
+    @Override
+    public Optional<Integer> countAll() {
+        ArrayList<Integer> count = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "SELECT COUNT(*) AS nbr FROM Comment GROUP BY idComment");
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                count.add(rs.getInt("nbr"));
+            }
+
+            if(count.isEmpty()){
+                return Optional.empty();
+            } else {
+                return Optional.of(count.get(0));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Integer> countAllOfUser(PersonId id) {
+        ArrayList<Integer> count = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "SELECT COUNT(*) AS nbr FROM Comment WHERE idUser=?");
+            statement.setString(1, id.asString());
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                count.add(rs.getInt("nbr"));
+            }
+
+            if(count.isEmpty()){
+                return Optional.empty();
+            } else {
+                return Optional.of(count.get(0));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
+
     private PreparedStatement getStatement (String cmd) throws SQLException {
         return dataSource.getConnection().prepareStatement(cmd);
     }

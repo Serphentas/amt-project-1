@@ -121,4 +121,30 @@ public class JdbcUserRepository implements IPersonRepo {
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Integer> countAll() {
+        ArrayList<Integer> count = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "SELECT COUNT(*) AS nbr FROM User GROUP BY idUser");
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                count.add(rs.getInt("nbr"));
+            }
+
+            if(count.isEmpty()){
+                return Optional.empty();
+            } else {
+                return Optional.of(count.get(0));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
 }
