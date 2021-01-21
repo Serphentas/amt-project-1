@@ -8,16 +8,15 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 
-
 public class ConnectionAPI {
     public void post(String type, String userId, String URL, String key) {
         try {
-            String jsonFormat = "{" +
-                "\"properties\": {}," +
-                "\"timestamp\": \"%s\"," +
-                "\"type\": \"%s\"," +
-                "\"userId\": \"%s\"" +
-            " }";
+            String jsonFormat = "{\n" +
+                "\"properties\": {},\n" +
+                "\"timestamp\": \"%s\",\n" +
+                "\"type\": \"%s\",\n" +
+                "\"userId\": \"%s\"\n" +
+            "}";
             String timestamp = java.time.Clock.systemUTC().instant().toString();
 
             HttpClient client = HttpClient.newHttpClient();
