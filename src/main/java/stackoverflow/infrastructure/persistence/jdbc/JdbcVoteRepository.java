@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
@@ -208,5 +209,59 @@ public class JdbcVoteRepository implements IVoteRepo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @Override
+    public Optional<Integer> countAll() {
+        ArrayList<Integer> count = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "SELECT COUNT(*) AS nbr FROM Vote GROUP BY idVote");
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                count.add(rs.getInt("nbr"));
+            }
+
+            if(count.isEmpty()){
+                return Optional.empty();
+            } else {
+                return Optional.of(count.get(0));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Integer> countAllOfUser(PersonId id) {
+        ArrayList<Integer> count = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "SELECT COUNT(*) AS nbr FROM Vote WHERE idUser=?");
+            statement.setString(1, id.asString());
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                count.add(rs.getInt("nbr"));
+            }
+
+            if(count.isEmpty()){
+                return Optional.empty();
+            } else {
+                return Optional.of(count.get(0));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return Optional.empty();
     }
 }
