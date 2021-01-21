@@ -25,6 +25,7 @@ public class ConnectionAPI {
                     .uri(URI.create(URL))
                     .setHeader("X-API-KEY", key)
                     .setHeader("Content-Type", "application/json")
+                    .setHeader("Accept", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(String.format(jsonFormat,timestamp, type, userId)))
                     .build();
 
