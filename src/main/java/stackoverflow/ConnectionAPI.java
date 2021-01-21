@@ -10,13 +10,13 @@ import java.net.URL;
 
 public class ConnectionAPI {
     @Resource(lookup = "gamification/event")
-    static String gamificationEventURL = "http://localhost:8080/events";
+    static String gamificationEventURL;
 
-    @Resource(lookup = "gamification/users/")
-    static String gamificationUsersURL = "http://localhost:8080/users";
+    @Resource(lookup = "gamification/users")
+    static String gamificationUsersURL;
 
     @Resource(lookup = "gamification/apikey")
-    static String gamificationAPIKey = "86c91f9e-d4fb-4ee8-9c63-c6beb6fa0a3b";
+    static String gamificationAPIKey;
 
     public static void post(String type, String userId) {
         try {
@@ -34,6 +34,7 @@ public class ConnectionAPI {
             postConnection.setRequestProperty("x-api-key", gamificationAPIKey);
             postConnection.setRequestProperty("Content-Type", "application/json");
             postConnection.setDoOutput(true);
+            postConnection.
 
             OutputStream os = postConnection.getOutputStream();
             os.write(String.format(jsonFormat, type,timestamp, userId).getBytes());
