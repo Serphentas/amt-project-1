@@ -2,15 +2,16 @@
 
 ![](img/homepage.jpg)
 
-## Table of contents
+## 0 Table of contents
 
-- [Introduction](#introduction)
-- [Usage](#usage)
-- [Repository structure](#repository-structure)
-- [Workflow](#workflow)
-- [Authors](#authors)
+- [1 Introduction](#1-introduction)
+- [2 Usage](#2-usage)
+- [3 Repository structure](#3-repository-structure)
+- [4 Workflow](#4-workflow)
+- [5 Added features](#5-added-features)
+- [6 Authors](#6-authors)
 
-## Introduction
+## 1 Introduction
 
 The purpose of Codemad is to provide a simplified version of StackOverflow, with the following features:
 
@@ -27,7 +28,7 @@ The purpose of Codemad is to provide a simplified version of StackOverflow, with
 
 This is provided with the use of Java EE APIs according to an MVC pattern, along with CodeceptJS to test the UI.
 
-## Usage
+## 2 Usage
 
 ### Release
 
@@ -73,7 +74,7 @@ npx codeceptjs run --steps
 
 Remember to have the website running at [http://localhost:9080](http://localhost:9080).
 
-## Repository structure
+## 3 Repository structure
 
 - `.github/workflows` - GitHub Actions workflow definitions
 - `docker` - files required for Docker deployments
@@ -92,23 +93,23 @@ Remember to have the website running at [http://localhost:9080](http://localhost
     - `webapp` - front-end resources (JSP files and UI toolkits)
   - `test` - JUnit files
 
-## Workflow
+## 4 Workflow
 
 Unstable/development code belongs in [devs](https://github.com/AMT-Long-Du-Zboub/amt-project-1/tree/devs) while stable code is in [master](https://github.com/AMT-Long-Du-Zboub/amt-project-1/tree/master).
 
-## Added features
+## 5 Added features
 
 - Vote: can vote on comments and answers
 - Added integration tests for JdbcCommentRepository
 - e2e: initial tests work again
 
-## Remaining bits
+### Remaining bits
 
 - Cove more use cases with CodeceptJS
 - Complete JUnit tests
 - Use Mockups for simple unit testing
 
-## Authors
+## 6 Authors
 
 * Bouyiatiotis Stéphane
 * Danai Moïn
