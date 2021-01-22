@@ -1,10 +1,12 @@
 package stackoverflow.application.question;
 
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.IQuestionRepo;
 import stackoverflow.domain.question.Question;
 import stackoverflow.domain.question.QuestionId;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class QuestionFacade {
@@ -52,5 +54,13 @@ public class QuestionFacade {
                 .build()
             ).collect(Collectors.toList()))
         .build();
+    }
+
+    public Optional<Integer> getCountQuestionOfUser(PersonId id) {
+        return questionRepository.countAllOfUser(id);
+    }
+
+    public Optional<Integer> getCountQuestion() {
+        return questionRepository.countAll();
     }
 }

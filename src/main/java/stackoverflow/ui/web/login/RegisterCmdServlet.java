@@ -34,6 +34,7 @@ public class RegisterCmdServlet extends HttpServlet {
 
         try {
             serviceReg.getIdentityMngmtFacade().register(proposeRegisterCmd);
+
             req.getRequestDispatcher("/login.do").forward(req, resp);
             return;
         } catch(RegistrationFailedException e) {

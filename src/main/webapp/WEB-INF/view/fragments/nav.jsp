@@ -30,6 +30,9 @@
                         <a href="<c:url value="/questions"/>" class="dropdown-item">
                             <i class="material-icons">article</i> View questions list
                         </a>
+                        <a href="<c:url value="/stat"/>" class="dropdown-item">
+                            <i class="material-icons">equalizer</i> View statistics
+                        </a>
 
                         <c:choose>
                             <c:when test="${currentUser != null}">

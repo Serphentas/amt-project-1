@@ -1,5 +1,6 @@
 package stackoverflow.infrastructure.persistence.jdbc;
 
+import stackoverflow.ConnectionAPI;
 import stackoverflow.domain.person.IPersonRepo;
 import stackoverflow.domain.person.Person;
 import stackoverflow.domain.person.PersonId;
@@ -8,7 +9,6 @@ import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.sql.DataSource;
-import javax.xml.registry.infomodel.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,13 +16,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
-import java.util.UUID;
 
 @ApplicationScoped
 @Named("JdbcUserRepository")
 public class JdbcUserRepository implements IPersonRepo {
     @Resource(lookup = "jdbc/StackOverFlowDS")
     DataSource dataSource;
+
+    @Resource(lookup = "gamification/events")
+    String gamificationEventURL;
+
+    @Resource(lookup = "gamification/apikey")
+    String gamificationKey;
 
     public JdbcUserRepository() {}
 
@@ -33,9 +38,11 @@ public class JdbcUserRepository implements IPersonRepo {
     @Override
     public void save(Person person) {
         try {
+            String userId = new PersonId().asString();
+
             PreparedStatement statement = dataSource.getConnection().prepareStatement(
                     "INSERT INTO codemad.User (idUser, username, firstname, lastname, email, password) VALUES (?, ?, ?, ?, ?, ?)");
-            statement.setString(1, new PersonId().asString());
+            statement.setString(1, userId);
             statement.setString(2, person.getUsername());
             statement.setString(3, person.getFirstName());
             statement.setString(4, person.getLastName());
@@ -43,6 +50,9 @@ public class JdbcUserRepository implements IPersonRepo {
             statement.setString(6, person.getEncryptedPassword());
 
             statement.execute();
+
+            new ConnectionAPI().post("registration", userId, gamificationEventURL, gamificationKey);
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -110,6 +120,32 @@ public class JdbcUserRepository implements IPersonRepo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Integer> countAll() {
+        ArrayList<Integer> count = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "SELECT COUNT(*) AS nbr FROM User GROUP BY idUser");
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                count.add(rs.getInt("nbr"));
+            }
+
+            if(count.isEmpty()){
+                return Optional.empty();
+            } else {
+                return Optional.of(count.get(0));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return Optional.empty();
     }
 }

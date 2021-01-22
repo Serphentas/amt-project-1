@@ -17,7 +17,7 @@ public class DataSourceProvider {
         MysqlDataSource datasource = new MysqlDataSource();
         datasource.setUrl("jdbc:mysql://localhost:3306/codemad");
         datasource.setUser("root");
-        datasource.setPassword("codemad");
+        datasource.setPassword("amt2");
 
         ds = datasource;
 

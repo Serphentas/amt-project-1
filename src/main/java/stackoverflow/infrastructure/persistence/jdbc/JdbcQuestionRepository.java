@@ -166,6 +166,60 @@ public class JdbcQuestionRepository implements IQuestionRepo {
         return new ArrayList<Question>();
     }
 
+    @Override
+    public Optional<Integer> countAll() {
+        ArrayList<Integer> count = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "SELECT COUNT(*) AS nbr FROM Question GROUP BY idQuestion");
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                count.add(rs.getInt("nbr"));
+            }
+
+            if(count.isEmpty()){
+                return Optional.empty();
+            } else {
+                return Optional.of(count.get(0));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Integer> countAllOfUser(PersonId id) {
+        ArrayList<Integer> count = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "SELECT COUNT(*) AS nbr FROM Question WHERE idUser=?");
+            statement.setString(1, id.asString());
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                count.add(rs.getInt("nbr"));
+            }
+
+            if(count.isEmpty()){
+                return Optional.empty();
+            } else {
+                return Optional.of(count.get(0));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
+
     private ArrayList<Question> resultSetAsList(ResultSet rs) throws SQLException {
         ArrayList<Question> res = new ArrayList<>();
 

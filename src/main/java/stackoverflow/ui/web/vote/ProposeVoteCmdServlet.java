@@ -1,12 +1,15 @@
 package stackoverflow.ui.web.vote;
 
+import stackoverflow.ConnectionAPI;
 import stackoverflow.application.ServiceReg;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
 import stackoverflow.application.vote.ProposeVoteCmd;
 import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.comment.CommentId;
+import stackoverflow.domain.person.PersonId;
 import stackoverflow.domain.question.QuestionId;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +24,12 @@ public class ProposeVoteCmdServlet extends HttpServlet {
 
     @Inject
     ServiceReg serviceReg;
+
+    @Resource(lookup = "gamification/events")
+    String gamificationEventURL;
+
+    @Resource(lookup = "gamification/apikey")
+    String gamificationKey;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,6 +59,8 @@ public class ProposeVoteCmdServlet extends HttpServlet {
                     .personId(currentUser.getId())
                     .build()
                 );
+
+                trySendAPi(currentUser.getId());
             }
         }
         else {
@@ -63,9 +74,18 @@ public class ProposeVoteCmdServlet extends HttpServlet {
                     .personId(currentUser.getId())
                     .build()
                 );
+
+                trySendAPi(currentUser.getId());
             }
         }
 
         resp.sendRedirect("/question?id=" + questionId.asString());
+    }
+
+    private void trySendAPi( PersonId userId) {
+        int nbVotes = serviceReg.getVoteFacade().getCountVoteOfUser(userId).orElse(0);
+        if(nbVotes == 1) {
+            new ConnectionAPI().post("vote", userId.asString(), gamificationEventURL, gamificationKey);
+        }
     }
 }
