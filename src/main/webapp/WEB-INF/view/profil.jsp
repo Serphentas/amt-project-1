@@ -47,7 +47,6 @@
                         <div>
                             <div>
                                 <h3>Niveau : ${level}</h3>
-                                <p>pts nécessaires pour le prochain niveau ${nbExp}</p>
                                 <p>Exp : ${exp}</p>
                             </div>
                             <div>

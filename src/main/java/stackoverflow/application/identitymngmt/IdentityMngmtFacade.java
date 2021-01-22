@@ -7,6 +7,7 @@ import stackoverflow.application.identitymngmt.login.ProposeRegisterCmd;
 import stackoverflow.application.identitymngmt.login.RegistrationFailedException;
 import stackoverflow.domain.person.IPersonRepo;
 import stackoverflow.domain.person.Person;
+import stackoverflow.domain.person.PersonId;
 
 import javax.annotation.Resource;
 import java.io.OutputStream;
@@ -109,5 +110,21 @@ public class IdentityMngmtFacade {
 
     public Optional<Integer> getCountUser() {
         return personRepo.countAll();
+    }
+
+    public Optional<CurrentUserDTO> getUserById(PersonId id){
+        Person person = personRepo.findById(id).orElse(null);
+
+        if ( person == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(CurrentUserDTO.builder()
+                    .id(person.getId())
+                    .username(person.getUsername())
+                    .email(person.getEmail())
+                    .firstName(person.getFirstName())
+                    .lastName(person.getLastName())
+                    .build());
+        }
     }
 }

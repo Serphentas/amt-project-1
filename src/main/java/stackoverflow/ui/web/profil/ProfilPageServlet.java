@@ -35,7 +35,6 @@ public class ProfilPageServlet extends HttpServlet {
         JSONObject ladder = jsonObject.getJSONObject("LadderOfUser");
         String level = ladder.getInt("level") + " " + ladder.getString("title");
         int exp = jsonObject.getInt("nbrPointOfUser");
-        int nbExp = ladder.getInt("nbrPoint");
 
         JSONArray jsonBadges = jsonObject.getJSONArray("badges");
         ArrayList<String> badges = new ArrayList<>();
@@ -46,7 +45,6 @@ public class ProfilPageServlet extends HttpServlet {
         req.setAttribute("currentUser", currentUser);
         req.setAttribute("level", level);
         req.setAttribute("exp", exp);
-        req.setAttribute("nbExp", nbExp);
         req.setAttribute("badges", badges);
 
         req.getRequestDispatcher("/WEB-INF/view/profil.jsp").forward(req, resp);

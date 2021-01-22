@@ -66,8 +66,33 @@ public class JdbcUserRepository implements IPersonRepo {
 
     @Override
     public Optional<Person> findById(PersonId id) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            PreparedStatement statement = dataSource.getConnection().prepareStatement(
+                    "SELECT * FROM codemad.User WHERE idUser=?");
+            statement.setString(1, id.asString());
+            ResultSet rs = statement.executeQuery();
+
+            ArrayList<Person> rows = new ArrayList<>();
+            while (rs.next()) {
+                Person person = Person.builder()
+                        .id(new PersonId(rs.getString("idUser")))
+                        .username(rs.getString("username"))
+                        .encryptedPassword(rs.getString("password"))
+                        .email(rs.getString("email"))
+                        .firstName(rs.getString("firstname"))
+                        .lastName(rs.getString("lastname"))
+                        .build();
+                rows.add(person);
+            }
+
+            if (rows.size() == 0) {
+                return Optional.empty();
+            }
+            return Optional.of(rows.get(0));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:base>
     <div class="page-header header-filter" data-parallax="true" style="background-image: url('../assets/img/city-profile.jpg');"></div>
@@ -19,7 +20,7 @@
                             <h1>Statistiques Globales</h1>
                             <div>
                                 <h3>Top 10 des utilisateurs :</h3>
-                                <c:forEach var = "user" items = "${top10}">
+                                <c:forEach var = "user" items = "${top}">
                                     <div class="card">${user}</div>
                                 </c:forEach>
                             </div>

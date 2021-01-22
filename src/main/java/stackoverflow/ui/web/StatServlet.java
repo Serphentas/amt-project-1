@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import stackoverflow.ConnectionAPI;
 import stackoverflow.application.ServiceReg;
 import stackoverflow.application.identitymngmt.authenticate.CurrentUserDTO;
+import stackoverflow.domain.person.PersonId;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -47,13 +48,20 @@ public class StatServlet extends HttpServlet {
         }
 
         String jsonTop = new ConnectionAPI().getTop10(gamificationUsersURL + "top10bypoint", gamificationKey);
-        JSONArray ar = new JSONObject(jsonTop).getJSONArray("lists");
-
+        JSONObject jsonObject = new JSONObject(jsonTop);
         ArrayList<String> top10 = new ArrayList<>();
-        for (int i = 0; i < ar.length(); i++) {
-            top10.add(ar.getJSONObject(i).getString("userId"));
-            System.out.println(top10.get(i));
+        if (!jsonObject.isNull("lists")) {
+            JSONArray ar = new JSONObject(jsonTop).getJSONArray("lists");
+
+            for (int i = 0; i < ar.length(); i++) {
+                CurrentUserDTO userDTO = serviceReg.getIdentityMngmtFacade().getUserById( new PersonId(ar.getJSONObject(i).getString("userId"))).orElse(null);
+                int level = ar.getJSONObject(i).getInt("level");
+                int nbrPts = ar.getJSONObject(i).getInt("nbrPoint");
+                if(userDTO != null)
+                    top10.add(userDTO.getUsername() + " niveau : " + level + " exp : " + nbrPts);
+            }
         }
+
 
         int nbUser = serviceReg.getIdentityMngmtFacade().getCountUser().orElse(0);
         int nbComment = serviceReg.getCommentFacade().getCountComment().orElse(0);
@@ -61,7 +69,7 @@ public class StatServlet extends HttpServlet {
         int nbQuestion = serviceReg.getQuestionFacade().getCountQuestion().orElse(0);
         int nbVote = serviceReg.getVoteFacade().getCountVote().orElse(0);
 
-        req.setAttribute("top10", top10);
+        req.setAttribute("top", top10);
         req.setAttribute("nbUser", nbUser);
         req.setAttribute("nbComment", nbComment);
         req.setAttribute("nbVote", nbVote);
