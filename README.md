@@ -30,6 +30,18 @@ This is provided with the use of Java EE APIs according to an MVC pattern, along
 
 ## 2 Usage
 
+### Cleanup
+
+In any case of problems, you can ensure all your images and containers are up to date:
+
+```
+docker kill $(docker ps -aq)
+docker rm -f $(docker ps -aq)
+docker rmi -f $(docker images -aq)
+```
+
+NOTE: this will delete ALL images and ALL containers.
+
 ### Release
 
 The easiest way to run our app is with the bundled scripts:
