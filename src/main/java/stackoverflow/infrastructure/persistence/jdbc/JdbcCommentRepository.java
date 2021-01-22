@@ -11,6 +11,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.sql.DataSource;
 
+import stackoverflow.ConnectionAPI;
 import stackoverflow.application.comment.CommentQuery;
 import stackoverflow.domain.answer.AnswerId;
 import stackoverflow.domain.comment.Comment;
@@ -24,6 +25,12 @@ import stackoverflow.domain.question.QuestionId;
 public class JdbcCommentRepository implements ICommentRepo {
     @Resource(lookup = "jdbc/StackOverFlowDS")
     DataSource dataSource;
+
+    @Resource(lookup = "gamification/events")
+    String gamificationEventURL;
+
+    @Resource(lookup = "gamification/apikey")
+    String gamificationKey;
 
     public JdbcCommentRepository() {
     }
@@ -47,6 +54,8 @@ public class JdbcCommentRepository implements ICommentRepo {
             );
             statement.setString(4, entity.getText());
             statement.execute();
+
+            new ConnectionAPI().post("comment", entity.getPersonId().asString(), gamificationEventURL, gamificationKey);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
