@@ -6,6 +6,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: amt
       MYSQL_USER: amt
+      MYSQL_PASSWORD: amt
     ports:
       - 3306:3306
 
