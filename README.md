@@ -58,10 +58,26 @@ and access the website at [http://localhost:9080](http://localhost:9080).
 
 ### Development
 
-Simply run this from the repository root:
+Ensure you have a gamification API key:
+
+```
+export GAMIF_KEY=$(python3 populate.py)
+```
+
+Ensure that `serverName` and the hostnames for gamification endpoints are up to date in [server.xml](src/main/liberty/config/server.xml). Usually, for dev purposes you'll want `127.0.0.1` for your database hostname, same for gamification.
+
+Then, run this from the repository root:
 
 ```
 mvn liberty:dev
+```
+
+#### Debug
+
+One fat-ass fool-proof command for devs:
+
+```
+docker rm -f codemad_db codemad_app && docker rmi -f serphentas/amt-project-1-app serphentas/amt-project-1-db && mvn clean package && docker build -t serphentas/amt-project-1-app . && cd docker/images/mariadb/ && docker build -t serphentas/amt-project-1-db . && cd ../../.. && ./run.sh
 ```
 
 ### Run the tests

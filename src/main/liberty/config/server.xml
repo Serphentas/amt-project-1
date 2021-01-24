@@ -22,7 +22,7 @@
         <jdbcDriver libraryRef="MySqlLib"/>
         <properties databaseName="codemad"
                     serverName="codemad_db" portNumber="3306"
-                    user="root" password="codemad"/>
+                    user="root" password="amt"/>
     </dataSource>
 
     <jndiEntry jndiName="gamification/apikey" value="${GAMIF_KEY}"/>
