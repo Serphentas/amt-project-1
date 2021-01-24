@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:base>
     <div class="page-header header-filter" data-parallax="true" style="background-image: url('../assets/img/city-profile.jpg');"></div>
@@ -36,6 +37,25 @@
                                     <button id="fProfilUpdate" role="submit"  class="btn btn-primary btn-link btn-wd btn-lg">update</button>
                                 </form>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ml-auto mr-auto">
+                        <div>
+                            <div>
+                                <h3>Niveau : ${level}</h3>
+                                <p>Exp : ${exp}</p>
+                            </div>
+                            <div>
+                                <h3>vos Badges</h3>
+                                <c:forEach var = "badge" items = "${badges}">
+                                    <div class="card">${badge}</div>
+                                </c:forEach>
+                            </div>
+
                         </div>
                     </div>
                 </div>

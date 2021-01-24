@@ -46,6 +46,10 @@ public class AuthorizationFilter implements Filter {
             return true;
         }
 
+        if(URI.startsWith("/stat")){
+            return true;
+        }
+
         if(URI.startsWith("/search")){
             return true;
         }
