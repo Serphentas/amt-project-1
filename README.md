@@ -47,6 +47,8 @@ docker rmi -f serphentas/amt-project-1-db serphentas/amt-project-1-app
 
 ### Release
 
+**NOTE:** you MUST have Python3 and `requests` installed.
+
 The easiest way to run our app is with the bundled scripts:
 
 ```
