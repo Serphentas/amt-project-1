@@ -29,6 +29,7 @@ jobs:
           echo ${{ secrets.token }} | docker login -u serphentas --password-stdin
           docker build -t serphentas/amt-project-1-app .
           docker push serphentas/amt-project-1-app
+          docker logout
 
       - name: Build database Docker image
         run: |
@@ -36,3 +37,4 @@ jobs:
           echo ${{ secrets.token }} | docker login -u serphentas --password-stdin
           docker build -t serphentas/amt-project-1-db .
           docker push serphentas/amt-project-1-db
+          docket logout
