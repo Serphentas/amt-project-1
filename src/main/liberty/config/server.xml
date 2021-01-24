@@ -22,15 +22,15 @@
         <jdbcDriver libraryRef="MySqlLib"/>
         <properties databaseName="codemad"
                     serverName="codemad_db" portNumber="3306"
-                    user="amt" password="amt"/>
+                    user="root" password="codemad"/>
     </dataSource>
 
-    <jndiEntry jndiName="gamification/apikey" value="CHANGEME"/>
-    <jndiEntry jndiName="gamification/auth" value="http://localhost:8080/auth"/>
-    <jndiEntry jndiName="gamification/badges" value="http://localhost:8080/badges"/>
-    <jndiEntry jndiName="gamification/events" value="http://localhost:8080/events/"/>
-    <jndiEntry jndiName="gamification/ladders" value="http://localhost:8080/ladders"/>
-    <jndiEntry jndiName="gamification/registrations" value="http://localhost:8080/registrations"/>
-    <jndiEntry jndiName="gamification/rules" value="http://localhost:8080/rules"/>
-    <jndiEntry jndiName="gamification/users" value="http://localhost:8080/users/"/>
+    <jndiEntry jndiName="gamification/apikey" value="${GAMIF_KEY}"/>
+    <jndiEntry jndiName="gamification/auth" value="http://longduzboub-gamif-app:8080/auth"/>
+    <jndiEntry jndiName="gamification/badges" value="http://longduzboub-gamif-app:8080/badges"/>
+    <jndiEntry jndiName="gamification/events" value="http://longduzboub-gamif-app:8080/events/"/>
+    <jndiEntry jndiName="gamification/ladders" value="http://longduzboub-gamif-app:8080/ladders"/>
+    <jndiEntry jndiName="gamification/registrations" value="http://longduzboub-gamif-app:8080/registrations"/>
+    <jndiEntry jndiName="gamification/rules" value="http://longduzboub-gamif-app:8080/rules"/>
+    <jndiEntry jndiName="gamification/users" value="http://longduzboub-gamif-app:8080/users/"/>
 </server>
