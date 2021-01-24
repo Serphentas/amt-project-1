@@ -13,6 +13,11 @@
 
 ## 1 Introduction
 
+**ADDED FEATURES**
+- Working Docker images
+- Top 10
+- Tests
+
 The purpose of Codemad is to provide a simplified version of StackOverflow, with the following features:
 
 - Anonymous users can:
